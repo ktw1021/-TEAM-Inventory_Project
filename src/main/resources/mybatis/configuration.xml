@@ -15,11 +15,13 @@
     <typeAliases>
         <typeAlias type="com.inventory.repositories.vo.BookVo" alias="BookVo" />
         <typeAlias type="com.inventory.repositories.vo.UserVo" alias="UserVo" />
+       <!--  <typeAlias type="com.inventory.repositories.vo.BranchInventoryVo" alias="BranchInventoryVo" /> -->
     </typeAliases>
 
     <mappers>
         <mapper resource="mybatis/mappers/StockOutMapper.xml"/>
         <mapper resource="mybatis/mappers/book.xml" />
         <mapper resource="mybatis/mappers/users.xml" />
+       <!--  <mapper resource="mybatis/mappers/branch.xml"/> -->
     </mappers>
 </configuration>
