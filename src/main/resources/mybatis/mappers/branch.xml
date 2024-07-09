@@ -1,0 +1,14 @@
+<mapper namespace="branch">
+<!--  Insert  -->
+<insert id="insertBranch" parameterType="com.inventory.repositories.vo.BranchInventoryVo"> INSERT INTO branch (branch_id, branch_name, branch_address) VALUES (#{branchId}, #{branchName}, #{branchAddress}) </insert>
+<!--  Select Branch by branchId  -->
+<select id="getBranchById" resultType="com.inventory.repositories.vo.BranchInventoryVo" parameterType="int"> SELECT * FROM branch WHERE branch_id = #{branchId} </select>
+<!--  Update Branch  -->
+<update id="updateBranch" parameterType="com.inventory.repositories.vo.BranchInventoryVo"> UPDATE branch SET branch_name = #{branchName}, branch_address = #{branchAddress} WHERE branch_id = #{branchId} </update>
+<!--  Delete Branch by branchId  -->
+<delete id="deleteBranch" parameterType="int"> DELETE FROM branch WHERE branch_id = #{branchId} </delete>
+<!--  Select All Branches  -->
+<select id="getAllBranches" resultType="com.inventory.repositories.vo.BranchInventoryVo"> SELECT * FROM branch </select>
+<!--  Select Branch by branchId and bookCode  -->
+<select id="getBranch" resultType="com.inventory.repositories.vo.BranchInventoryVo" parameterType="java.util.Map"> SELECT * FROM branch WHERE branch_id = #{branchId} AND book_code = #{bookCode} </select>
+</mapper>
