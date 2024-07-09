@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="book">
+	<!-- 목록 -->
+	<select id="selectAll" resultType="BookVo">
+		SELECT book_code, book_name,
+		price, kindcode FROM book_list
+	</select>
+	<delete id="delete" parameterType="String">
+		DELETE FROM book_list
+		WHERE
+		book_code = #{book_code}
+	</delete>
+	<insert id="insert" parameterType="BookVo">
+		INSERT INTO BOOK_LIST
+		(BOOK_CODE, BOOK_NAME, PRICE, KINDCODE) VALUES (#{book_code},
+		#{book_name}, #{price}, #{kindcode})
+	</insert>
+	<select id="searchList" parameterType="String"
+		resultType="BookVo">
+		SELECT book_code, book_name, price, kindcode
+		FROM book_list
+		WHERE book_name LIKE '%' || #{book_name} || '%'
+
+	</select>
+
+	<select id="getData" parameterType="String" resultType="BookVo">
+		SELECT * FROM book_list WHERE book_code = #{book_code}
+	</select>
+
+	<update id="updateData" parameterType="BookVo">
+		UPDATE book_list
+		SET book_name = #{book_name}, price = #{price}, kindcode = #{kindcode}
+		WHERE book_code = #{book_code}
+	</update>
+</mapper>
