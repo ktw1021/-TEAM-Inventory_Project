@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inventory.repositories.vo.OrderVo;
@@ -104,4 +106,46 @@ public class OrderCheckController {
 
 		return "redirect:/admin/ordercheck/list";
 	}
+
+	// 동현
+
+	@RequestMapping("/summary")
+	public String getBranchListSummary(Model model) {
+		try {
+			List<OrderVo> branchListSummary = OrderCheckService.getBranchListSummary();
+			model.addAttribute("branchListSummary", branchListSummary);
+			return "admins/order_detail_summary";
+		} catch (Exception e) {
+			e.printStackTrace(); // Log the exception
+			return "errorPage"; // Return to a generic error page
+		}
+	}
+
+	 @GetMapping("/calendar")
+	    public String getOrderCalendar(@RequestParam(value = "date", required = false) String date, Model model) {
+	        List<OrderVo> orderDetail = null;
+	        if (date != null) {
+	            // Convert date format if needed
+	            orderDetail = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
+	        }
+	        model.addAttribute("orderDetail", orderDetail);
+	        return "admins/order_check_detail_calender"; // This should match the JSP path
+	    }
+	 @RequestMapping("/calendar/{date}")
+	    public String showOrderCalendar(@PathVariable(value = "date", required = false) String date, Model model) {
+	        List<OrderVo> showOrderListByDate = null;
+	        if (date != null) {
+	            // Convert date format if needed
+	            showOrderListByDate = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
+	        }
+	        model.addAttribute("showOrderListByDate", showOrderListByDate);
+	        return "admins/calender_detail";
+	    }
+	 @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
+	 @ResponseBody
+	 public ResponseEntity<?> addEvent(@RequestBody Event event) {
+	     // Handle event addition (save to database)
+	     boolean success = eventService.addEvent(event); // Implement this method
+	     return success ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	 }
 }

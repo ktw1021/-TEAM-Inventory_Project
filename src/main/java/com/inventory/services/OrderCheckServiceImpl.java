@@ -14,7 +14,7 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 
 	@Autowired
 	private OrderCheckDao OrderCheckDao;
-	
+
 	@Override
 	public List<OrderVo> getList() {
 		List<OrderVo> list = OrderCheckDao.getAllList();
@@ -29,10 +29,10 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 
 	@Override
 	public List<OrderVo> getOrderDetail(String id) {
-		List <OrderVo> list = OrderCheckDao.getOrderDetail(id);
+		List<OrderVo> list = OrderCheckDao.getOrderDetail(id);
 		return list;
 	}
-	
+
 	@Override
 	public long getCount() {
 		return OrderCheckDao.getCount();
@@ -73,7 +73,19 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 		List<OrderVo> list = OrderCheckDao.getBranchList();
 		return list;
 	}
+
+	// 동현
+	@Override
+	public List<OrderVo> getBranchListSummary() {
+		List<OrderVo> list = OrderCheckDao.getBranchListSummary();
+		return list;
+	}
+
+	@Override
+	public List<OrderVo> selectAllBookOrders() {
+		List<OrderVo> list = OrderCheckDao.selectAllBookOrders();
+		return list;
+	}
 	
-	
-	
+
 }
