@@ -139,6 +139,13 @@ public class OrderCheckController {
 	            showOrderListByDate = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
 	        }
 	        model.addAttribute("showOrderListByDate", showOrderListByDate);
-	        return "admins/order_check_detail_calender";
+	        return "admins/calender_detail";
 	    }
+	 @RequestMapping(value = "/addEvent", method = RequestMethod.POST)
+	 @ResponseBody
+	 public ResponseEntity<?> addEvent(@RequestBody Event event) {
+	     // Handle event addition (save to database)
+	     boolean success = eventService.addEvent(event); // Implement this method
+	     return success ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	 }
 }
