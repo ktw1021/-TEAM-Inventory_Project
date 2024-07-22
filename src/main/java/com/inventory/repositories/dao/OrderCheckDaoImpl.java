@@ -80,4 +80,15 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 		return list;
 	}
 
+	@Override
+	public List<OrderVo> getBranchListSummary() {
+		return sqlSession.selectList("orderCheck.getBranchListSummary");
+	}
+
+
+	@Override
+	public List<OrderVo> selectAllBookOrders() {
+		return sqlSession.selectList("orderCheck.selectAllBookOrders");
+	}
+
 }

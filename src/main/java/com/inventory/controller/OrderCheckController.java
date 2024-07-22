@@ -1,12 +1,15 @@
 package com.inventory.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inventory.repositories.vo.OrderVo;
@@ -96,5 +99,49 @@ public class OrderCheckController {
 		}
 
 		return "redirect:/admin/ordercheck/list";
+	}
+
+	// 동현
+
+	@RequestMapping("/summary")
+	public String getBranchListSummary(Model model) {
+		try {
+			List<OrderVo> branchListSummary = OrderCheckService.getBranchListSummary();
+			model.addAttribute("branchListSummary", branchListSummary);
+			return "admins/order_detail_summary";
+		} catch (Exception e) {
+			e.printStackTrace(); // Log the exception
+			return "errorPage"; // Return to a generic error page
+		}
+	}
+
+	@RequestMapping("/calendar")
+	public String showOrderCalendar(Model model) {
+		List<OrderVo> orderDetail = OrderCheckService.selectAllBookOrders();
+		model.addAttribute("orderDetail", orderDetail);
+		return "admins/order_check_detail_calender"; // This should match the JSP path
+	}
+
+	@GetMapping("/calendar/data")
+	@ResponseBody
+	public List<OrderVo> getOrderCalendarData() {
+		List<OrderVo> orderDetail = OrderCheckService.getList();
+
+		// Check if the list is null or empty
+		if (orderDetail == null || orderDetail.isEmpty()) {
+			// Return an empty list
+			return Collections.emptyList();
+		}
+
+		// Validate each order in the list
+		for (OrderVo order : orderDetail) {
+			if (order.getOrderId() == null || order.getBranchId() == null || order.getOrderDate() == null) {
+				// Return null if any required field is missing
+				return null;
+			}
+		}
+
+		// If all validations pass, return the list
+		return orderDetail;
 	}
 }

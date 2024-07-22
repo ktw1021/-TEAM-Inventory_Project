@@ -25,9 +25,17 @@ public interface OrderCheckService {
 	
 	public int confirmAndInsertInDetail(StockVo vo);
 	
-	public String getBranchId(String orderId);
+	String getBranchId(String orderId);
 	
-	public List<OrderVo> getBranchList();
+	List<OrderVo> getBranchList();
+
+	
+	//동현
+	
+	public List<OrderVo> getBranchListSummary();
+
+	public List<OrderVo> selectAllBookOrders();
+	
 }
 
 

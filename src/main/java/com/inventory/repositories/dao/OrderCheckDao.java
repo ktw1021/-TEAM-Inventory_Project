@@ -28,4 +28,10 @@ public interface OrderCheckDao {
 	public String getBranchId(String orderId);
 	
 	public List<OrderVo> getBranchList();
+	//동현
+	List<OrderVo> getBranchListSummary();
+
+	List<OrderVo> selectAllBookOrders();
+
+
 }
