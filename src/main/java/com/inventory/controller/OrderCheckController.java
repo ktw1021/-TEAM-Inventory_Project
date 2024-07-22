@@ -1,6 +1,5 @@
 package com.inventory.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inventory.repositories.vo.OrderVo;
@@ -115,33 +114,24 @@ public class OrderCheckController {
 		}
 	}
 
-	@RequestMapping("/calendar")
-	public String showOrderCalendar(Model model) {
-		List<OrderVo> orderDetail = OrderCheckService.selectAllBookOrders();
-		model.addAttribute("orderDetail", orderDetail);
-		return "admins/order_check_detail_calender"; // This should match the JSP path
-	}
-
-	@GetMapping("/calendar/data")
-	@ResponseBody
-	public List<OrderVo> getOrderCalendarData() {
-		List<OrderVo> orderDetail = OrderCheckService.getList();
-
-		// Check if the list is null or empty
-		if (orderDetail == null || orderDetail.isEmpty()) {
-			// Return an empty list
-			return Collections.emptyList();
-		}
-
-		// Validate each order in the list
-		for (OrderVo order : orderDetail) {
-			if (order.getOrderId() == null || order.getBranchId() == null || order.getOrderDate() == null) {
-				// Return null if any required field is missing
-				return null;
-			}
-		}
-
-		// If all validations pass, return the list
-		return orderDetail;
-	}
+	 @GetMapping("/calendar")
+	    public String getOrderCalendar(@RequestParam(value = "date", required = false) String date, Model model) {
+	        List<OrderVo> orderDetail = null;
+	        if (date != null) {
+	            // Convert date format if needed
+	            orderDetail = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
+	        }
+	        model.addAttribute("orderDetail", orderDetail);
+	        return "admins/order_check_detail_calender"; // This should match the JSP path
+	    }
+	 @RequestMapping("/calendar/{date}")
+	    public String showOrderCalendar(@PathVariable(value = "date", required = false) String date, Model model) {
+	        List<OrderVo> showOrderListByDate = null;
+	        if (date != null) {
+	            // Convert date format if needed
+	            showOrderListByDate = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
+	        }
+	        model.addAttribute("showOrderListByDate", showOrderListByDate);
+	        return "admins/order_check_detail_calender";
+	    }
 }

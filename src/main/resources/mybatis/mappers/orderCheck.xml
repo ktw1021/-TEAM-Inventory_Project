@@ -136,4 +136,14 @@
         FROM
             book_order
     </select>
+    
+    <select id="findOrdersByDate" parameterType="String" resultType="OrderVo">
+        SELECT 
+            ORDER_ID AS orderId,
+            BRANCH_ID AS branchId,
+            ORDER_DATE AS orderDate,
+            CHECKED AS checked
+        FROM book_order
+        WHERE ORDER_DATE = #{date}
+    </select>
 </mapper>

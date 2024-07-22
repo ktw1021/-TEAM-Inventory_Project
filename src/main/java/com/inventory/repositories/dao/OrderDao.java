@@ -17,4 +17,5 @@ public interface OrderDao {
 	public List<OrderVo> getOrderList(String branchId);
 	
 	public List<OrderVo> getDetailList(String orderId);
+
 }

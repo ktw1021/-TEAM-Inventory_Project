@@ -33,9 +33,8 @@ public interface OrderCheckService {
 	//동현
 	
 	public List<OrderVo> getBranchListSummary();
-
 	public List<OrderVo> selectAllBookOrders();
-	
+	public List<OrderVo> selectOrdersByDate(String date);
 }
 
 

@@ -91,4 +91,10 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 		return sqlSession.selectList("orderCheck.selectAllBookOrders");
 	}
 
+	@Override
+	public List<OrderVo> findOrdersByDate(String date) {
+		List<OrderVo> list=sqlSession.selectList("orderCheck.findOrdersByDate", date);
+		return list;
+	}
+
 }
