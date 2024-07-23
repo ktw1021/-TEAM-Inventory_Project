@@ -92,7 +92,7 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 	}
 
 	@Override
-	public List<OrderVo> findOrdersByDate(String date) {
+	public List<OrderVo> selectOrdersByDate(String date) {
 		List<OrderVo> list=sqlSession.selectList("orderCheck.selectOrdersByDate", date);
 		return list;
 	}

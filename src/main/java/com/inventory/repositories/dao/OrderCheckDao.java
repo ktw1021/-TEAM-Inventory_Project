@@ -35,5 +35,7 @@ public interface OrderCheckDao {
 
 	List<OrderVo> selectOrdersByDate(String date);
 
+	/* List<OrderVo> findByDate(String date); */
+
 
 }

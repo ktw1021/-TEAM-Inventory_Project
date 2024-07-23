@@ -1,18 +1,15 @@
 package com.inventory.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,7 +18,6 @@ import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.OrderCheckService;
 
-import io.micrometer.observation.Observation.Event;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/admin/ordercheck")
@@ -77,12 +73,12 @@ public class OrderCheckController {
 	public String orderCheckdetail(@PathVariable("id") String id, HttpSession session, Model model) {
 
 		List<OrderVo> list = OrderCheckService.getOrderDetail(id);
-		
+
 		String checked = null;
-		for(OrderVo vo:list) {
+		for (OrderVo vo : list) {
 			checked = vo.getChecked();
 		}
-		
+
 		session.setAttribute("list", list);
 		model.addAttribute("checked", checked);
 
@@ -127,25 +123,31 @@ public class OrderCheckController {
 		}
 	}
 
-	 @GetMapping("/calendar")
-	    public String getOrderCalendar(@RequestParam(value = "date", required = false) String date, Model model) {
-	        List<OrderVo> orderDetail = null;
-	        if (date != null) {
-	            // Convert date format if needed
-	            orderDetail = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
-	        }
-	        model.addAttribute("orderDetail", orderDetail);
-	        return "admins/order_check_detail_calender"; // This should match the JSP path
-	    }
-	 @RequestMapping("/calendar/{date}")
-	    public String showOrderCalendar(@PathVariable(value = "date", required = false) String date, Model model) {
-	        List<OrderVo> showOrderListByDate = null;
-	        if (date != null) {
-	            // Convert date format if needed
-	            showOrderListByDate = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
-	        }
-	        model.addAttribute("showOrderListByDate", showOrderListByDate);
-	        return "admins/calender_detail";
-	    }
+	@RequestMapping("calendar")
+	public String showCalendar(Model model) {
+		return "admins/order_check_detail_calender";
+	}
+
+	@GetMapping("/calendar/{date}")
+	public Map<String, Object> getOrderCalendar(@PathVariable String date) {
+		List<OrderVo> orderDetail = OrderCheckService.selectOrdersByDate(date); // Method to fetch orders by date
+		Map<String, Object> response = new HashMap<>();
+		response.put("orders", orderDetail);
+		return response;
+	}
+
+	@GetMapping("/detail/{date}")
+	@ResponseBody
+	public List<OrderVo> showOrderCalendar(@PathVariable(value = "date", required = false) String date) {
+		if (date != null) {
+			// Convert date format if needed
+			return OrderCheckService.selectOrdersByDate(date);
+		}
+		return List.of(); // Return an empty list if no date is provided
+	}
+	/*
+	 * @GetMapping("/notes/{date}") public String getNotesByDate(@PathVariable
+	 * String date) { return OrderCheckService.getNotesByDate(date); }
+	 */
 
 }

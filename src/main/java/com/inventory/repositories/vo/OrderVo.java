@@ -24,6 +24,8 @@ public class OrderVo {
     private String outId; // For specific queries
     private int totalQuantity; // For specific queries
     private String userName;
+    
+    private String content;
 
     // Default constructor
     public OrderVo() {
@@ -201,8 +203,18 @@ public class OrderVo {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
+    
+    
+    public String getContent() {
+		return content;
+	}
 
-    @Override
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	@Override
     public String toString() {
         return "OrderVo [orderId=" + orderId + ", branchId=" + branchId + ", orderDate=" + orderDate + ", checked="
                 + checked + ", bookCode=" + bookCode + ", bookName=" + bookName + ", branchName=" + branchName

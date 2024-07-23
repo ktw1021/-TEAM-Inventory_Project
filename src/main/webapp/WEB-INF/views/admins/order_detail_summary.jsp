@@ -59,6 +59,27 @@
             color: white;
         }
 
+        .table-container {
+            max-height: 200px; /* Adjust height as needed */
+            overflow-y: auto;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            position: relative;
+        }
+
+        .table-container thead {
+            position: -webkit-sticky; /* For Safari */
+            position: sticky;
+            top: 0;
+            z-index: 10; /* Ensures the header is above other content */
+            background-color: #f4f4f4;
+        }
+
         .summary-table {
             display: none;
             position: absolute;
@@ -109,34 +130,36 @@
                 </button>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 25%;">
-                            <button class="branchId-btn" onclick="location.href='<c:url value='/admin/ordercheck/summary/branchId' />'">Order ID</button>
-                        </th>
-                        <th style="width: 25%;">
-                            <button class="bookCode-btn" onclick="location.href='<c:url value='/admin/ordercheck/summary/bookCode' />'">Branch ID</button>
-                        </th>
-                        <th style="width: 25%;">
-                            <button class="branchId-btn" onclick="location.href='#'">Book Name</button>
-                        </th>
-                        <th style="width: 25%;">
-                            <button class="totalQuantity-btn" onclick="location.href='#'">Quantity</button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="data-table-body">
-                    <c:forEach items="${branchListSummary}" var="item">
+            <div class="table-container">
+                <table>
+                    <thead>
                         <tr>
-                            <td>${item.orderId}</td>
-                            <td>${item.branchId}</td>
-                            <td>${item.bookName}</td>
-                            <td>${item.quantity}</td>
+                            <th style="width: 25%;">
+                                <button class="branchId-btn" onclick="location.href='<c:url value='/admin/ordercheck/summary/branchId' />'">Order ID</button>
+                            </th>
+                            <th style="width: 25%;">
+                                <button class="bookCode-btn" onclick="location.href='<c:url value='/admin/ordercheck/summary/bookCode' />'">Branch ID</button>
+                            </th>
+                            <th style="width: 25%;">
+                                <button class="branchId-btn" onclick="location.href='#'">Book Name</button>
+                            </th>
+                            <th style="width: 25%;">
+                                <button class="totalQuantity-btn" onclick="location.href='#'">Quantity</button>
+                            </th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="data-table-body">
+                        <c:forEach items="${branchListSummary}" var="item">
+                            <tr>
+                                <td>${item.orderId}</td>
+                                <td>${item.branchId}</td>
+                                <td>${item.bookName}</td>
+                                <td>${item.quantity}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </c:if>
 
         <!-- Summary Table Placeholder -->

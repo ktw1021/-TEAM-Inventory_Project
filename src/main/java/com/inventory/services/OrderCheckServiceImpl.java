@@ -93,5 +93,11 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 		return list;
 	}
 	
+	/*
+	 * public List<OrderVo> getNotesByDate(String date){ return
+	 * OrderCheckDao.findByDate(date) ;
+	 * 
+	 * }
+	 */
 
 }
