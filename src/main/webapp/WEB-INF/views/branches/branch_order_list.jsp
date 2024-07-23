@@ -30,7 +30,7 @@ $(document).ready(function() {
 <div class="content">
     <div class="order-history">
         <h2>발주 기록</h2>
-        <h3>
+        <h3 class="parent">
             <a href="<c:url value="/branch/order/form" />">발주</a>
         </h3>
         <table>
@@ -42,7 +42,7 @@ $(document).ready(function() {
             </tr>
             <c:forEach items="${list}" var="vo" varStatus="status">
                 <tr>
-                    <td><a href="<c:url value="/branch/order/detail" />?orderId=${vo.orderId}">${vo.orderId}</a></td>
+                    <td class="parent"><a href="<c:url value="/branch/order/detail" />?orderId=${vo.orderId}">${vo.orderId}</a></td>
                     <td>${vo.orderDate}</td>
                     <td>${vo.userName}</td>
                     <c:choose>

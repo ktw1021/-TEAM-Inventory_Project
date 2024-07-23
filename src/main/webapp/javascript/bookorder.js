@@ -20,10 +20,20 @@
 	 }, 100);
 
 	 $("#resetBtn").click(function() {
-		 loadAllData(); // 모든 데이터 다시 로드
-
-		 // 수량 입력 초기화
-		 $(".quantityInput").val(0);
+		 $.ajax({
+			 url: '/Inventory/branch/order/getData',
+			 type: 'GET',
+			 dataType: 'json',
+			 success: function(data) {
+				 renderData(data); // 데이터를 렌더링
+				 updateCart(); // 장바구니 업데이트
+				 renderHeader(data);
+			 },
+			 error: function(xhr, status, error) {
+				 console.error('AJAX Error: ' + status + ' - ' + error);
+				 $("#result").html("An error occurred while processing the request.");
+			 }
+		 });
 
 		 // 검색 입력 초기화
 		 $("#searchInput").val('');

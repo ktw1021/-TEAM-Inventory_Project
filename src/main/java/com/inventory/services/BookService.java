@@ -18,5 +18,5 @@ public interface BookService {
 	
 	public BookVo getData(String bookCode);
 	
-	
+	public int insertInventory(String bookCode);
 }
