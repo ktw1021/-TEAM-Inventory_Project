@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.inventory.repositories.vo.BookVo;
 
-
-
 public interface BookService {
+	
 	public List<BookVo> getbookList();
 
 	public List<BookVo> search(String bookName);

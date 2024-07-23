@@ -16,6 +16,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
+    <div class="content">
     <div id="head">
     </div>
     <h3>
@@ -59,6 +60,7 @@
     <form:form method="post" action="#">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form:form>
+    </div>
 
     <script src="<c:url value='/javascript/bookorder.js'/>"></script>
 </body>

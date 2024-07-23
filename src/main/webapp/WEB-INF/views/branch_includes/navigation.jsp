@@ -30,6 +30,11 @@
                     href="<c:url value='/branch/stockout/list' />">출고</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
+            	<c:if test="${sessionScope.authUser.authCode == 2}">
+			        <li class="nav-item">
+			            <a class="nav-link" href="<c:url value='/admin/' />">관리자 페이지</a>
+			        </li>
+    			</c:if>
                 <li class="nav-item">
                     <span class="navbar-text text-white">
                         <a href="<c:url value='/user/mypage'/>" class="text-white"><c:out value="${sessionScope.authUser.name}"/> 님</a>

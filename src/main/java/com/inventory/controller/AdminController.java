@@ -23,6 +23,7 @@ public class AdminController {
     @RequestMapping({"/home", "/", ""}) 
     public String adminHome(HttpSession session,  RedirectAttributes redirectAttributes, Model model) {
     	UserVo authUser = (UserVo) session.getAttribute("authUser");
+    	System.err.println(authUser);
     	//	authUser = null 일때 오류 나니까 수정 필요
 //    	if (!("2").equals(authUser.getAuthCode())) {
 //			//	홈화면으로 보내
@@ -40,4 +41,34 @@ public class AdminController {
     	
         return "admins/admin_home";
     }
+    
+    @RequestMapping("/1")
+    public String branchA(HttpSession session) {
+    	UserVo authUser = (UserVo) session.getAttribute("authUser");
+    	authUser.setBranchId("1");
+    	session.setAttribute("authUser", authUser);
+    	return "redirect:/branch/home";
+    }
+    @RequestMapping("/2")
+    public String branchB(HttpSession session) {
+    	UserVo authUser = (UserVo) session.getAttribute("authUser");
+    	authUser.setBranchId("2");
+    	session.setAttribute("authUser", authUser);
+    	return "redirect:/branch/home";
+    }
+    @RequestMapping("/3")
+    public String branchC(HttpSession session) {
+    	UserVo authUser = (UserVo) session.getAttribute("authUser");
+    	authUser.setBranchId("3");
+    	session.setAttribute("authUser", authUser);
+    	return "redirect:/branch/home";
+    }
+    @RequestMapping("/4")
+    public String branchD(HttpSession session) {
+    	UserVo authUser = (UserVo) session.getAttribute("authUser");
+    	authUser.setBranchId("4");
+    	session.setAttribute("authUser", authUser);
+    	return "redirect:/branch/home";
+    }
+    
 }

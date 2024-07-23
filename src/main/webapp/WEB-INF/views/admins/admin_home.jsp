@@ -27,6 +27,14 @@
 		<p class="parent">
 			<a href="<c:url value='/admin/usermanage'/>">보러 가기</a>
 		</p>
+
+		<h1>지점 페이지</h1>
+		<p class="parent">
+			<a href="<c:url value='/admin/1'/>">A지점</a>
+			<a href="<c:url value='/admin/2'/>">B지점</a>
+			<a href="<c:url value='/admin/3'/>">c지점</a>
+			<a href="<c:url value='/admin/4'/>">D지점</a>
+		</p>
 	</div>
 
 	<!-- Include footer -->
