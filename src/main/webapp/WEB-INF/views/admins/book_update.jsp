@@ -69,6 +69,7 @@
 
     <%@ include file="/WEB-INF/views/admin_includes/footer.jsp"%>
     <script src="<c:url value='/javascript/bookupdate.js'/>"></script>
+
     <script>
         function downloadCSV() {
             var csvContent = "data:text/csv;charset=utf-8,";

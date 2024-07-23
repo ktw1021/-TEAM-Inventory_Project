@@ -16,9 +16,10 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
+    <div class="content">
     <div id="head">
     </div>
-    <h3>
+    <h3 class="parent">
         <a href="<c:url value="/branch/order/list" />">발주 리스트</a>
     </h3>
 
@@ -38,17 +39,17 @@
 
     <!-- 검색 입력 및 버튼 -->
     <input type="text" id="searchInput" placeholder="Search books...">
-    <select id="ordering">
-		<option value="">선택</option>
-		<option value="asc">오름차순</option>
-		<option value="desc">내림차순</option>
-    </select>
     <select id="key">
 		<option value="">선택</option>
 		<option value="kindCode">과목코드</option>
 		<option value="book_name">교재명</option>
 		<option value="inventory">재고</option>
 		<option value="price">가격</option>
+    </select>
+    <select id="ordering">
+		<option value="">선택</option>
+		<option value="asc">오름차순</option>
+		<option value="desc">내림차순</option>
     </select>
     <button id="searchBtn">검색</button>
     <button id="resetBtn">초기화</button>
@@ -59,6 +60,7 @@
     <form:form method="post" action="#">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form:form>
+    </div>
 
     <script src="<c:url value='/javascript/bookorder.js'/>"></script>
 </body>
