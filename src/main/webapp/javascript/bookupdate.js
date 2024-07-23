@@ -101,3 +101,4 @@ function validateBookName(input) {
         alert("교재명은 최대 30자까지 입력 가능합니다.");
     }
 }
+

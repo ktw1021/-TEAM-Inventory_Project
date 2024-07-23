@@ -49,7 +49,7 @@ public class OrderController {
 	@ResponseBody
 	public List<BookInventoryVo> searchBooks(@RequestParam("query") String query, @RequestParam("ordering") String ordering, @RequestParam("key") String key, HttpSession session) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		System.err.println(query + ordering + key);
+		
 		return bookInventoryService.search(vo.getBranchId(), query, key, ordering);
 	}
 
@@ -90,7 +90,7 @@ public class OrderController {
 
 			// 세션에 업데이트된 수량 저장
 			session.setAttribute("quantities", pastQuantities);
-			System.err.println(pastQuantities);
+			
 			return "Quantities saved to session successfully";
 		} catch (Exception e) {
 			e.printStackTrace(); // 로그에 오류 정보 기록
@@ -227,7 +227,7 @@ public class OrderController {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 
 		List<LinkedHashMap> cartData = (List<LinkedHashMap>) session.getAttribute("quantities");
-
+		
 		// 장바구니가 있으면 book_order 테이블에 지점 아이디 기반으로 데이터 생성
 		if (cartData != null && !cartData.isEmpty()) {
 			orderService.insert(vo);

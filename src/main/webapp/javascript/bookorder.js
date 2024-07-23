@@ -43,6 +43,11 @@
 		 $("#key").val('');
 	 });
 
+	 $(document).on('click', '#resetQuantity', function() {
+		 $(".quantityInput").val(0);
+		 quantityMap = {}; // 수량 맵도 초기화
+	 });
+
 	 // 모든 데이터를 로드하는 함수
 	 function loadAllData() {
 		 $.ajax({
@@ -86,7 +91,9 @@
 			 '<th>교재명</th>' +
 			 '<th>재고</th>' +
 			 '<th>가격</th>' +
-			 '<th>수량</th>' +
+			 '<th>수량' +
+			 '<button id="resetQuantity">수량 초기화</button>' +
+			 '</th>' +
 			 '</tr>' +
 			 '</thead>' +
 			 '<tbody>';
@@ -311,22 +318,22 @@
 
 	 // 장바구니 추가 버튼 클릭 이벤트 처리
 	 $("#saveBtn").click(function() {
-		 var bookQuantities = Object.keys(quantityMap).map(function(bookCode) {
-			 return {
-				 bookCode: bookCode,
-				 bookName: quantityMap[bookCode].bookName,
-				 inventory: quantityMap[bookCode].inventory, // 재고 정보 추가
-				 price: quantityMap[bookCode].price, // 가격 정보 추가
-				 quantity: quantityMap[bookCode].quantity
-			 };
+		 var bookQuantities = [];
+
+		 Object.keys(quantityMap).forEach(function(bookCode) {
+			 var quantity = quantityMap[bookCode].quantity;
+			 if (quantity > 0) { // quantity가 0보다 큰 경우에만 추가
+				 bookQuantities.push({
+					 bookCode: bookCode,
+					 bookName: quantityMap[bookCode].bookName,
+					 inventory: quantityMap[bookCode].inventory,
+					 price: quantityMap[bookCode].price,
+					 quantity: quantity
+				 });
+			 }
 		 });
 
-		 // 선택된 항목이 있는지 확인
-		 var allZero = bookQuantities.every(function(item) {
-			 return item.quantity === 0;
-		 });
-
-		 if (allZero) {
+		 if (bookQuantities.length === 0) {
 			 alert("적어도 1개 이상은 선택해 주세요.");
 			 return; // 모든 항목이 0이면 처리 중지
 		 }

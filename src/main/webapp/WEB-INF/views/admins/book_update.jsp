@@ -77,34 +77,23 @@
 
     <%@ include file="/WEB-INF/views/admin_includes/footer.jsp"%>
     <script src="<c:url value='/javascript/bookupdate.js'/>"></script>
-    
-    <script type="text/javascript">
-    function downloadCSV() {
-        var table = document.querySelector("table"); // 테이블 요소를 가져옵니다.
-        var rows = table.querySelectorAll("tr"); // 테이블의 모든 행을 선택합니다.
-        
-        var csvContent = "data:text/csv;charset=utf-8,";
+   <script>
+        function downloadCSV() {
+            var csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "교재 ID,교재명,가격,과목 코드\n"; // CSV 헤더
 
-        // 각 행의 셀 데이터를 CSV 형식으로 변환합니다.
-        rows.forEach(function(row) {
-            var rowData = [];
-            row.querySelectorAll("td").forEach(function(cell) {
-                rowData.push(cell.textContent); // 각 셀의 텍스트 내용을 가져와 배열에 추가합니다.
-            });
-            csvContent += rowData.join(",") + "\n"; // 각 행의 데이터를 CSV 행으로 변환하여 csvContent에 추가합니다.
-        });
+            <c:forEach items="${list}" var="vo">
+                var row = "${vo.bookCode},${vo.bookName},${vo.price},${vo.kindCode}\n";
+                csvContent += row;
+            </c:forEach>
 
-        // CSV 파일 다운로드를 위한 작업
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "table_data.csv");
-
-        // 링크를 document body에 추가합니다.
-        document.body.appendChild(link);
-
-        // 링크를 클릭하여 CSV 파일 다운로드를 시작합니다.
-        link.click();
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "books.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
     </script>
 
 </body>
