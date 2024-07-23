@@ -44,7 +44,7 @@
                 </tr>
             </table>
         </form>
-        <button type="button" onclick="downloadCSV()">엑셀 다운로드</button>
+        <button type="button" onclick="downloadCSV()">CSV 다운로드</button>
         <table>
             <tr>
                 <th>교재 ID</th>
@@ -69,8 +69,7 @@
 
     <%@ include file="/WEB-INF/views/admin_includes/footer.jsp"%>
     <script src="<c:url value='/javascript/bookupdate.js'/>"></script>
-
-    <script>
+   <script>
         function downloadCSV() {
             var csvContent = "data:text/csv;charset=utf-8,";
             csvContent += "교재 ID,교재명,가격,과목 코드\n"; // CSV 헤더

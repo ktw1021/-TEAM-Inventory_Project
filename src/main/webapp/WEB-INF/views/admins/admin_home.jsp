@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리자 디폴트 페이지</title>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/admins.css'/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/admins.css'/>">
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
@@ -30,10 +31,9 @@
 
 		<h1>지점 페이지</h1>
 		<p class="parent">
-			<a href="<c:url value='/admin/1'/>">A지점</a>
-			<a href="<c:url value='/admin/2'/>">B지점</a>
-			<a href="<c:url value='/admin/3'/>">c지점</a>
-			<a href="<c:url value='/admin/4'/>">D지점</a>
+			<c:forEach items="${branchList}" var="vo" varStatus="status">
+				<a href="<c:url value='/admin/branch/${vo.branchId}'/>">${vo.branchName}지점</a>
+			</c:forEach>
 		</p>
 	</div>
 

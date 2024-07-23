@@ -1,11 +1,15 @@
 package com.inventory.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.inventory.repositories.vo.OrderVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.OrderCheckService;
 import com.inventory.services.UserService;
@@ -36,39 +40,22 @@ public class AdminController {
     	
     	long orderCount = orderCheckService.getCount();
     	
+    	List<OrderVo> branchList = orderCheckService.getBranchList();
+    	
     	model.addAttribute("userCount", taikiUser);
     	model.addAttribute("orderCount", orderCount);
+    	model.addAttribute("branchList", branchList);
     	
         return "admins/admin_home";
     }
     
-    @RequestMapping("/1")
-    public String branchA(HttpSession session) {
+    @RequestMapping("/branch/{branchId}")
+    public String branch(HttpSession session, @PathVariable("branchId") String branchId) {
     	UserVo authUser = (UserVo) session.getAttribute("authUser");
-    	authUser.setBranchId("1");
+    	authUser.setBranchId(branchId);
     	session.setAttribute("authUser", authUser);
     	return "redirect:/branch/home";
     }
-    @RequestMapping("/2")
-    public String branchB(HttpSession session) {
-    	UserVo authUser = (UserVo) session.getAttribute("authUser");
-    	authUser.setBranchId("2");
-    	session.setAttribute("authUser", authUser);
-    	return "redirect:/branch/home";
-    }
-    @RequestMapping("/3")
-    public String branchC(HttpSession session) {
-    	UserVo authUser = (UserVo) session.getAttribute("authUser");
-    	authUser.setBranchId("3");
-    	session.setAttribute("authUser", authUser);
-    	return "redirect:/branch/home";
-    }
-    @RequestMapping("/4")
-    public String branchD(HttpSession session) {
-    	UserVo authUser = (UserVo) session.getAttribute("authUser");
-    	authUser.setBranchId("4");
-    	session.setAttribute("authUser", authUser);
-    	return "redirect:/branch/home";
-    }
+
     
 }

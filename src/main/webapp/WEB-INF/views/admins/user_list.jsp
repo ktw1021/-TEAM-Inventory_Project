@@ -15,7 +15,7 @@
     <div class="content">
         <h1>유저 리스트 및 관리</h1>
         <p>유저리스트</p>
-        <button type="button" onclick="downloadCSV()">엑셀 다운로드</button>
+        <button type="button" onclick="downloadCSV()">CSV 다운로드</button>
         <table>
             <tr>
                 <th>번호</th>
