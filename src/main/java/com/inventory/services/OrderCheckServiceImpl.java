@@ -86,6 +86,12 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 		List<OrderVo> list = OrderCheckDao.selectAllBookOrders();
 		return list;
 	}
+
+	@Override
+	public List<OrderVo> selectOrdersByDate(String date) {
+		List<OrderVo> list = OrderCheckDao.selectOrdersByDate(date);
+		return list;
+	}
 	
 
 }

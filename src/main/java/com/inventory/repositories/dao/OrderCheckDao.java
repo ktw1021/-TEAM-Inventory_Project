@@ -33,7 +33,7 @@ public interface OrderCheckDao {
 
 	List<OrderVo> selectAllBookOrders();
 
-	List<OrderVo> findOrdersByDate(String date);
+	List<OrderVo> selectOrdersByDate(String date);
 
 
 }
