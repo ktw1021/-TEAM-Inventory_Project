@@ -110,8 +110,10 @@ public class UserController {
 	                             HttpSession session) {
 	    UserVo userVo = (UserVo) session.getAttribute("authUser");
 	    boolean success = userService.changePassword(userVo.getName(), currentPassword, newPassword);
-
+	    
+	    
 	    if (success) {
+	    	session.removeAttribute("tempPasswordMessage");
 	        return "redirect:/user/changePassword?status=success";
 	    } else {
 	        return "redirect:/user/changePassword?status=failure";

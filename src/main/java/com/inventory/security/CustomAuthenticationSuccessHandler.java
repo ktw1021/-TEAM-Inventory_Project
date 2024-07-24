@@ -43,7 +43,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             if (duration.compareTo(Duration.ofHours(1)) <= 0) {
             	System.err.println("들어왔다 히히~~~~~~~~~~~~~~~~");
                 session.setAttribute("tempPasswordMessage", "임시 비밀번호는 1시간 동안 유효합니다. 비밀번호를 변경하십시오.");
-            } 
+            } else {
+            	session.removeAttribute("tempPasswordMessage");
+            }
         }
         String asf = (String) session.getAttribute("tempPasswordMessage");
         System.err.println(asf);

@@ -28,7 +28,7 @@ h3 {
 
 p {
 	font-size: 1.2em;
-	margin: 5px 0 15px 0;
+	margin: 5px 0 10px 0;
 }
 
 /* Navigation Bar Styles */
@@ -134,7 +134,7 @@ nav .menu {
 table {
 	width: 60%;
 	border-collapse: collapse;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 th, td {
@@ -213,7 +213,6 @@ footer {
 	color: white;
 	text-align: center;
 	padding: 10px;
-	position: fixed;
 	width: 100%;
 	bottom: 0;
 }
@@ -409,7 +408,6 @@ footer {
     z-index: 1000; /* 다른 요소들 위에 표시되도록 */
     max-height: 90%;
     max-width: 40%;
-    cursor: move; /* 드래그 가능 커서 */
 } 
    
 #gije{
@@ -443,13 +441,6 @@ footer {
     background-color: #555;
 }
 
-.date-input-th {
-    position: sticky;
-    top: 0;
-    background-color: #f2f2f2;
-    z-index: 9; /* 다른 <th> 요소보다 높이 설정 */
-}
-
 .mordan {
     position: sticky;
     top: 0;
@@ -459,5 +450,5 @@ footer {
 
 .sita {
 	position: sticky;
-	top: 46px;
+	top: 47px;
 }

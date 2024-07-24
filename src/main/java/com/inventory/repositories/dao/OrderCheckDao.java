@@ -1,15 +1,12 @@
 package com.inventory.repositories.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.inventory.repositories.vo.OrderVo;
 import com.inventory.repositories.vo.StockVo;
 
 public interface OrderCheckDao {
-	
-	public List <OrderVo> getAllList ();
-	
-	public List<OrderVo> getBranchsList(String id);
 	
 	public List <OrderVo> getOrderDetail(String id);
 	
@@ -28,4 +25,6 @@ public interface OrderCheckDao {
 	public String getBranchId(String orderId);
 	
 	public List<OrderVo> getBranchList();
+	
+	public List <OrderVo> newGetList(Map <String, String> params);
 }

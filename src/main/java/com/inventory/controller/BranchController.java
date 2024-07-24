@@ -56,7 +56,8 @@ public class BranchController {
     		@RequestParam(value="check", required = false) String check,
     		@RequestParam(value = "orderBy", defaultValue = "kindcode desc, book_name asc") String orderBy,
     		@RequestParam(value = "startDate", required = false) String startDate,
-    		@RequestParam(value = "endDate", required = false) String endDate) {
+    		@RequestParam(value = "endDate", required = false) String endDate,
+    		@RequestParam(value = "kindCode", required = false) String kindCode) {
         UserVo vo = (UserVo) session.getAttribute("authUser");
         
         Map <String, Object> params = new HashMap<>();
@@ -66,6 +67,7 @@ public class BranchController {
 	    params.put("orderBy", orderBy != null ? orderBy.trim() : null);
 	    params.put("startDate", startDate !=null ? startDate : null);
 	    params.put("endDate", endDate != null ? endDate : null);
+	    params.put("kindCode", kindCode != null ? kindCode : "");
         
         return bookInvenService.invenList(params);
     }

@@ -12,9 +12,63 @@
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <title>지점 관리 시스템</title>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/branches.css'/>">
-
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/branches.css'/>">
+<style>
+/* 드래그 가능한 search-form 스타일 */
+#search-form {
+    cursor: move; /* 드래그 가능 커서 */
+}
+.mordan2 {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 9;
+    cursor: pointer;
+}
+.mordan2:hover{
+	background-color: #3e8e41;
+	cursor: pointer;
+}
+.mordan-dropdown{
+	position: relative;
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 9;
+    cursor: pointer;
+}
+.mordan-dropdown:hover{
+	background-color: #3e8e41;
+}
+.mordan-dropdown:hover .dropdown-content{
+	display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+    top: 100%;
+    left: 0;
+    width: 100%;
+}
+.dropdown-content p {
+    color: black;
+    font-size: 12px;
+    padding: 12px 5px;
+    margin: 0;
+    background-color: white;
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+}
+.dropdown-content p:hover {
+    background-color: #f1f1f1;
+    text-decoration: underline;
+}
+</style>
 <script src="<c:url value='/javascript/inven.js'/>"></script>
 </head>
 <body>
@@ -32,6 +86,7 @@
 			<button type="button" onclick="resetKeyword()" class="add">초기화</button>
 			<button type="button" id="resetOrderBy">정렬 초기화</button>
 			<button type="button" id="toggleTable">테이블 바꾸기</button>
+			<input type="hidden" id="kindCode" name="kindCode" value="">
 		</form>
 		<br />
 		<div id="table-container" class="table-container">
@@ -52,5 +107,6 @@
             alert(tempPasswordMessage);
         </script>
     </c:if>
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

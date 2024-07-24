@@ -18,18 +18,6 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<OrderVo> getAllList() {
-		List<OrderVo> list = sqlSession.selectList("orderCheck.orderCheckList");
-		return list;
-	}
-
-	@Override
-	public List<OrderVo> getBranchsList(String id) {
-		List<OrderVo> list = sqlSession.selectList("orderCheck.orderCheckBranch", id);
-		return list;
-	}
-
-	@Override
 	public List<OrderVo> getOrderDetail(String id) {
 		List<OrderVo> list = sqlSession.selectList("orderCheck.selectOrderDetail", id);
 		return list;
@@ -78,6 +66,11 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 	public List<OrderVo> getBranchList() {
 		List<OrderVo> list = sqlSession.selectList("orderCheck.getBranchList");
 		return list;
+	}
+
+	@Override
+	public List<OrderVo> newGetList(Map <String, String> params) {
+		return sqlSession.selectList("orderCheck.newOrderCheckList", params);
 	}
 
 }
