@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -63,7 +65,7 @@
                 <tr>
                     <td>${vo.bookCode}</td>
                     <td>${vo.bookName}</td>
-                    <td>${vo.price}</td>
+                    <td><fmt:formatNumber value="${vo.price}" pattern="#,##0"></fmt:formatNumber></td>
                     <td>${vo.kindCode}</td>
                     <td><a
                         href="<c:url value='/admin/book/update/${vo.bookCode}'/>"
