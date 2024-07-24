@@ -67,7 +67,7 @@
         function renderHeader(dataArray) {
             if (dataArray.length > 0) {
                 var firstBranchName = dataArray[0].branchName;
-                var result = '<h1>' + firstBranchName + ' 지점</h1>';
+                var result = '<h1>' + firstBranchName + ' 지점 발주 페이지</h1>';
                 $("#head").html(result);
             } else {
                 $("#head").html('<h1>No Branch ID Available</h1>');
@@ -81,7 +81,7 @@
                                  '<thead>' +
                                  '<tr>' +
                            		 '<th>번호</th>' + // Index 추가
-                                 '<th class="sortable" data-column="kindCode">과목 코드</th>' +
+                                 '<th class="sortable" data-column="kindCode">분류</th>' +
                                  '<th class="sortable" data-column="bookName">교재명</th>' +
                                  '<th class="sortable" data-column="inventory">재고</th>' +
                                  '<th class="sortable" data-column="price">가격</th>' +

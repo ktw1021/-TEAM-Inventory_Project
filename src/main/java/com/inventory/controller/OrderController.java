@@ -219,6 +219,8 @@ public class OrderController {
 			model.addAttribute("success", true);
 			session.removeAttribute("success");
 		}
+		
+		model.addAttribute("authUser", vo);
 
 		return "branches/branch_order_list";
 	}

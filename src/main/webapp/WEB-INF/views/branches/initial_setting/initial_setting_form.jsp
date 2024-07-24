@@ -17,8 +17,8 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
-
-	<h1>재고 추가 페이지</h1>
+	<div class="content">
+	<h1>${authUser.branchName } 지점 재고 추가 페이지</h1>
 
 	<form id="search-form">
 		<label for="keyword">검색어: </label><input type="text" name="keyword" value="${param.keyword == null ? '' : param.keyword.trim()}">
@@ -47,6 +47,7 @@
             <button type="button" onclick="submitOrderForm()" class="add">확인</button>
             <button type="button" onclick="closeModal()" class="delete">취소</button>
         </div>
+    </div>
     </div>
 </body>
 </html>

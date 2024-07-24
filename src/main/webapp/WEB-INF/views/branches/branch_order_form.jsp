@@ -22,14 +22,14 @@
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 	<div id="head"></div>
-	<h3 class="parent">
+	<h4 class="parent">
 		<a href="<c:url value="/branch/order/list" />">발주 리스트</a>
-	</h3>
+	</h4>
 
 	<!-- 장바구니 섹션 -->
 	<div id="cart" class="cart">
-		<h2>Cart</h2>
-		<input type="text" id="searchInput" placeholder="Search books...">
+		<h2>장바구니</h2>
+		<input type="text" id="searchInput" placeholder="교재명...">
 		<select id="ordering">
 			<option value="">선택</option>
 			<option value="asc">오름차순</option>
@@ -66,7 +66,7 @@
 			value="${_csrf.token}" />
 	</form:form>
 	</div>
-
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 	<script src="<c:url value='/javascript/bookorder.js'/>"></script>
 </body>
 </html>

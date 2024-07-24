@@ -26,7 +26,7 @@ public class BranchController {
 	@Autowired
 	private BookInventoryService bookInvenService;
 	
-	@RequestMapping({"/inventory", "/home"})
+	@RequestMapping("/inventory")
 	public String newHome(HttpSession session) {
 		UserVo userVo = (UserVo) session.getAttribute("authUser");
 		userVo.setBranchName(bookInvenService.getBranchName(userVo.getBranchId()));

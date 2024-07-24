@@ -15,14 +15,14 @@
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>출고 detail</h1>
+		<h1>출고 번호: ${outId }</h1>
 		<table border="1">
 			<tr>
-				<th>date</th>
-				<th>book_code</th>
-				<th>book_name</th>
-				<th>quantity</th>
-				<th>comments</th>
+				<th>출고일</th>
+				<th>교재 코드</th>
+				<th>교재명</th>
+				<th>수량</th>
+				<th>사유</th>
 			</tr>
 					
 			<c:forEach items="${list }" var="vo">
@@ -36,7 +36,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<p><a href ="<c:url value="/branch/stockout/list"/>">목록으로 돌아가기</a></p>
+		<p class="parent"><a href ="<c:url value="/branch/stockout/list"/>">목록으로 돌아가기</a></p>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>

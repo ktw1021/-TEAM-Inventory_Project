@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <th onclick="updateOrderBy('kindcode')" rowspan="2" class = "mordan">분류
                         ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan">책 이름
+                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan">교재명
                         ${orderBy.includes('bookName asc') ? '▲' : orderBy.includes('bookName desc') ? '▼' : ''}
                     </th>
                     <th onclick="updateOrderBy('price')" rowspan="2" class = "mordan">가격
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <th onclick="updateOrderBy('kindcode')" rowspan="2" class = "mordan">분류
                         ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan">책 이름
+                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan">교재명
                         ${orderBy.includes('bookName asc') ? '▲' : orderBy.includes('bookName desc') ? '▼' : ''}
                     </th>
                     <th onclick="updateOrderBy('price')" rowspan="2" class = "mordan">가격

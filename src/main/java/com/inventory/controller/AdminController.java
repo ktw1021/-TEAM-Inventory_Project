@@ -54,7 +54,7 @@ public class AdminController {
     	UserVo authUser = (UserVo) session.getAttribute("authUser");
     	authUser.setBranchId(branchId);
     	session.setAttribute("authUser", authUser);
-    	return "redirect:/branch/home";
+    	return "redirect:/branch/inventory";
     }
 
     

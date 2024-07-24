@@ -10,9 +10,11 @@ body {
     justify-content: flex-start; /* 컨텐츠를 상단에 배치 */
     align-items: center;
 }
+
 .navbar {
     width: 100%;
 }
+
 nav {
     position: fixed;
     top: 0;
@@ -32,7 +34,8 @@ h2 {
     padding: 40px 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 200px; /* 네비게이션 바 아래로 공간 확보 */
+    margin-top: 100px; /* 네비게이션 바 아래로 공간 확보 */
+    position: relative; /* 뒤로가기 버튼을 절대 위치로 배치하기 위해 relative 위치 지정 */
 }
 
 .container input[type="text"],
@@ -71,6 +74,7 @@ form, .message-box {
     box-sizing: border-box;
     text-align: center;
     margin-top: 100px; /* 네비게이션 바 아래로 공간 확보 */
+    position: relative; /* 뒤로가기 버튼을 절대 위치로 배치하기 위해 relative 위치 지정 */
 }
 
 label {
@@ -135,4 +139,25 @@ a:hover {
 
 .message-box a:hover {
     background-color: #4cae4c;
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #ff4c4c;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
