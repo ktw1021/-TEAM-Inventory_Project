@@ -1,5 +1,9 @@
 package com.inventory.repositories.dao;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +11,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.inventory.exceptions.UserDaoException;
@@ -19,6 +24,8 @@ public class UserDaoImpl implements UserDao{
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public int insert(UserVo vo) {
@@ -121,6 +128,47 @@ public class UserDaoImpl implements UserDao{
 		params.put("name", name);
 		params.put("newPassword", newPassword);
 		sqlSession.update("users.updatePassword",params);
-		
 	}
+	
+	@Override
+	public void updateTemporaryPassword(String name, String temporaryPassword, Timestamp createdAt) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("name", name);
+	    params.put("temporaryPassword", temporaryPassword);
+	    params.put("createdAt", createdAt);
+	    sqlSession.update("users.updateTemporaryPassword", params);
+	}
+	 @Override
+	    public UserVo getUserByUsername(String username) {
+	        return sqlSession.selectOne("users.getUserByUsername", username);
+	    }
+	@Override
+	public boolean isTemporaryPasswordValid(String username, String rawPassword) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("username", username);
+	    UserVo user = sqlSession.selectOne("users.getUserByUsername", params);
+
+	    if (user != null) {
+	        String encodedPassword = user.getPassword();
+	        Date createdAt = user.getTemporaryPasswordCreatedAt();
+
+	        if (passwordEncoder.matches(rawPassword, encodedPassword)) {
+	            if (createdAt != null) {
+	                Instant createdAtInstant = createdAt.toInstant();
+	                Instant now = Instant.now();
+	                Duration duration = Duration.between(createdAtInstant, now);
+
+	                return duration.compareTo(Duration.ofHours(1)) <= 0;
+	            }
+	        }
+	    }
+	    return false;
+	}
+
+	@Override
+	public void resetTemporaryPasswordCreatedAt(String name) {
+	    sqlSession.update("users.resetTemporaryPasswordCreatedAt", name);
+	}
+
+	
 }

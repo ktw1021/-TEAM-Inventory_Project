@@ -46,5 +46,11 @@
 			<a href="<c:url value='/branch/order/list'/>">오더 리스트 보기</a>
 		</p>
 	</div>
+    <c:if test="${not empty sessionScope.tempPasswordMessage}">
+        <script>
+            var tempPasswordMessage = "${sessionScope.tempPasswordMessage}";
+            alert(tempPasswordMessage);
+        </script>
+    </c:if>
 </body>
 </html>
