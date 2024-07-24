@@ -32,9 +32,9 @@
 	</select>
 
 	<select id="selectDetailList" parameterType="String" resultType="OrderVo">
-		SELECT order_id as orderId, book_code as bookCode, quantity
-		FROM order_detail
-		WHERE order_id = #{orderId}
+		SELECT od.order_id as orderId, od.book_code as bookCode, b.book_name as bookName, od.quantity as quantity, b.price as price
+	    FROM order_detail od join book_list b on od.book_code = b.book_code
+	    WHERE order_id = #{orderId}
 	</select>
 
 </mapper>

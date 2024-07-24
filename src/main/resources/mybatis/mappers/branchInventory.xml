@@ -33,8 +33,8 @@
 
 	<!-- book inventory list -->
 	<select id="selectInventory" parameterType="string" resultType="BookInventoryVo">
-		select bi.branch_id as branchId, bi.book_code as bookCode, bl.book_name as bookName, bi.inventory as inventory, bl.price as price, bl.kindcode as kindCode
-		from branch_inventory bi join book_list	bl on bi.book_code = bl.book_code
+		select bi.branch_id as branchId, bi.book_code as bookCode, bl.book_name as bookName, bi.inventory as inventory, bl.price as price, bl.kindcode as kindCode, b.branch_name as branchName
+		from branch_inventory bi join book_list	bl on bi.book_code = bl.book_code join branch b on bi.branch_id = b.branch_id
 		where bi.branch_id = #{id} order by kindcode desc, bl.book_name
 	</select>
 

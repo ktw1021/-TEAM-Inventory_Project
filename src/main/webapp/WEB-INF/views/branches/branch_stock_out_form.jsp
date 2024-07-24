@@ -12,7 +12,8 @@
 <title>소비 페이지</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
-<script src="<c:url value= "/javascript/stockout.js"/>"></script>
+<script src="<c:url value='/javascript/stout.js'/>"></script>
+
 
 </head>
 

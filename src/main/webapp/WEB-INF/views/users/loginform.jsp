@@ -9,30 +9,10 @@
     <title>My Home: Login</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/users.css'/>">
     <script src="<c:url value="/javascript/users.js"/>"></script>
-    <style>
-        .container .back-button {
-            position: relative;
-            top: 10px;
-            left: 10px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            color: #4CAF50; /* Adjust color as needed */
-        }
-        .container .back-button svg {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <button class="back-button" onclick="history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
+        <a href="javascript:history.back()" class="back-button">뒤로가기</a>
         <h2>로그인</h2>
         <form id="login-form" 
               name="loginform" 
@@ -52,6 +32,5 @@
         </form>
         <a href="<c:url value='/user/forgotPassword'/>">비밀번호 찾기</a> <!-- 비밀번호 찾기 링크 추가 -->
     </div>
-
 </body>
 </html>
