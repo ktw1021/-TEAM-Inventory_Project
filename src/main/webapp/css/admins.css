@@ -111,11 +111,9 @@ footer {
 	color: white;
 	text-align: center;
 	padding: 10px;
-	position: fixed;
 	width: 100%;
 	bottom: 0;
 }
-
 /* 수정 버튼 스타일 */
 .update {
 	background-color: #008CBA; /* 파란색 */

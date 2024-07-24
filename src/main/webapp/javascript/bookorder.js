@@ -27,6 +27,8 @@
 	 $("#resetBtn").click(function() {
 		 loadAllData(); // 모든 데이터 다시 로드
 
+		 currentKindCodeFilter = $("#kindCodeFilter").val("");
+		 currentInventoryFilter = $("#inventoryFilter").val("");
 		 // 수량 입력 초기화
 		 $(".quantityInput").val(0);
 
@@ -431,6 +433,8 @@
 			 data: { query: query, ordering: ordering, key: key },
 			 dataType: 'json',
 			 success: function(data) {
+				 currentKindCodeFilter = $("#kindCodeFilter").val("");
+				 currentInventoryFilter = $("#inventoryFilter").val("");
 				 currentData = data; // 검색 결과를 currentData에 저장
 				 sortOrders = {
 					 'kindCode': 'desc',
