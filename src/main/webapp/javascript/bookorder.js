@@ -4,6 +4,10 @@
 	 var quantityMap = {}; // 수량 맵 초기화
 	 var sortOrders = {}; // 각 컬럼의 정렬 순서를 저장
 	 var sortOrder = ''; // 현재 정렬 순서 (asc, desc, '')
+	 var currentData = []; // 현재 표시 중인 데이터를 저장할 변수
+	 // 전역 변수로 현재 필터 상태 추가
+	 var currentKindCodeFilter = "";
+	 var currentInventoryFilter = "";
 	 // CSRF 토큰 설정
 	 var csrfHeaderName = $('meta[name="_csrf_header"]').attr('content');
 	 var csrfToken = $('meta[name="_csrf"]').attr('content');
@@ -42,11 +46,15 @@
 			 dataType: 'json',
 			 success: function(data) {
 				 quantityMap = {}; // 수량 맵 초기화
+				 currentData = data; // 받아온 데이터를 저장
 				 // 초기 정렬 상태 설정
 				 sortOrders = {
 					 'kindCode': 'desc',
 					 'bookName': 'asc'
 				 };
+				 currentKindCodeFilter = ""; // 초기 필터 상태 설정
+				 currentInventoryFilter = "";
+				 applyFiltersAndSort(); // 필터와 정렬을 적용
 				 renderData(data); // 데이터를 렌더링
 				 updateCart(); // 장바구니 업데이트
 				 renderHeader(data);
@@ -80,12 +88,30 @@
 		 var resultHtml = '<table>' +
 			 '<thead>' +
 			 '<tr>' +
-			 '<th>번호</th>' + // Index 추가
+			 '<th rowspan="2">번호</th>' +
+			 '<th class="filter-header">' +
+			 '<select id="kindCodeFilter">' +
+			 '<option value="">모든 분류</option>' +
+			 '<option value="1"' + (currentKindCodeFilter === "1" ? ' selected' : '') + '>초등</option>' +
+			 '<option value="2"' + (currentKindCodeFilter === "2" ? ' selected' : '') + '>중등</option>' +
+			 '<option value="3"' + (currentKindCodeFilter === "3" ? ' selected' : '') + '>고등</option>' +
+			 '<option value="4"' + (currentKindCodeFilter === "4" ? ' selected' : '') + '>수능</option>' +
+			 '</select>' +
+			 '</th>' +
+			 '<th class="sortable" data-column="bookName" rowspan="2">교재명</th>' +
+			 '<th class="filter-header">' +
+			 '<select id="inventoryFilter">' +
+			 '<option value="">모든 재고</option>' +
+			 '<option value="0"' + (currentInventoryFilter === "0" ? ' selected' : '') + '>재고 없음</option>' +
+			 '<option value="1"' + (currentInventoryFilter === "1" ? ' selected' : '') + '>재고 있음</option>' +
+			 '</select>' +
+			 '</th>' +
+			 '<th class="sortable" data-column="price" rowspan="2">가격</th>' +
+			 '<th rowspan="2">수량</th>' +
+			 '</tr>' +
+			 '<tr>' +
 			 '<th class="sortable" data-column="kindCode">분류</th>' +
-			 '<th class="sortable" data-column="bookName">교재명</th>' +
 			 '<th class="sortable" data-column="inventory">재고</th>' +
-			 '<th class="sortable" data-column="price">가격</th>' +
-			 '<th>수량</th>' +
 			 '</tr>' +
 			 '</thead>' +
 			 '<tbody>';
@@ -143,6 +169,10 @@
 			 quantityMap[bookCode] = { bookCode: bookCode, bookName: bookName, price: bookPrice, inventory: bookInven, quantity: quantity };
 			 //updateCart(); // 장바구니 업데이트
 		 });
+
+		 $("#kindCodeFilter, #inventoryFilter").change(function() {
+			 applyFiltersAndSort();
+		 });
 	 }
 
 	 // 과목 코드를 한글로 변환하는 함수
@@ -161,6 +191,48 @@
 				 return "기타";
 		 }
 	 }
+
+	 function applyFiltersAndSort() {
+		 currentKindCodeFilter = $("#kindCodeFilter").val();
+		 currentInventoryFilter = $("#inventoryFilter").val();
+
+		 var filteredData = currentData.filter(function(book) {
+			 var kindCodeMatch = currentKindCodeFilter === "" || book.kindCode === currentKindCodeFilter;
+			 var inventoryMatch = currentInventoryFilter === "" ||
+				 (currentInventoryFilter === "0" && book.inventory == 0) ||
+				 (currentInventoryFilter === "1" && book.inventory > 0);
+			 return kindCodeMatch && inventoryMatch;
+		 });
+
+		 // 정렬 적용
+		 filteredData.sort(function(a, b) {
+			 for (var key in sortOrders) {
+				 var valueA = a[key];
+				 var valueB = b[key];
+
+				 if (key === 'inventory' || key === 'price') {
+					 valueA = parseFloat(valueA);
+					 valueB = parseFloat(valueB);
+				 }
+
+				 if (valueA !== valueB) {
+					 return sortOrders[key] === 'asc' ?
+						 (valueA > valueB ? 1 : -1) :
+						 (valueA < valueB ? 1 : -1);
+				 }
+			 }
+			 return 0;
+		 });
+
+		 renderData(filteredData);
+		 updateSortIndicators();
+	 }
+
+
+
+	 /*$("#applyFilter").click(function() {
+		 applyFiltersAndSort();
+	 });*/
 
 	 // 데이터 정렬 함수
 	 function sortData(column, data, isMultiSort) {
@@ -195,6 +267,7 @@
 			 return 0;
 		 });
 
+		 applyFiltersAndSort();
 		 renderData(data);
 		 updateSortIndicators();
 	 }
@@ -358,10 +431,12 @@
 			 data: { query: query, ordering: ordering, key: key },
 			 dataType: 'json',
 			 success: function(data) {
+				 currentData = data; // 검색 결과를 currentData에 저장
 				 sortOrders = {
 					 'kindCode': 'desc',
 					 'bookName': 'asc'
 				 };
+				 applyFiltersAndSort(); // 필터와 정렬을 적용
 				 renderData(data); // 검색 결과 렌더링
 				 updateSortIndicators(); // 정렬 표시 업데이트
 			 },
@@ -495,3 +570,4 @@
 
 	 loadAllData(); // 페이지 로드 시 모든 데이터 초기화
  });
+

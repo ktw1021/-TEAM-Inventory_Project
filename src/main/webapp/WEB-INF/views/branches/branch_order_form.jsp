@@ -16,7 +16,6 @@
 <!-- CSS 파일 추가 -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
-
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
