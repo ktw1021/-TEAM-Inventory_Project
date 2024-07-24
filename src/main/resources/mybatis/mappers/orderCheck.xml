@@ -7,14 +7,8 @@
 
 	<!-- order check list -->
 	<select id="orderCheckList" resultType="OrderVo">
-		select bo.order_id AS
-		orderId, bo.branch_id AS branchId,
-		bo.order_date AS orderDate,
-		bo.checked, bo.user_name AS userName,
-		b.branch_name AS branchName FROM
-		book_order bo
-		JOIN branch b ON bo.branch_id = b.branch_id ORDER BY
-		bo.order_date DESC
+		select bo.order_id AS orderId, bo.branch_id AS branchId, bo.order_date AS orderDate, bo.checked, bo.user_name AS userName, b.branch_name AS branchName
+		FROM book_order bo JOIN branch b ON bo.branch_id = b.branch_id ORDER BY	bo.order_date DESC
 	</select>
 
 	<!-- order check list 지점 별로 구분하기 -->

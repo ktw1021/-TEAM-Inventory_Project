@@ -26,12 +26,6 @@ public class OrderCheckController {
 	@RequestMapping({ "", "/", "/list" })
 	public String orderCheckList(HttpSession session, RedirectAttributes redirectAttributes, Model model) {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		// 로그인 정보 판단
-		if (!("2").equals(authUser.getAuthCode())) {
-			// 로그인 안 한 경우 홈으로 리다이렉트
-			redirectAttributes.addFlashAttribute("errorMsg", "auth code 불일치 ");
-			return "redirect:/";
-		}
 
 		session.setAttribute("authUser", authUser);
 		List<OrderVo> list = OrderCheckService.getList();
@@ -50,11 +44,6 @@ public class OrderCheckController {
 	public String branchOrderCheckList(HttpSession session, RedirectAttributes redirectAttributes, Model model,
 			@PathVariable("no") String no) {
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if (!("2").equals(authUser.getAuthCode())) {
-			// 로그인 안 한 경우 홈으로 리다이렉트
-			redirectAttributes.addFlashAttribute("errorMsg", "auth code 불일치 ");
-			return "redirect:/";
-		}
 
 		List<OrderVo> list = OrderCheckService.getBranchsList(no);
 		List<OrderVo> branchList = OrderCheckService.getBranchList();

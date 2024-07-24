@@ -397,19 +397,21 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
-
+ 
+/* 드래그 가능한 search-form 스타일 */
 #search-form {
-        position: fixed;
-        top: 10%; /* 페이지 상단에서의 위치 */
-        right: 10px; /* 페이지 오른쪽에서의 위치 */
-        background-color: white; /* 배경색 (투명도 조정 가능) */
-        padding: 10px; /* 패딩 */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
-        z-index: 1000; /* 다른 요소들 위에 표시되도록 */
-        max-height: 90%;
-		max-width: 40%;
-}
-    
+    position: fixed;
+    top: 10%; /* 페이지 상단에서의 위치 */
+    right: 10px; /* 페이지 오른쪽에서의 위치 */
+    background-color: white; /* 배경색 (투명도 조정 가능) */
+    padding: 10px; /* 패딩 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 */
+    max-height: 90%;
+    max-width: 40%;
+    cursor: move; /* 드래그 가능 커서 */
+} 
+   
 #gije{
 	max-height: calc(80vh - 50px);
 	overflow-y: auto; /* 세로 스크롤 */
@@ -457,5 +459,5 @@ footer {
 
 .sita {
 	position: sticky;
-	top: 47px;
+	top: 46px;
 }
