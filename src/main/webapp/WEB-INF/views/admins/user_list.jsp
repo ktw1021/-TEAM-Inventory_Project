@@ -51,7 +51,7 @@
             </c:forEach>
         </table>
         <div class="parent">
-            <a href="<c:url value='/admin'/>">admin 홈으로 돌아가기</a>
+            <a href="<c:url value='/admin/home'/>">admin 홈으로 돌아가기</a>
         </div>
     </div>
 

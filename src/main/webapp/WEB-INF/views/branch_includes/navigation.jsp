@@ -43,7 +43,7 @@
 
                 <c:if test="${sessionScope.authUser.authCode == 2}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value='/admin/' />">관리자 페이지</a>
+                        <a class="nav-link" href="<c:url value='/admin/home' />">관리자 페이지</a>
                     </li>
                 </c:if>
 
