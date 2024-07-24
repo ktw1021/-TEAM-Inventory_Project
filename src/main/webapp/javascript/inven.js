@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 정렬 초기화 버튼 이벤트
     document.getElementById('resetOrderBy').addEventListener('click', function() {
         orderByInput.value = '';
+        orderBy = '';
         document.getElementById('search-form').dispatchEvent(new Event('submit'));
     });
     

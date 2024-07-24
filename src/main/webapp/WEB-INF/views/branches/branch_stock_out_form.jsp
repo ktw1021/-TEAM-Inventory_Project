@@ -14,7 +14,6 @@
 	href="<c:url value='/css/branches.css'/>">
 <script src="<c:url value='/javascript/stout.js'/>"></script>
 
-
 </head>
 
 <body>
@@ -34,6 +33,8 @@
     <table id="table">
         <thead>
             <tr>
+            	<th>번호</th>
+            	<th>분류</th>
                 <th>교재명</th>
                 <th>수량</th>
                 <th>작업</th>
@@ -41,7 +42,6 @@
             </tr>
         </thead>
         <tbody id="table-body">
-            <!-- 검색 결과가 여기에 동적으로 추가됩니다. -->
         </tbody>
     </table>
 

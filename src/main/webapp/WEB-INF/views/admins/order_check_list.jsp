@@ -59,6 +59,7 @@
         background-color: white;
         text-decoration: none;
         display: block;
+        text-align: center;
     }
     
     .dropdown-content a:hover {

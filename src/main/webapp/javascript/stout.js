@@ -70,11 +70,13 @@ function initializeLocalStorage(data) {
 // 검색 결과를 페이지에 업데이트
 function updateSearchResults(data) {
     const tableBody = document.getElementById('table-body');
-    tableBody.innerHTML = ''; // 기존 결과를 지웁니다.
+    tableBody.innerHTML = '';
 
-    data.forEach(item => {
+    data.forEach((item, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
+        	<td>${index + 1}</td>
+        	<td>${getKindCode(item.kindCode)}</td>
             <td>${item.bookName}</td>
             	<input type="hidden" name="bookCode" value="${item.bookCode}">
                 <input type="hidden" name="bookName" value="${item.bookName}">
@@ -316,4 +318,13 @@ function submitOrderForm() {
         localStorage.clear(); // 성공 후에는 비워주기~~
         window.location.href = 'http://localhost:8080/Inventory/branch/stockout/list';
     }).catch(error => console.error('Error:', error));
+}
+function getKindCode(kindCode) {
+    switch (parseInt(kindCode, 10)) {
+        case 1: return '초등';
+        case 2: return '중등';
+        case 3: return '고등';
+        case 4: return '수능';
+        default: return '몰라';
+    }
 }

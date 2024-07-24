@@ -83,7 +83,7 @@
 			<label for="check">재고 있는 책만 보기</label>
 			<input type="hidden" id="orderBy" name="orderBy" value="${param.orderBy}">
 			<input type="submit" value="검색">
-			<button type="button" onclick="resetKeyword()" class="add">초기화</button>
+			<button type="button" onclick="resetKeyword()">검색어 초기화</button>
 			<button type="button" id="resetOrderBy">정렬 초기화</button>
 			<button type="button" id="toggleTable">테이블 바꾸기</button>
 			<input type="hidden" id="kindCode" name="kindCode" value="">
