@@ -80,7 +80,7 @@
 						<c:when test="${vo.kindCode eq 2}">중등</c:when>
 						<c:when test="${vo.kindCode eq 3}">고등</c:when>
 						<c:when test="${vo.kindCode eq 4}">수능</c:when>
-						<c:otherwise>몰라</c:otherwise>
+						<c:otherwise>미분류</c:otherwise>
 					</c:choose></td>
 					<td>${vo.bookName}</td>
 					<td><fmt:formatNumber value="${vo.price}" pattern="#,###"/></td>

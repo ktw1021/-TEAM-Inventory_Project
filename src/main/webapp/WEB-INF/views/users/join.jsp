@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="javascript:history.back()" class="back-button">뒤로가기</a>
         <h2>회원가입</h2>
         <form id="joinForm" action="<c:url value='/user/join'/>" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
