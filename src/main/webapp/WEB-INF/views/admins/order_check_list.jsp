@@ -35,13 +35,20 @@
 <style>
     .dropdown {
         position: relative;
+        color: black;
+        border: 1px solid #ddd;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 16px;
     }
     
     .dropdown-content {
         display: none;
         position: absolute;
         background-color: white;
-        min-width: 160px;
+        top: 100%;
+        left: 0;
+        width: 100%;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
@@ -63,32 +70,20 @@
         display: block;
     }
     
-    .dropdown:hover .dropbtn {
+    .dropdown:hover {
         background-color: #3e8e41;
     }
-    
-    .dropbtn {
 
-        color: black;
-        border: 1px solid #ddd;
-        padding: 10px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    
-    .dropbtn:hover {
-        background-color: #f0f0f0;
-    }
     td.clickable {
 	    cursor: pointer;
 	    padding: 10px 20px; /* 기존 th와 동일한 패딩 */
 	    text-align: center;
 	}
 
-/* 클릭 시 시각적 피드백 추가 */
-td.clickable:hover {
-    background-color: #e0e0e0; /* 호버 시 색상 변경 */
-}
+	/* 클릭 시 시각적 피드백 추가 */
+	td.clickable:hover {
+	    background-color: #e0e0e0; /* 호버 시 색상 변경 */
+	}
 </style>
 </head>
 <body>
@@ -100,41 +95,37 @@ td.clickable:hover {
             <tr>
                 <th>order_id</th>
                 <th class="dropdown">
-                    <button class="dropbtn">
-                        <c:choose>
-                            <c:when test="${param.branchId != null && param.branchId != ''}">
-                                <c:forEach items="${branchList}" var="vo">
-                                    <c:if test="${vo.branchId == param.branchId}">
-                                        ${vo.branchName} ▼
-                                    </c:if>
-                                </c:forEach>
-                            </c:when>
-                            <c:otherwise>지점명 ▼</c:otherwise>
-                        </c:choose>
-                    </button>
-                    <div class="dropdown-content">
-                        <a href="#" onclick="submitWithBranchId(null)">모두 보기</a>
-                        <c:forEach items="${branchList}" var="vo">
-                            <a href="#" onclick="submitWithBranchId(${vo.branchId})">${vo.branchName }</a>
-                        </c:forEach>
-                    </div>
+				<c:choose>
+				    <c:when test="${param.branchId != null && param.branchId != ''}">
+				        <c:forEach items="${branchList}" var="vo">
+				            <c:if test="${vo.branchId == param.branchId}">
+				                ${vo.branchName} ▼
+				            </c:if>
+				        </c:forEach>
+				    </c:when>
+				    <c:otherwise>지점명 ▼</c:otherwise>
+				</c:choose>
+                <div class="dropdown-content">
+                    <a href="#" onclick="submitWithBranchId(null)">모두 보기</a>
+                    <c:forEach items="${branchList}" var="vo">
+                        <a href="#" onclick="submitWithBranchId(${vo.branchId})">${vo.branchName }</a>
+                    </c:forEach>
+                </div>
                 </th>
                 <th>order_date</th>
                 <th>담당자</th>
                 <th class="dropdown">
-                    <button class="dropbtn">
-                        <c:choose>
-                            <c:when test="${param.checked != null && param.checked != ''}">
-                                <c:choose>
-                                    <c:when test="${param.checked == '0'}">미확인 ▼</c:when>
-                                    <c:when test="${param.checked == '1'}">반려 ▼</c:when>
-                                    <c:when test="${param.checked == '2'}">처리 완료 ▼</c:when>
-                                    <c:otherwise>처리 여부 ▼</c:otherwise>
-                                </c:choose>
-                            </c:when>
-                            <c:otherwise>처리 여부 ▼</c:otherwise>
-                        </c:choose>
-                    </button>
+                    <c:choose>
+                        <c:when test="${param.checked != null && param.checked != ''}">
+                            <c:choose>
+                                <c:when test="${param.checked == '0'}">미확인 ▼</c:when>
+                                <c:when test="${param.checked == '1'}">반려 ▼</c:when>
+                                <c:when test="${param.checked == '2'}">처리 완료 ▼</c:when>
+                                <c:otherwise>처리 여부 ▼</c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>처리 여부 ▼</c:otherwise>
+                    </c:choose>
                     <div class="dropdown-content">
                         <a href="#" onclick="submitWithChecked(null)">모두 보기</a>
                         <a href="#" onclick="submitWithChecked(0)">미확인</a>

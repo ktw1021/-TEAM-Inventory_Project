@@ -42,6 +42,20 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('search-form').dispatchEvent(new Event('submit'));
     });
     
+    	
+	let kindCodeInput = document.getElementById('kindCode');
+    let kindCode = kindCodeInput.value || '';
+    window.selectListKindCode = function(e, event) {
+		event.stopPropagation();
+        if (e === null) {
+            kindCode = "";
+        } else {
+            kindCode = e;
+        }
+        kindCodeInput.value = kindCode;
+        document.getElementById('search-form').dispatchEvent(new Event('submit'));
+    }
+    
 	// Ajax요청 List 받기 함수
 	document.getElementById('search-form').addEventListener('submit', function(event) {
 		event.preventDefault();
@@ -109,23 +123,30 @@ document.addEventListener('DOMContentLoaded', function() {
             <thead>
                 <tr>
                     <th rowspan="2" class = "mordan">번호</th>
-                    <th onclick="updateOrderBy('kindcode')" rowspan="2" class = "mordan">분류
-                        ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
-                    </th>
-                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan">책 이름
+                    <th class="mordan-dropdown" onclick="updateOrderBy('kindcode')">
+    					${getKindCode(kindCode)} ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
+    					<div class="dropdown-content">
+					       	<p onclick="selectListKindCode(null, event)">모두 보기</p>
+					        <p onclick="selectListKindCode('4', event)">수능</p>
+					        <p onclick="selectListKindCode('3', event)">고등</p>
+					        <p onclick="selectListKindCode('2', event)">중등</p>
+					        <p onclick="selectListKindCode('1', event)">초등</p>
+					    </div>
+					</th>
+                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan2">책 이름
                         ${orderBy.includes('bookName asc') ? '▲' : orderBy.includes('bookName desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('price')" rowspan="2" class = "mordan">가격
+                    <th onclick="updateOrderBy('price')" rowspan="2" class = "mordan2">가격
                         ${orderBy.includes('price asc') ? '▲' : orderBy.includes('price desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('inventory')" rowspan="2" class = "mordan">현재 재고
+                    <th onclick="updateOrderBy('inventory')" rowspan="2" class = "mordan2">현재 재고
                         ${orderBy.includes('inventory asc') ? '▲' : orderBy.includes('inventory desc') ? '▼' : ''}
                     </th>
                     <th rowspan="2" class = "mordan">재고*가격</th>
-                    <th onclick="updateOrderBy('inDate')" rowspan="2" class = "mordan">최근 입고일
+                    <th onclick="updateOrderBy('inDate')" rowspan="2" class = "mordan2">최근 입고일
                         ${orderBy.includes('inDate asc') ? '▲' : orderBy.includes('inDate desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('outDate')" rowspan="2" class = "mordan">최근 출고일
+                    <th onclick="updateOrderBy('outDate')" rowspan="2" class = "mordan2">최근 출고일
                         ${orderBy.includes('outDate asc') ? '▲' : orderBy.includes('outDate desc') ? '▼' : ''}
                     </th>
                 </tr>
@@ -138,22 +159,29 @@ document.addEventListener('DOMContentLoaded', function() {
             <thead>
                 <tr>
                     <th rowspan="2" class = "mordan">번호</th>
-                    <th onclick="updateOrderBy('kindcode')" rowspan="2" class = "mordan">분류
-                        ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
-                    </th>
-                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan">책 이름
+                    <th rowspan = "2" class="mordan-dropdown" onclick="updateOrderBy('kindcode')">
+    					${getKindCode(kindCode)} ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
+    					<div class="dropdown-content">
+					       	<p onclick="selectListKindCode(null, event)">모두 보기</p>
+					        <p onclick="selectListKindCode('4', event)">수능</p>
+					        <p onclick="selectListKindCode('3', event)">고등</p>
+					        <p onclick="selectListKindCode('2', event)">중등</p>
+					        <p onclick="selectListKindCode('1', event)">초등</p>
+					    </div>
+					</th>
+                    <th onclick="updateOrderBy('bookName')" rowspan="2" class = "mordan2">책 이름
                         ${orderBy.includes('bookName asc') ? '▲' : orderBy.includes('bookName desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('price')" rowspan="2" class = "mordan">가격
+                    <th onclick="updateOrderBy('price')" rowspan="2" class = "mordan2">가격
                         ${orderBy.includes('price asc') ? '▲' : orderBy.includes('price desc') ? '▼' : ''}
                     </th>
-                    <th onclick="updateOrderBy('inventory')" rowspan="2" class = "mordan">현재 재고
+                    <th onclick="updateOrderBy('inventory')" rowspan="2" class = "mordan2">현재 재고
                         ${orderBy.includes('inventory asc') ? '▲' : orderBy.includes('inventory desc') ? '▼' : ''}
                     </th>
-                    <th class="date-input-th" colspan="2">
+                    <th class="mordan" colspan="2">
                         <input type="date" id="startDate" />
                     </th>
-                    <th class="date-input-th" colspan="2">
+                    <th class="mordan" colspan="2">
                         <input type="date" id="endDate" />
                     </th>
                 </tr>
@@ -284,6 +312,6 @@ function getKindCode(kindCode) {
         case 2: return '중등';
         case 3: return '고등';
         case 4: return '수능';
-        default: return '몰라';
+        default: return '분류';
     }
 }
