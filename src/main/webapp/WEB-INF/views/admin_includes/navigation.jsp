@@ -18,7 +18,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="<c:url value='/admin' />">본사 관리 시스템</a>
+        <a class="navbar-brand" href="<c:url value='/admin/home' />">본사 관리 시스템</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

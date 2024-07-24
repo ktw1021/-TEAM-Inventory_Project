@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.*" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -57,7 +59,7 @@
                 <tr>
                     <td>${vo.bookCode}</td>
                     <td>${vo.bookName}</td>
-                    <td>${vo.price}</td>
+                    <td><fmt:formatNumber value="${vo.price}" pattern="#,##0"></fmt:formatNumber></td>
                     <td>${vo.kindCode}</td>
                     <td><a href="<c:url value='/admin/book/update/${vo.bookCode}'/>" class="update">수정</a> &nbsp; 
                         <a href="<c:url value='/admin/book/delete/${vo.bookCode}'/>" class="delete" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>

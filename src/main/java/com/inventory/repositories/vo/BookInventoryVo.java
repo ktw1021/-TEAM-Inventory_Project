@@ -16,6 +16,7 @@ public class BookInventoryVo {
 	private int sumInInventory;
 	private int sumOutInventory;
 	private int startInventory;
+	private String branchName;
 	
 	public BookInventoryVo() {
 		
@@ -35,6 +36,16 @@ public class BookInventoryVo {
 		this.sumInInventory = sumInInventory;
 		this.sumOutInventory = sumOutInventory;
 		this.startInventory = startInventory;
+	}
+	
+	
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 
 	public String getBranchId() {

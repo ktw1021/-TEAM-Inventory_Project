@@ -41,15 +41,17 @@ public class OrderController {
 	@ResponseBody
 	public List<BookInventoryVo> getData(HttpSession session) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
+		System.err.println(bookInventoryService.getList(vo.getBranchId()));
 		return bookInventoryService.getList(vo.getBranchId());
 	}
 
 	// 지점의 재고에서 특정 책을 검색하는 메서드
 	@GetMapping("/searchBooks")
 	@ResponseBody
-	public List<BookInventoryVo> searchBooks(@RequestParam("query") String query, @RequestParam("ordering") String ordering, @RequestParam("key") String key, HttpSession session) {
+	public List<BookInventoryVo> searchBooks(@RequestParam("query") String query,
+			@RequestParam("ordering") String ordering, @RequestParam("key") String key, HttpSession session) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		
+
 		return bookInventoryService.search(vo.getBranchId(), query, key, ordering);
 	}
 
@@ -90,7 +92,7 @@ public class OrderController {
 
 			// 세션에 업데이트된 수량 저장
 			session.setAttribute("quantities", pastQuantities);
-			
+
 			return "Quantities saved to session successfully";
 		} catch (Exception e) {
 			e.printStackTrace(); // 로그에 오류 정보 기록
@@ -146,24 +148,24 @@ public class OrderController {
 	@PostMapping("/clearCart")
 	@ResponseBody
 	public String clearCart(HttpSession session) {
-	    // 장바구니 데이터를 가져옴
-	    Object cartObj = session.getAttribute("quantities");
+		// 장바구니 데이터를 가져옴
+		Object cartObj = session.getAttribute("quantities");
 
-	    if (cartObj == null) {
-	        return "Cart is already empty.";
-	    }
+		if (cartObj == null) {
+			return "Cart is already empty.";
+		}
 
-	    // 장바구니가 비어 있는지 확인
-	    List<?> cart = (List<?>) cartObj;
-	    if (cart.isEmpty()) {
-	        return "Cart is already empty.";
-	    }
+		// 장바구니가 비어 있는지 확인
+		List<?> cart = (List<?>) cartObj;
+		if (cart.isEmpty()) {
+			return "Cart is already empty.";
+		}
 
-	    // 장바구니를 비움
-	    session.removeAttribute("quantities");
-	    return "Cart cleared successfully!";
+		// 장바구니를 비움
+		session.removeAttribute("quantities");
+		return "Cart cleared successfully!";
 	}
-	
+
 	// 주문 페이지를 로드하는 메서드
 	@RequestMapping("/form")
 	public String orderList(HttpSession session, Model model) {
@@ -201,7 +203,7 @@ public class OrderController {
 		model.addAttribute("cartList", cartList);
 		return "branches/branch_order_form";
 	}
-	
+
 	// 주문 기록 페이지를 로드하는 메서드
 	@RequestMapping("/list")
 	public String orderHistory(Model model, HttpSession session) {
@@ -220,14 +222,14 @@ public class OrderController {
 
 		return "branches/branch_order_list";
 	}
-	
+
 	// 주문을 확정하는 메서드
 	@RequestMapping("/submit")
 	public String ordering(HttpSession session, Model model) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 
 		List<LinkedHashMap> cartData = (List<LinkedHashMap>) session.getAttribute("quantities");
-		
+
 		// 장바구니가 있으면 book_order 테이블에 지점 아이디 기반으로 데이터 생성
 		if (cartData != null && !cartData.isEmpty()) {
 			orderService.insert(vo);
@@ -254,21 +256,15 @@ public class OrderController {
 		session.setAttribute("success", true);
 		return "redirect:/branch/order/list";
 	}
-	
+
 	// 주문 상세 페이지를 로드하는 메서드
 	@RequestMapping("/detail")
 	public String orderDetail(@RequestParam("orderId") String orderId, Model model) {
 		// 받아온 orderId 기반으로 주문 상세 페이지로 연결
 		List<OrderVo> list = orderService.getDetailList(orderId);
-		for (OrderVo vo : list) {
-			BookVo bookVo = bookService.getData(vo.getBookCode());
-			vo.setBookName(bookVo.getBookName());
-			vo.setPrice(bookVo.getPrice());
-		}
 		model.addAttribute("list", list);
 		model.addAttribute("orderId", orderId);
 		return "branches/branch_order_detail";
 	}
-	
 
 }
