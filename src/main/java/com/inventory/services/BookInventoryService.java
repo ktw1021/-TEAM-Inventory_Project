@@ -9,7 +9,7 @@ public interface BookInventoryService {
 //	성민 사용중
 	public List <BookInventoryVo> getList (String id);
 	
-	public List <BookInventoryVo> search (String id, String keyword, String key, String ordering);
+	public List <BookInventoryVo> search (String id, String keyword);
 	
 	public int getInventory(BookInventoryVo vo);
 //=======================================

@@ -29,17 +29,6 @@
 	<div id="cart" class="cart">
 		<h2>장바구니</h2>
 		<input type="text" id="searchInput" placeholder="교재명...">
-		<select id="ordering">
-			<option value="">선택</option>
-			<option value="asc">오름차순</option>
-			<option value="desc">내림차순</option>
-		</select> <select id="key">
-			<option value="">선택</option>
-			<option value="kindCode">과목코드</option>
-			<option value="book_name">교재명</option>
-			<option value="inventory">재고</option>
-			<option value="price">가격</option>
-		</select>
 		<button id="searchBtn">검색</button>
 		<button id="resetBtn">초기화</button>
 		<!-- 장바구니 아이템이 여기에 동적으로 추가됨 -->

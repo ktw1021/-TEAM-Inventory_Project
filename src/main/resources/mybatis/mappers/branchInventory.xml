@@ -43,20 +43,8 @@
     	<![CDATA[
     		select bi.branch_id as branchId, bi.book_code as bookCode, bl.book_name as bookName, bi.inventory as inventory, bl.price as price, bl.kindcode as kindCode
     		from branch_inventory bi join book_list bl on bi.book_code = bl.book_code 
-		    where bi.branch_id = #{id} and upper(bl.book_name) like '%' || upper(trim(#{keyword})) || '%'
+		    where bi.branch_id = #{id} and upper(bl.book_name) like '%' || upper(trim(#{keyword})) || '%' order by kindCode desc, bl.book_name
     	]]>
-	    <if test="key != '' and ordering != ''">
-	        order by ${key} ${ordering}
-	    </if>
-	    <if test="key != '' and ordering == ''">
-	        order by ${key} desc
-	    </if>
-	    <if test="key == '' and ordering != ''">
-	        order by kindCode ${ordering}
-	    </if>
-	    <if test="key == '' and ordering == ''">
-	        order by kindCode desc, bl.book_name
-	    </if>
 	</select>
 
 	<!-- 계정 승인 시 인벤토리 채워주는 역할 -->

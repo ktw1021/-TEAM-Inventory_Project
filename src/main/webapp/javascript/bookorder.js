@@ -25,19 +25,43 @@
 	 }, 100);
 
 	 $("#resetBtn").click(function() {
-		 loadAllData(); // 모든 데이터 다시 로드
+		 $.ajax({
+			 url: '/Inventory/branch/order/getData',
+			 type: 'GET',
+			 dataType: 'json',
+			 success: function(data) {
+				 currentData = data; // 받아온 데이터를 저장
+				 // 초기 정렬 상태 설정
+				 sortOrders = {
+					 'kindCode': 'desc',
+					 'bookName': 'asc'
+				 };
+				 currentKindCodeFilter = ""; // 초기 필터 상태 설정
+				 currentInventoryFilter = "";
+				 applyFiltersAndSort(); // 필터와 정렬을 적용
+				 renderData(data); // 데이터를 렌더링
+				 updateCart(); // 장바구니 업데이트
+				 renderHeader(data);
+				 updateSortIndicators(); // 정렬 표시 업데이트
+			 },
+			 error: function(xhr, status, error) {
+				 console.error('AJAX Error: ' + status + ' - ' + error);
+				 $("#result").html("An error occurred while processing the request.");
+			 }
+		 });
 
 		 currentKindCodeFilter = $("#kindCodeFilter").val("");
 		 currentInventoryFilter = $("#inventoryFilter").val("");
 		 // 수량 입력 초기화
-		 $(".quantityInput").val(0);
+		 //$(".quantityInput").val(0);
 
 		 // 검색 입력 초기화
 		 $("#searchInput").val('');
+	 });
 
-		 // 검색 조건 초기화
-		 $("#ordering").val('');
-		 $("#key").val('');
+	 $(document).on('click', '#resetQuantity', function() {
+		 $(".quantityInput").val(0);
+		 quantityMap = {}; // 수량 맵도 초기화
 	 });
 
 	 // 모든 데이터를 로드하는 함수
@@ -109,7 +133,7 @@
 			 '</select>' +
 			 '</th>' +
 			 '<th class="sortable" data-column="price" rowspan="2">가격</th>' +
-			 '<th rowspan="2">수량</th>' +
+			 '<th rowspan="2">수량 &nbsp;<button id="resetQuantity">수량 초기화</button></th>' +
 			 '</tr>' +
 			 '<tr>' +
 			 '<th class="sortable" data-column="kindCode">분류</th>' +
@@ -425,12 +449,11 @@
 	 // searchBtn 클릭 이벤트 수정
 	 $("#searchBtn").click(function() {
 		 var query = $("#searchInput").val();
-		 var ordering = $("#ordering").val();
-		 var key = $("#key").val();
+
 		 $.ajax({
 			 url: '/Inventory/branch/order/searchBooks',
 			 type: 'GET',
-			 data: { query: query, ordering: ordering, key: key },
+			 data: { query: query },
 			 dataType: 'json',
 			 success: function(data) {
 				 currentKindCodeFilter = $("#kindCodeFilter").val("");
