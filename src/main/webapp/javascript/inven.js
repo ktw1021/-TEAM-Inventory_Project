@@ -216,6 +216,50 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 	document.getElementById('inventory-table2').style.display = 'none';
 	
+	
+	// CSV 문자열 생성 함수
+function generateCSV(data) {
+    let csv = '번호,분류,교재명,가격,현재 재고,재고*가격,최근 입고일,최근 출고일\n';
+    data.forEach((item, index) => {
+        csv += [
+            index + 1,
+            getKindCode(item.kindCode),
+            '"' + item.bookName.replace(/"/g, '""') + '"',
+            item.price,
+            item.inventory,
+            item.inventory * item.price,
+            item.inDate,
+            item.outDate
+        ].join(',') + '\n';
+    });
+    return csv;
+}
+
+// CSV 다운로드 함수
+function downloadCSV(csv, filename) {
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+// 다운로드 버튼 클릭 이벤트
+document.getElementById('downloadCSV').addEventListener('click', function() {
+    fetch('http://localhost:8080/Inventory/branch/initialList')
+    .then(response => response.json())
+    .then(data => {
+        const csv = generateCSV(data);
+        downloadCSV(csv, 'inventory_data.csv');
+    })
+    .catch(error => console.error('Error:', error));
+});
 })
 
 function getKindCode(kindCode) {
