@@ -14,6 +14,12 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
 <script src="<c:url value= "/javascript/initialsetting.js"/>"></script>
+<style type="text/css">
+.selectOrderBy:hover{
+	background-color: #3e8e41;
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>

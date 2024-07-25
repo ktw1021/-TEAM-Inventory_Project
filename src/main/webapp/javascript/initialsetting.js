@@ -69,13 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
         <thead>
             <tr>
                 <th>번호</th>
-                <th onclick="updateOrderBy('kindcode')">구분
+                <th onclick="updateOrderBy('kindcode')" class = "selectOrderBy">구분
                     ${orderBy.includes('kindcode asc') ? '▲' : orderBy.includes('kindcode desc') ? '▼' : ''}
                 </th>
-                <th onclick="updateOrderBy('bookName')">교재명
+                <th onclick="updateOrderBy('bookName')" class = "selectOrderBy">교재명
                     ${orderBy.includes('bookName asc') ? '▲' : orderBy.includes('bookName desc') ? '▼' : ''}
                 </th>
-                <th onclick="updateOrderBy('inventory')">재고
+                <th onclick="updateOrderBy('inventory')" class = "selectOrderBy">재고
                     ${orderBy.includes('inventory asc') ? '▲' : orderBy.includes('inventory desc') ? '▼' : ''}
                 </th>
                 <th>작업</th>

@@ -1,6 +1,7 @@
 package com.inventory.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +89,41 @@ public class OrderCheckController {
 			OrderCheckService.confirmAndInsertInDetail(stockVo);
 		}
 
+		return "redirect:/admin/ordercheck/list";
+	}
+	
+	@RequestMapping ("/view")
+	public String test(HttpSession session) {	
+		List<OrderVo> list = OrderCheckService.getSum();  // bookCode와 inventory 정보만 있는 리스트
+	    session.setAttribute("list", list);
+
+	    List<OrderVo> branchList = OrderCheckService.getBranchList();  // branchId만 있는 리스트
+	    session.setAttribute("branchList", branchList);
+
+	    List<OrderVo> testList = OrderCheckService.getOrderQuantity();  // branchId, bookCode, inventory 정보가 있는 리스트
+		// 데이터 가공
+	    Map<String, Map<String, Integer>> bookBranchQuantities = new LinkedHashMap<>();
+	    Map<String, Integer> bookTotalQuantities = new HashMap<>();
+
+	    for (OrderVo order : testList) {
+	        bookBranchQuantities
+	            .computeIfAbsent(order.getBookName(), k -> new HashMap<>())
+	            .put(order.getBranchId(), order.getInventory());
+	    }
+
+	    for (OrderVo order : list) {
+	        bookTotalQuantities.put(order.getBookName(), order.getInventory());
+	    }
+
+	    session.setAttribute("bookBranchQuantities", bookBranchQuantities);
+	    session.setAttribute("bookTotalQuantities", bookTotalQuantities);
+
+	    return "admins/order_check_test";
+	}
+	
+	@RequestMapping ("/order")
+	public String test2 () {
+		OrderCheckService.goodGije();
 		return "redirect:/admin/ordercheck/list";
 	}
 }

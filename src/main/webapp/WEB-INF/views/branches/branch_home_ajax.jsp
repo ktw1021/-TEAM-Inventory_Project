@@ -76,16 +76,17 @@
 	
 	<div class="content">
 		<h1>${authUser.branchName} 지점의 교재 재고 현황</h1>
-		<button id="downloadCSV">CSV 다운로드</button>
+		
 		<form id="search-form">
 			<label for="keyword">검색어: </label><input type="text" name="keyword" value="${param.keyword == null ? '' : param.keyword.trim()}">
 			<input type="checkbox" 	name="check" id="check" value="check" ${param.check == 'check' ? 'checked' : ''} />
 			<label for="check">재고 있는 책만 보기</label>
 			<input type="hidden" id="orderBy" name="orderBy" value="${param.orderBy}">
 			<input type="submit" value="검색">
-			<button type="button" onclick="resetKeyword()" class="add">초기화</button>
+			<button type="button" onclick="resetKeyword()">검색어 초기화</button>
 			<button type="button" id="resetOrderBy">정렬 초기화</button>
 			<button type="button" id="toggleTable">테이블 바꾸기</button>
+			<button id="downloadCSV">CSV 다운로드</button>
 			<input type="hidden" id="kindCode" name="kindCode" value="">
 		</form>
 		<br />

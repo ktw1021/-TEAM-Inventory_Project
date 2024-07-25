@@ -77,4 +77,43 @@
 	<select id="getBranchList" resultType="OrderVo">
 		SELECT branch_id as branchId, branch_name as branchName FROM branch
 	</select>
+	
+	<select id = "getSumOrderQuantity" resultType="OrderVo">
+		SELECT od.book_code as bookCode, bl.book_name as bookName, SUM(od.quantity) as inventory 
+		FROM order_detail od 
+		JOIN book_list bl ON od.book_code = bl.book_code
+		JOIN book_order bo ON  bo.order_id = od.order_id
+		WHERE bo.checked = 2
+		GROUP BY od.book_code, bl.book_name 
+		ORDER BY bl.book_name
+	</select>
+	
+	<select id="getBranchsOrderQuantity" resultType="OrderVo">
+		SELECT 
+		    bo.branch_id AS branchId, 
+		    b.branch_name AS branchName, 
+		    od.book_code AS bookCode, 
+		    bl.book_name AS bookName, 
+		    SUM(od.quantity) AS inventory
+		FROM 
+		    book_order bo
+		    JOIN order_detail od ON bo.order_id = od.order_id
+		    JOIN book_list bl ON od.book_code = bl.book_code
+		    JOIN branch b ON bo.branch_id = b.branch_id
+		WHERE 
+		    bo.checked = 2
+		GROUP BY 
+		    bo.branch_id, b.branch_name, od.book_code, bl.book_name
+		ORDER BY 
+		    bl.book_name
+	</select>
+	
+	<select id="getOrderId" resultType = "String">
+		select order_id as orderId from book_order where checked = 2
+	</select>
+	
+	<update id="goodOrder" parameterType="String">
+		UPDATE book_order SET
+		checked = '3' WHERE order_id = #{no}
+	</update>
 </mapper>

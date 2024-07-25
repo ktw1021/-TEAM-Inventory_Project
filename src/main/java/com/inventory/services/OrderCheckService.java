@@ -27,6 +27,11 @@ public interface OrderCheckService {
 	public List<OrderVo> getBranchList();
 	
 	public List <OrderVo> newGetList(Map <String, String> params);
+	
+	public List <OrderVo> getSum();
+	public List <OrderVo> getOrderQuantity();
+	
+	public int goodGije();
 }
 
 

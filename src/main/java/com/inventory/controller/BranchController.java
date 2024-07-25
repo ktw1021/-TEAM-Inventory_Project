@@ -31,10 +31,6 @@ public class BranchController {
 		UserVo userVo = (UserVo) session.getAttribute("authUser");
 		userVo.setBranchName(bookInvenService.getBranchName(userVo.getBranchId()));
 		session.setAttribute("authUser", userVo);
-		
-		
-    	
-    	
     	return"branches/branch_home_ajax";
 	}
 	
