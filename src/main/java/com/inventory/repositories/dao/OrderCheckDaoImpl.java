@@ -73,4 +73,24 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 		return sqlSession.selectList("orderCheck.newOrderCheckList", params);
 	}
 
+	@Override
+	public List<OrderVo> getSum() {
+		return sqlSession.selectList("orderCheck.getSumOrderQuantity");
+	}
+
+	@Override
+	public List<OrderVo> getOrderQuantity() {
+		return sqlSession.selectList("orderCheck.getBranchsOrderQuantity");
+	}
+
+	@Override
+	public List<String> getOrderId() {
+		return sqlSession.selectList("orderCheck.getOrderId");
+	}
+
+	@Override
+	public int goodOrder(String orderId) {
+		return sqlSession.update("orderCheck.goodOrder", orderId);
+	}
+
 }

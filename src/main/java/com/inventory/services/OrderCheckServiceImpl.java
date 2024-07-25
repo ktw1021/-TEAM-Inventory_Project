@@ -67,4 +67,25 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 	public List<OrderVo> newGetList(Map <String, String> params) {
 		return OrderCheckDao.newGetList(params);
 	}
+
+	@Override
+	public List<OrderVo> getSum() {
+		return OrderCheckDao.getSum();
+	}
+
+	@Override
+	public List<OrderVo> getOrderQuantity() {
+		return OrderCheckDao.getOrderQuantity();
+	}
+
+	@Override
+	public int goodGije() {
+		List <String> list = OrderCheckDao.getOrderId();
+		int success = 0;
+		for (String orderId :list) {
+			success = OrderCheckDao.goodOrder(orderId);
+		}
+		return success;
+	}
+	
 }

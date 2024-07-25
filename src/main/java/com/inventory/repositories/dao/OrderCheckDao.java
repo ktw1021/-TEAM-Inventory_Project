@@ -27,4 +27,10 @@ public interface OrderCheckDao {
 	public List<OrderVo> getBranchList();
 	
 	public List <OrderVo> newGetList(Map <String, String> params);
+	
+	public List <OrderVo> getSum();
+	public List <OrderVo> getOrderQuantity();
+	
+	public List <String> getOrderId();
+	public int goodOrder (String orderId);
 }

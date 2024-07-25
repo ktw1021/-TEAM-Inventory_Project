@@ -51,10 +51,10 @@ $(document).ready(function() {
                             <td style="color: red;">미확인</td>
                         </c:when>
                         <c:when test="${vo.checked eq 1}">
-                            <td style="color: blue;">처리중</td>
+                            <td style="color: blue;">반려</td>
                         </c:when>
                         <c:when test="${vo.checked eq 2}">
-                            <td style="color: green;">도착</td>
+                            <td style="color: green;">승인 완료</td>
                         </c:when>
                         <c:otherwise>
                             <td>????</td>

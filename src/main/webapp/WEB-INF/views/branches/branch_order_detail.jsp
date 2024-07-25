@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,7 +33,7 @@
 					<tr>
 						<td>${vo.bookName }</td>
 						<td>${vo.quantity }</td>
-						<td>${vo.price }</td>
+						<td><fmt:formatNumber value="${vo.price}" pattern="#,##0"/></td>
 					</tr>
 					<c:set var="totalQuantity" value="${totalQuantity + (vo.quantity)}" />
 					<c:set var="totalPrice"
@@ -40,7 +42,7 @@
 				<tr>
 					<td><strong>총합</strong></td>
 					<td><strong>${totalQuantity}</strong></td>
-					<td><strong>${totalPrice}</strong></td>
+					<td><strong><fmt:formatNumber value="${totalPrice}" pattern="#,##0"/></strong></td>
 				</tr>
 			</table>
 		</div>
