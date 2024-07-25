@@ -56,7 +56,6 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>소비 처리 확인</h2>
             <div id="modal-body">
-            <!-- JavaScript로 동적으로 내용이 추가됩니다. -->
             </div>
             <button type="button" onclick="submitOrderForm()" class="add">확인</button>
             <button type="button" onclick="closeModal()" class="delete">취소</button>
