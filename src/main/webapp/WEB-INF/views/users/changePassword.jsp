@@ -30,6 +30,7 @@
             }
         };
     </script>
+    <script src="<c:url value='/javascript/users.js'/>"></script> <!-- Add this line to include the JavaScript file -->
 </head>
 
 <body>
@@ -46,17 +47,29 @@
         </c:otherwise>
     </c:choose>
 
-        <div class="content">
-            <h2>비밀번호 변경</h2>
-            <form action="<c:url value='/user/changePassword'/>" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <label for="currentPassword">현재 비밀번호:</label>
-                <input type="password" id="currentPassword" name="currentPassword" required><br>
-                <label for="newPassword">새 비밀번호:</label>
-                <input type="password" id="newPassword" name="newPassword" required><br>
-                <button type="submit">비밀번호 변경</button>
-            </form>
-        </div>
+    <div class="content">
+        <h2>비밀번호 변경</h2>
+        <form action="<c:url value='/user/changePassword'/>" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <label for="currentPassword">현재 비밀번호:</label>
+            <input type="password" id="currentPassword" name="currentPassword" required><br>
+            <label for="newPassword">새 비밀번호:</label>
+            <input type="password" id="newPassword" name="newPassword" required><br>
+            <div id="strengthBarContainer">
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+            </div>
+            <span id="strengthText"></span><br>
+            <label for="confirmPassword">새 비밀번호 확인:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+            <span id="passwordMismatch">비밀번호가 일치하지 않습니다.</span><br>
+            <button type="submit">비밀번호 변경</button>
+        </form>
+    </div>
+
     <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

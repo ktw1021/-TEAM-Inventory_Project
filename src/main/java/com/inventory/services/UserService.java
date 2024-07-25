@@ -1,5 +1,6 @@
 package com.inventory.services;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.inventory.repositories.vo.UserVo;
@@ -38,4 +39,8 @@ public interface UserService {
 	//	임시 비밀번호 전송
 	public void sendEmail(String to, String subject, String text);
 	public void resetPassword(String username);
+	public void updatePasswordTemporaryPassword(String username, String password, Timestamp createdAt);
+	public boolean isTemporaryPasswordValid(String username, String rawPassword); 
+	public void resetTemporaryPasswordCreatedAt(String name);
+
 }

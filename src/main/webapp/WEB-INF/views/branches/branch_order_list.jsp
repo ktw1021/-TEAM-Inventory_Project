@@ -39,10 +39,11 @@ $(document).ready(function() {
                 <th>날짜</th>
                 <th>담당자</th>
                 <th>상태</th>
+                <th>상세 보기</th>
             </tr>
             <c:forEach items="${list}" var="vo" varStatus="status">
                 <tr>
-                    <td class="parent"><a href="<c:url value="/branch/order/detail" />?orderId=${vo.orderId}">${vo.orderId}</a></td>
+                    <td>${vo.orderId}</td>
                     <td>${vo.orderDate}</td>
                     <td>${vo.userName}</td>
                     <c:choose>
@@ -59,6 +60,7 @@ $(document).ready(function() {
                             <td>????</td>
                         </c:otherwise>
                     </c:choose>
+                    <td class="parent"><a href="<c:url value="/branch/order/detail" />?orderId=${vo.orderId}">보러 가기</a></td>
                 </tr>
             </c:forEach>
         </table>

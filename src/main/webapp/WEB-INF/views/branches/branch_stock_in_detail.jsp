@@ -19,17 +19,23 @@
 		<h2>${inId }입고 기록</h2>
 		<table border="1">
 			<tr>
-				<th>date</th>
-				<th>book_code</th>
-				<th>book_name</th>
-				<th>quantity</th>
-				<th>check</th>
-				<th>comments</th>
+				<th>입고일</th>
+				<th>교재명</th>
+				<th>수량</th>
+				<th>진행 상황</th>
 			</tr>
 				<c:forEach items="${list }" var="vo">
 					<tr>
-						<td>${vo.flucDate}</td>
-						<td>${vo.bookCode}</td>
+						<td>
+							<c:choose>
+						        <c:when test="${vo.flucDate == ''}">
+						            미정
+						        </c:when>
+						        <c:otherwise>
+						            ${vo.flucDate}
+						        </c:otherwise>
+					    	</c:choose>
+					    </td>
 						<td>${vo.bookName}</td>
 						<td>${vo.quantity}</td>
 						<td>
@@ -40,7 +46,6 @@
                 			<c:otherwise>알 수 없음</c:otherwise>
            				</c:choose>
            				</td>
-           				<td>${vo.comments}</td>
 					</tr>
 				</c:forEach>
 			</table>

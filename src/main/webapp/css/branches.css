@@ -28,7 +28,7 @@ h3 {
 
 p {
 	font-size: 1.2em;
-	margin: 5px 0 15px 0;
+	margin: 5px 0 10px 0;
 }
 
 /* Navigation Bar Styles */
@@ -134,7 +134,7 @@ nav .menu {
 table {
 	width: 60%;
 	border-collapse: collapse;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 th, td {
@@ -396,19 +396,20 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
-
+ 
+/* 드래그 가능한 search-form 스타일 */
 #search-form {
-        position: fixed;
-        top: 10%; /* 페이지 상단에서의 위치 */
-        right: 10px; /* 페이지 오른쪽에서의 위치 */
-        background-color: white; /* 배경색 (투명도 조정 가능) */
-        padding: 10px; /* 패딩 */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
-        z-index: 1000; /* 다른 요소들 위에 표시되도록 */
-        max-height: 90%;
-		max-width: 40%;
-}
-    
+    position: fixed;
+    top: 10%; /* 페이지 상단에서의 위치 */
+    right: 10px; /* 페이지 오른쪽에서의 위치 */
+    background-color: white; /* 배경색 (투명도 조정 가능) */
+    padding: 10px; /* 패딩 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 */
+    max-height: 90%;
+    max-width: 40%;
+} 
+   
 #gije{
 	max-height: calc(80vh - 50px);
 	overflow-y: auto; /* 세로 스크롤 */
@@ -438,13 +439,6 @@ footer {
 
 .table-container::-webkit-scrollbar-thumb:hover {
     background-color: #555;
-}
-
-.date-input-th {
-    position: sticky;
-    top: 0;
-    background-color: #f2f2f2;
-    z-index: 9; /* 다른 <th> 요소보다 높이 설정 */
 }
 
 .mordan {

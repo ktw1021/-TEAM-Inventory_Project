@@ -37,7 +37,15 @@
 							<c:when test="${vo.orderId eq -1 }">임의 입고</c:when>
 							<c:otherwise>${vo.orderId}</c:otherwise>
 						</c:choose></td>
-					<td>${vo.flucDate}</td>
+					<td><c:choose>
+					        <c:when test="${vo.flucDate == ''}">
+					            미정
+					        </c:when>
+					        <c:otherwise>
+					            ${vo.flucDate}
+					        </c:otherwise>
+					    </c:choose>
+					</td>
 					<td><c:choose>
 							<c:when test="${vo.checkedIn eq -1}">처리 완료</c:when>
 							<c:when test="${vo.checkedIn eq 0}">미확인</c:when>
