@@ -10,6 +10,21 @@
 <title>지점 관리 시스템</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
+<script src="<c:url value='/javascript/check.js'/>"></script>
+<style>
+.content a {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #333333; /* 검은색으로 변경 */
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.content a:hover {
+	background-color: #000000; /* 더 짙은 검은색으로 변경 */
+}
+</style>
 </head>
 
 <body>
@@ -36,7 +51,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<p class="parent"><a href ="<c:url value="/branch/stockout/list"/>">목록으로 돌아가기</a></p>
+		<div class="back-link">
+			<a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a>
+		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
