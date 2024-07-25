@@ -1,0 +1,192 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    height: 100vh;
+    background: linear-gradient(135deg, #72edf2 10%, #5151e5 100%);
+    display: flex;
+    flex-direction: column; /* Flex direction을 column으로 설정하여 네비게이션 바와 컨텐츠를 수직으로 배치 */
+    justify-content: flex-start; /* 컨텐츠를 상단에 배치 */
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container, .authcode-box, .joinsuccess-box {
+    text-align: center;
+    background: #fff;
+    padding: 40px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px; /* 네비게이션 바 아래로 공간 확보 */
+    position: relative; /* 뒤로가기 버튼을 절대 위치로 배치하기 위해 relative 위치 지정 */
+    max-width: 400px; /* 컨테이너의 최대 너비를 늘림 */
+    width: 100%;
+}
+
+.container input[type="text"],
+.container input[type="password"],
+.container input[type="email"],
+.container input[type="button"],
+.container select,
+.container button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.container button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.container input[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+form, .message-box {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 100px; /* 네비게이션 바 아래로 공간 확보 */
+    position: relative; /* 뒤로가기 버튼을 절대 위치로 배치하기 위해 relative 위치 지정 */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+    text-align: left;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button, input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #5cb85c;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.message-box p {
+    font-size: 18px;
+    color: #555;
+    margin: 20px 0;
+}
+
+.message-box a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.message-box a:hover {
+    background-color: #4cae4c;
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #ff4c4c;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#strengthBarContainer {
+    width: 100%;
+    height: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    display: flex;
+    border-radius: 10px;
+}
+
+.strengthBarSegment {
+    height: 100%;
+    flex-grow: 1;
+}
+
+#strengthText {
+    font-weight: bold;
+    margin-top: 5px;
+    display: block;
+}
+
+#passwordMismatch {
+    color: red;
+    font-weight: bold;
+    display: none;
+}

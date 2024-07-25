@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderCheck">
+	
+	<!-- 기제 개선 쿼리문 -->
+	<select id="newOrderCheckList" parameterType = "map" resultType = "OrderVo">
+		SELECT bo.order_id AS orderId, bo.branch_id AS branchId, bo.order_date AS orderDate, bo.checked, bo.user_name AS userName, b.branch_name AS branchName
+		FROM book_order bo JOIN branch b ON bo.branch_id = b.branch_id 
+		<where>
+	        <if test="branchId != null and branchId.trim() != ''">
+	            bo.branch_id = #{branchId}
+	        </if>
+	        <if test="checked != null and checked != ''">
+	            AND bo.checked = #{checked}
+	        </if>
+    	</where>
+		order by order_date desc
+	</select>
+
+	<!-- order detail 조회 -->
+	<select id="selectOrderDetail" parameterType="String" resultType="OrderVo">
+		select bo.order_id as orderId, bo.branch_id as branchId, b.branch_name as branchName, bo.order_date as orderDate, bo.checked,
+		od.book_code as bookCode, od.quantity as quantity, bl.book_name as bookName
+		from book_order bo join order_detail od on bo.order_id = od.order_id
+		join book_list bl on od.book_code = bl.book_code
+		join branch b on bo.branch_id = b.branch_id
+		where bo.order_id = #{id}
+	</select>
+
+	<!-- 오더 미확인 갯수 출력 -->
+	<select id="countNewOrder" resultType="long">
+		SELECT COUNT(*) FROM
+		book_order WHERE checked = '0'
+	</select>
+
+	<!-- order 거절 -> orderList의 order_chheck만 코드 수정 -->
+	<update id="refuseOrder" parameterType="String">
+		UPDATE book_order SET
+		checked = '1' WHERE order_id = #{no}
+	</update>
+
+	<!-- order 승인 -> orderList의 order_check 코드 수정 -->
+	<update id="confirmOrderCode" parameterType="String">
+		update book_order
+		set checked = '2' where order_id = #{no}
+	</update>
+
+	<select id="getBranchId" parameterType="String"
+		resultType="String">
+		select branch_id as branchId from book_order where order_id
+		= #{id}
+	</select>
+
+	<!-- order 승인2 -> stock_in table에 새로운 데이터 입력 -->
+	<insert id="confirmAndInsertStockIn" parameterType="map">
+		insert into
+		stock_in (order_id, checked_in, branch_id) values
+		(#{orderId}, '0', #{branchId})
+	</insert>
+
+	<!-- order 승인3 -> stock_in 테이블의 in_id 받아오기 -->
+	<select id="getStockInIdByOrderId" parameterType="String"
+		resultType="int">
+		select in_id from stock_in where order_id = #{id}
+	</select>
+
+	<!-- order 승인4 -> in_detail에 데이터 입력 -->
+	<insert id="confirmAndInsertInDetail" parameterType="StockVo">
+		insert into
+		in_detail (in_id, book_code, quantity) values(#{id}, #{bookCode},
+		#{quantity})
+	</insert>
+	
+	<select id="getBranchList" resultType="OrderVo">
+		SELECT branch_id as branchId, branch_name as branchName FROM branch
+	</select>
+	
+	<select id = "getSumOrderQuantity" resultType="OrderVo">
+		SELECT od.book_code as bookCode, bl.book_name as bookName, SUM(od.quantity) as inventory 
+		FROM order_detail od 
+		JOIN book_list bl ON od.book_code = bl.book_code
+		JOIN book_order bo ON  bo.order_id = od.order_id
+		WHERE bo.checked = 2
+		GROUP BY od.book_code, bl.book_name 
+		ORDER BY od.book_code
+	</select>
+	
+	<select id="getBranchsOrderQuantity" resultType="OrderVo">
+		SELECT 
+		    bo.branch_id AS branchId, 
+		    b.branch_name AS branchName, 
+		    od.book_code AS bookCode, 
+		    bl.book_name AS bookName, 
+		    SUM(od.quantity) AS inventory
+		FROM 
+		    book_order bo
+		    JOIN order_detail od ON bo.order_id = od.order_id
+		    JOIN book_list bl ON od.book_code = bl.book_code
+		    JOIN branch b ON bo.branch_id = b.branch_id
+		WHERE 
+		    bo.checked = 2
+		GROUP BY 
+		    bo.branch_id, b.branch_name, od.book_code, bl.book_name
+		ORDER BY 
+		    b.branch_name
+	</select>
+	
+	<select id="getOrderId" resultType = "String">
+		select order_id as orderId from book_order where checked = 2
+	</select>
+	
+	<update id="goodOrder" parameterType="String">
+		UPDATE book_order SET
+		checked = '3' WHERE order_id = #{no}
+	</update>
+</mapper>

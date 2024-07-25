@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="stock">
+	
+	<!-- 지점 코드에 맞는 Stock in list 불러오기 -->
+	<select id="stockInList" parameterType="String" resultType="StockVo">
+		select in_id as id, order_id as orderId, in_date as flucDate, checked_in as checkedIn, branch_id as branchId FROM stock_in where branch_id = #{branchId} 
+		order by in_id desc
+	</select>
+	
+	<!-- in_id 에 맞는 detail 페이지 -->
+	<select id="stockInDetail" parameterType="String" resultType="StockVo">
+		select si.in_id as id, si.order_id as orderId, si.in_date as flucDate, si.checked_in as checkedIn, si.branch_id as branchId, 
+		inde.book_code as bookCode, inde.quantity, bl.book_name as bookName, inde.comments as comments 
+		from stock_in si join in_detail inde on si.in_id = inde.in_id join book_list bl on inde.book_code = bl.book_code 
+		where si.in_id = #{inId} 
+	</select>
+	
+	<!-- 입고 확인 1. checked_in 을 1번으로 수정 -->
+	<update id="confirmStockInCheckedIn" parameterType="String">
+		update stock_in set checked_in = '1', in_date = sysdate where in_id = #{inId}
+	</update>
+	
+	<!-- 입고 확인 2. branch_id에 맞는 inventory에 book_code랑 quantity 반영 -->
+	<update id = "confirmAndInventoryIn" parameterType="StockVo">
+		UPDATE branch_inventory SET inventory = inventory + #{quantity}
+		WHERE branch_id = #{branchId} AND book_code = #{bookCode}
+	</update>
+	
+	<!-- stock out list 불러오기 -->
+	<select id = "stockOutList" parameterType="String" resultType="StockVo">
+		select out_id as id, out_date as flucDate, branch_id as branchId from stock_out where branch_id = #{branchId} order by out_id desc
+	</select>
+	
+	<!-- out_id 에 맞는 detail 페이지 -->
+	<select id="stockOutDetail" parameterType="String" resultType="StockVo">
+		select so.out_id as id, so.out_date as flucDate, so.branch_id as branchId, 
+		out.book_code as bookCode, out.quantity, bl.book_name as bookName, out.comments as comments 
+		from stock_out so join out_detail out on so.out_id = out.out_id join book_list bl on out.book_code = bl.book_code 
+		where so.out_id = #{outId} 
+	</select>
+	
+	<!-- stock out 테이블에 데이터 입력 -->
+	<insert id="confirmAndInsertStockOut" parameterType="String">
+		insert into stock_out (branch_id) values (#{branchId})
+	</insert>
+	
+	<!-- stock out id 받아오기 -->
+	<select id="getStockOutIdByBranchId" parameterType="String" resultType="int">
+		SELECT out_id FROM stock_out WHERE branch_id = #{branchId}
+		ORDER BY out_id DESC FETCH FIRST 1 ROW ONLY
+	</select>
+	
+	<!-- outDetail 데이터 입력 -->
+	<insert id="insertOutDetail" parameterType="StockVo">
+		insert into out_detail (out_id, book_code, quantity, comments) values (#{id}, #{bookCode}, #{quantity}, #{comments})
+	</insert>
+	
+	<!-- branch_id에 맞는 inventory에 book_code랑 quantity 반영 -->
+	<update id = "confirmAndInventoryOut" parameterType="StockVo">
+		UPDATE branch_inventory SET inventory = inventory - #{quantity}
+		WHERE branch_id = #{branchId} AND book_code = #{bookCode}
+	</update>
+	
+	<!-- 비밀 코드 -->
+	<select id ="getStockInIdBybranchId" parameterType="String" resultType="int">
+		SELECT in_id FROM stock_in WHERE branch_id = #{branchId}
+		ORDER BY in_id DESC FETCH FIRST 1 ROW ONLY
+	</select> 
+	
+	<!-- 비밀 코드 2 -> stock_in table에 새로운 데이터 입력 -->
+	<insert id="initialStockIn" parameterType = "map">
+		insert into stock_in (order_id, in_date, checked_in, branch_id) values (#{orderId}, sysdate, '-1', #{branchId})
+	</insert>
+	
+</mapper>
