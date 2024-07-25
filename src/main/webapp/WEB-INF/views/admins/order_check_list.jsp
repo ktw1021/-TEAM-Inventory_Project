@@ -91,7 +91,6 @@
     <%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
     <div class="content">
         <h1>발주 승인</h1>
-
         <table>
             <tr>
                 <th>order_id</th>

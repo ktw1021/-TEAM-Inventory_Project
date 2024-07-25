@@ -18,7 +18,6 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
-
 	<h1>출고 소비 페이지</h1>
 
 	<form id="search-form">
@@ -52,7 +51,6 @@
         <button type="button" onclick="showConfirmationModal()" class="update">확정</button>
     </form>
 
-			
 	<div id="confirmationModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -64,5 +62,6 @@
             <button type="button" onclick="closeModal()" class="delete">취소</button>
         </div>
     </div>
+    <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

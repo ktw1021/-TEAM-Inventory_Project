@@ -26,7 +26,7 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/home' />">본사 홈</a></li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/ordercheck' />">발주 승인</a></li>
-                <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/book/list' />">교재 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/book/update' />">교재 관리</a></li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/usermanage/list' />">회원 승인</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">

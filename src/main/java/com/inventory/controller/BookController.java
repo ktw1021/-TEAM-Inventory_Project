@@ -25,7 +25,7 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 
-	@RequestMapping("/list")
+	@RequestMapping("/update")
 	public String booklist(Model model, HttpSession session) {
 //		book_list 테이블에서 전체 데이터를 뽑아와 list에 저장
 		List<BookVo> list = bookService.getbookList();
@@ -58,7 +58,7 @@ public class BookController {
 	public String delete(@PathVariable("bookCode") String bookCode) {
 //		book_list 테이블에서 부분 데이터 삭제 기능
 		bookService.deletebook(bookCode);
-		return "redirect:/admin/book/list";
+		return "redirect:/admin/book/update";
 	}
 
 //	본사 교재 리스트에서 교재 추가 기능
@@ -73,7 +73,7 @@ public class BookController {
 		if (isDuplicate) {
 			session.setAttribute("addList", false);
 			
-			return "redirect:/admin/book/list";
+			return "redirect:/admin/book/update";
 		} 
 		// 중복되지 않으면 책 정보 추가
 		boolean success = (boolean)bookService.writebook(vo);
@@ -81,7 +81,7 @@ public class BookController {
 			session.setAttribute("addList", true);
 			bookService.insertInventory(vo.getBookCode());
 		}
-		return "redirect:/admin/book/list";
+		return "redirect:/admin/book/update";
 	}
 
 	private boolean checkForDuplicates(List<BookVo> list, String bookCode) {
@@ -119,6 +119,6 @@ public class BookController {
 		if(success) {
 			session.setAttribute("modify", true);
 		}
-		return "redirect:/admin/book/list";
+		return "redirect:/admin/book/update";
 	}
 }

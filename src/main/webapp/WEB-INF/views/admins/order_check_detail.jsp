@@ -22,12 +22,12 @@
 
 		<table>
 			<tr>
-				<th>order_id</th>
-				<th>branch_name</th>
-				<th>order_date</th>
-				<th>book_name</th>
-				<th>quantity</th>
-				<th>order_check</th>
+				<th>주문 번호</th>
+				<th>지점명</th>
+				<th>주문일</th>
+				<th>교재명</th>
+				<th>수량</th>
+				<th>진행 상황</th>
 			</tr>
 			<c:forEach items="${list}" var="vo">
 				<tr>
@@ -47,8 +47,8 @@
 		</table>
 		<c:choose>
 			<c:when test="${checked eq 0}">
-				<p><a href="<c:url value='/admin/ordercheck/refuse/${id}'/>" class="delete">반려</a></p>
-				<p><a href="<c:url value='/admin/ordercheck/confirm/${id}'/>" class="update">승인</a>	</p>
+				<p class="delete"><a href="<c:url value='/admin/ordercheck/refuse/${id}'/>" class="delete">반려</a></p>
+				<p class="update"><a href="<c:url value='/admin/ordercheck/confirm/${id}'/>" class="update">승인</a>	</p>
 			</c:when>
 		</c:choose>
 		

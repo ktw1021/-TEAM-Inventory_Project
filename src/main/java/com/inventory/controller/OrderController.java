@@ -48,11 +48,10 @@ public class OrderController {
 	// 지점의 재고에서 특정 책을 검색하는 메서드
 	@GetMapping("/searchBooks")
 	@ResponseBody
-	public List<BookInventoryVo> searchBooks(@RequestParam("query") String query,
-			@RequestParam("ordering") String ordering, @RequestParam("key") String key, HttpSession session) {
+	public List<BookInventoryVo> searchBooks(@RequestParam("query") String query, HttpSession session) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 
-		return bookInventoryService.search(vo.getBranchId(), query, key, ordering);
+		return bookInventoryService.search(vo.getBranchId(), query);
 	}
 
 	// 세션에 수량을 저장하는 메서드
@@ -219,6 +218,8 @@ public class OrderController {
 			model.addAttribute("success", true);
 			session.removeAttribute("success");
 		}
+		
+		model.addAttribute("authUser", vo);
 
 		return "branches/branch_order_list";
 	}
