@@ -39,7 +39,8 @@
 					<td><c:choose>
 						<c:when test="${vo.checked eq 0}">미확인</c:when>
 						<c:when test="${vo.checked eq 1}">반려</c:when>
-						<c:when test="${vo.checked eq 2}">처리 완료</c:when>
+						<c:when test="${vo.checked eq 2}">확인 완료</c:when>
+						<c:when test="${vo.checked eq 3}">발주 완료</c:when>
 						<c:otherwise>알 수 없음</c:otherwise>
 					</c:choose></td>
 				</tr>

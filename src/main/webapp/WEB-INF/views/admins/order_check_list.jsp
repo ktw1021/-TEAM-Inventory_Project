@@ -8,30 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>본사 관리 시스템</title>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/admins.css'/>">
-<script>
-    function submitWithChecked(checked) {
-        var url = new URL(window.location.href);
-        if (checked === null) {
-            url.searchParams.delete('checked');
-        } else {
-            url.searchParams.set('checked', checked);
-        }
-        window.location.href = url.toString();
-    }
-
-    function submitWithBranchId(branchId) {
-        var url = new URL(window.location.href);
-        if (branchId === null) {
-            url.searchParams.delete('branchId');
-        } else {
-            url.searchParams.set('branchId', branchId);
-        }
-        window.location.href = url.toString();
-    }
-    function redirectToUrl(url) {
-        window.location.href = url;
-    }
-</script>
+<script src="<c:url value='/javascript/check.js'/>"></script>
 <style>
     .dropdown {
         position: relative;
@@ -85,12 +62,21 @@
 	td.clickable:hover {
 	    background-color: #e0e0e0; /* 호버 시 색상 변경 */
 	}
+	#order-form{
+		position: fixed;
+	    top: 20%; /* 페이지 상단에서의 위치 */
+	    right: 50px; /* 페이지 오른쪽에서의 위치 */
+	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
+	}
 </style>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
     <div class="content">
         <h1>발주 승인</h1>
+        <div id = "order-form">
+        	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">발주서 확인</button>
+        </div>
         <table>
             <tr>
                 <th>order_id</th>
@@ -121,6 +107,7 @@
                                 <c:when test="${param.checked == '0'}">미확인 ▼</c:when>
                                 <c:when test="${param.checked == '1'}">반려 ▼</c:when>
                                 <c:when test="${param.checked == '2'}">처리 완료 ▼</c:when>
+                                <c:when test="${param.checked == '3'}">발주 완료 ▼</c:when>
                                 <c:otherwise>처리 여부 ▼</c:otherwise>
                             </c:choose>
                         </c:when>
@@ -130,7 +117,8 @@
                         <a href="#" onclick="submitWithChecked(null)">모두 보기</a>
                         <a href="#" onclick="submitWithChecked(0)">미확인</a>
                         <a href="#" onclick="submitWithChecked(1)">반려</a>
-                        <a href="#" onclick="submitWithChecked(2)">처리 완료</a>
+                        <a href="#" onclick="submitWithChecked(2)">확인 완료</a>
+                        <a href="#" onclick="submitWithChecked(3)">발주 완료</a>
                     </div>
                 </th>
                 <th>상세보기</th>
@@ -144,13 +132,16 @@
                     <td class="clickable" onclick="submitWithChecked(${vo.checked})">
                     	<c:choose>
                             <c:when test="${vo.checked eq 0}">
-                                <span style="color: red; font-weight: bold;">미확인</span>
+                                <span style="color: #FF4C4C; font-weight: bold;">미확인</span>
                             </c:when>
                             <c:when test="${vo.checked eq 1}">
-                                <span style="color: orange; font-weight: bold;">반려</span>
+                                <span style="color: #B0B0B0; font-weight: bold;">반려</span>
                             </c:when>
                             <c:when test="${vo.checked eq 2}">
-                                <span style="color: green; font-weight: bold;">처리 완료</span>
+                                <span style="color: orange; font-weight: bold;">확인 완료</span>
+                            </c:when>
+                            <c:when test="${vo.checked eq 3}">
+                                <span style="color: green; font-weight: bold;">발주 완료</span>
                             </c:when>
                             <c:otherwise>알 수 없음</c:otherwise>
                         </c:choose>
