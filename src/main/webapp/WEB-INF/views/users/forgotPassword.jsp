@@ -11,7 +11,7 @@
         window.onload = function() {
             const params = new URLSearchParams(window.location.search);
             if (params.get('status') === 'success') {
-                alert('임시 비밀번호가 이메일로 전송되었습니다.');
+                alert('임시 비밀번호가 이메일로 전송되었습니다. 임시 비밀번호는 1시간 동안 사용 가능합니다.');
                 window.location.href = '<c:url value="/user/login"/>';
             }
         };
@@ -19,6 +19,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="javascript:history.back()" class="back-button">뒤로가기</a>
         <h2>비밀번호 재설정</h2>
         <c:if test="${not empty message}">
             <script>alert('${message}');</script>

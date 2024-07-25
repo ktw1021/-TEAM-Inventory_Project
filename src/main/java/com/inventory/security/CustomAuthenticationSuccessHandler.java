@@ -1,6 +1,8 @@
 package com.inventory.security;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,24 +27,33 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        // Authentication 객체에서 사용자 이름 가져오기
         String username = ((User) authentication.getPrincipal()).getUsername();
-        
-        // 사용자 정보를 가져오기 위해 UserService 사용
         UserVo authUser = userService.getUserByNameForLogin(username);
         
-        // 로그인 정보 session에 기록
         HttpSession session = request.getSession();
         session.setAttribute("authUser", authUser);
         session.setAttribute("username", username);
 
-        // 권한에 따른 리다이렉트 URL 결정
+        // 임시 비밀번호 안내 메시지 설정
+        if (authUser.getTemporaryPasswordCreatedAt() != null) {
+            Instant createdAtInstant = authUser.getTemporaryPasswordCreatedAt().toInstant();
+            Instant now = Instant.now();
+            Duration duration = Duration.between(createdAtInstant, now);
+
+            if (duration.compareTo(Duration.ofHours(1)) <= 0) {
+            	System.err.println("들어왔다 히히~~~~~~~~~~~~~~~~");
+                session.setAttribute("tempPasswordMessage", "임시 비밀번호는 1시간 동안 유효합니다. 비밀번호를 변경하십시오.");
+            } else {
+            	session.removeAttribute("tempPasswordMessage");
+            }
+        }
+        String asf = (String) session.getAttribute("tempPasswordMessage");
+        System.err.println(asf);
         String targetUrl = determineTargetUrl(authentication);
+        
         response.sendRedirect(request.getContextPath() + targetUrl);
     }
 
-    
-    
     protected String determineTargetUrl(Authentication authentication) {
         boolean isAdmin = authentication.getAuthorities().stream()
             .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
@@ -56,9 +67,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         } else if (isUser) {
             return "/branch/inventory";
         } else if (isGuest) {
-        	return "/user/waiting";
-        }
-        else {
+            return "/user/waiting";
+        } else {
             return "/users/authcode";
         }
     }

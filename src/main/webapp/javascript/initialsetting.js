@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 페이지를 떠날 때 로컬 스토리지 초기화
     window.addEventListener('beforeunload', function() {
         localStorage.clear();
-    });
+	});
 });
 
 // 초기 데이터로 로컬 스토리지 설정

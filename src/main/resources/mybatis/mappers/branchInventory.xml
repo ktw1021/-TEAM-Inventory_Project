@@ -26,6 +26,9 @@
 		<if test="check != null and check  == 'check'">
 				<![CDATA[and bi.inventory <> 0]]>
 		</if>
+		<if test="kindCode != null and kindCode.trim () != ''">
+			and bl.kindCode = #{kindCode}
+		</if>
 		<if test="orderBy != null">
 			order by ${orderBy}
 		</if>

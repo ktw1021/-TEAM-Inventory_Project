@@ -1,5 +1,6 @@
 package com.inventory.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,8 +110,10 @@ public class UserController {
 	                             HttpSession session) {
 	    UserVo userVo = (UserVo) session.getAttribute("authUser");
 	    boolean success = userService.changePassword(userVo.getName(), currentPassword, newPassword);
-
+	    
+	    
 	    if (success) {
+	    	session.removeAttribute("tempPasswordMessage");
 	        return "redirect:/user/changePassword?status=success";
 	    } else {
 	        return "redirect:/user/changePassword?status=failure";
@@ -134,45 +137,12 @@ public class UserController {
 
         String tempPassword = UUID.randomUUID().toString().substring(0, 8);
         String encodedPassword = passwordEncoder.encode(tempPassword);
-        userService.updatePassword(username, encodedPassword);
-        userService.sendEmail(userVo.getEmail(), "임시 비밀번호 발급", "임시 비밀번호: " + tempPassword);
+        userService.updatePasswordTemporaryPassword(username, encodedPassword, new Timestamp(System.currentTimeMillis()));
+        userService.sendEmail(userVo.getEmail(), "임시 비밀번호 발급", userVo.getName()+" 님의 임시 비밀번호: " + tempPassword);
 
         model.addAttribute("status", "success");
         return "redirect:/user/forgotPassword?status=success";
     }
 	
-//	@PostMapping("/login")
-//	public String loginAction(@RequestParam(value="name", required=false, defaultValue="") String name,
-//			@RequestParam(value="password", required=false, defaultValue="") String password,
-//			HttpSession session) {
-//		
-//		if (name.length() == 0 || password.length() == 0) {
-//			//	이름이나 비밀번호가 입력되지 않았을 경우 로그인 페이지로 리다이렉트.
-//			return "redirect:/user/login";
-//		}
-//		
-//		//	이메일과 패스워드 이용해서 사용자 정보 질의
-//		UserVo authUser = userService.getUser(name, password);
-//		if (authUser != null) {
-//			//	로그인 정보 session에 기록
-//			session.setAttribute("authUser", authUser);
-//			if (authUser.getAuthCode().equals("1")) {
-//				//	auth code가 1일 경우 지점 페이지
-//
-//				return "redirect:/branch/inventory";
-//				
-//			} else if (authUser.getAuthCode().equals("2")) {
-//				//	auth code가 2일 경우 관리자 페이지
-//				return "redirect:/admin/home"; 
-//				
-//			 				//	그외 (기본 0)의 경우 가입 승인 대기 페이지
-//				return "users/authcode";
-//			}
-//			
-//		 else {
-//			//	계정 정보가 없을 경우 (로그인 실패)
-//			return "redirect:/user/login";
-//		}
-//	}
 	
 }

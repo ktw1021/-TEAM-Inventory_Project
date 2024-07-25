@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.*" %>
@@ -59,7 +60,7 @@
                 <tr>
                     <td>${vo.bookCode}</td>
                     <td>${vo.bookName}</td>
-                    <td><fmt:formatNumber value="${vo.price}" pattern="#,##0"></fmt:formatNumber></td>
+                    <td><fmt:formatNumber value="${vo.price}" pattern="#,##0"/></td>
                     <td>${vo.kindCode}</td>
                     <td><a href="<c:url value='/admin/book/update/${vo.bookCode}'/>" class="update">수정</a> &nbsp; 
                         <a href="<c:url value='/admin/book/delete/${vo.bookCode}'/>" class="delete" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
@@ -71,7 +72,7 @@
 
     <%@ include file="/WEB-INF/views/admin_includes/footer.jsp"%>
     <script src="<c:url value='/javascript/bookupdate.js'/>"></script>
-   <script>
+    <script>
         function downloadCSV() {
             var csvContent = "data:text/csv;charset=utf-8,";
             csvContent += "교재 ID,교재명,가격,과목 코드\n"; // CSV 헤더

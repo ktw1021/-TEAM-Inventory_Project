@@ -4,48 +4,29 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="orderCheck">
-
-	<!-- order check list -->
-	<select id="orderCheckList" resultType="OrderVo">
-		select bo.order_id AS
-		orderId, bo.branch_id AS branchId,
-		bo.order_date AS orderDate,
-		bo.checked, bo.user_name AS userName,
-		b.branch_name AS branchName FROM
-		book_order bo
-		JOIN branch b ON bo.branch_id = b.branch_id ORDER BY
-		bo.order_date DESC
-	</select>
-
-	<!-- order check list 지점 별로 구분하기 -->
-	<select id="orderCheckBranch" parameterType="String"
-		resultType="OrderVo">
-		SELECT bo.order_id AS orderId, bo.branch_id AS branchId,
-		bo.order_date AS orderDate, bo.checked, bo.user_name AS userName,
-		b.branch_name AS branchName FROM book_order bo
-		JOIN branch b ON
-		bo.branch_id = b.branch_id where bo.branch_id = #{id} order
-		by
-		order_date desc
+	
+	<!-- 기제 개선 쿼리문 -->
+	<select id="newOrderCheckList" parameterType = "map" resultType = "OrderVo">
+		SELECT bo.order_id AS orderId, bo.branch_id AS branchId, bo.order_date AS orderDate, bo.checked, bo.user_name AS userName, b.branch_name AS branchName
+		FROM book_order bo JOIN branch b ON bo.branch_id = b.branch_id 
+		<where>
+	        <if test="branchId != null and branchId.trim() != ''">
+	            bo.branch_id = #{branchId}
+	        </if>
+	        <if test="checked != null and checked != ''">
+	            AND bo.checked = #{checked}
+	        </if>
+    	</where>
+		order by order_date desc
 	</select>
 
 	<!-- order detail 조회 -->
-	<select id="selectOrderDetail" parameterType="String"
-		resultType="OrderVo">
-		select bo.order_id as orderId, bo.branch_id as branchId,
-		b.branch_name as branchName,
-		bo.order_date as orderDate, bo.checked,
-		od.book_code as bookCode,
-		od.quantity as quantity,
-		bl.book_name as
-		bookName
-		from book_order bo
-		join order_detail od on bo.order_id =
-		od.order_id
-		join book_list bl on
-		od.book_code = bl.book_code
-		join branch
-		b on bo.branch_id = b.branch_id
+	<select id="selectOrderDetail" parameterType="String" resultType="OrderVo">
+		select bo.order_id as orderId, bo.branch_id as branchId, b.branch_name as branchName, bo.order_date as orderDate, bo.checked,
+		od.book_code as bookCode, od.quantity as quantity, bl.book_name as bookName
+		from book_order bo join order_detail od on bo.order_id = od.order_id
+		join book_list bl on od.book_code = bl.book_code
+		join branch b on bo.branch_id = b.branch_id
 		where bo.order_id = #{id}
 	</select>
 

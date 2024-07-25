@@ -1,105 +1,168 @@
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const errorParam = urlParams.get('error');
-            if (errorParam) {
-                if (errorParam === 'unauthorized') {
-                    alert('로그인이 필요합니다.');
-                } else {
-                    alert('아이디 또는 비밀번호가 잘못되었습니다.');
-                }
-            }
-        });
+document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorParam = urlParams.get('error');
+    if (errorParam) {
+        alert(decodeURIComponent(errorParam));
+    }
+});
 
-        function validateLoginForm(event) {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+function validateLoginForm(event) {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
 
-            if (username === '' || password === '') {
-                alert('아이디와 패스워드를 모두 입력해주세요.');
-                return false; // 폼 제출을 막음
-            }
+    if (username === '' || password === '') {
+        alert('아이디와 패스워드를 모두 입력해주세요.');
+        return false; // 폼 제출을 막음
+    }
 
-            // 추가적인 클라이언트 측 유효성 검사를 여기서 수행할 수 있음
-
-            return true; // 폼 제출을 허용
-        }
-
-function checkName(event) {
-	console.log("작동 함!");
-	//	이벤트 발생 객체 
-	const obj = event.target;	//	button#check-email
-	const target = obj.getAttribute("data-target");	//	API 호출 위치
-	const frm = obj.form;	//	폼 
-	
-	const name = frm.name.value.trim();
-	
-	if (name.length === 0) {
-		alert("이름을 입력하세요!");
-		return;
-	}
-	
-	//	fetch
-	console.log(`${target}?name=${name}`);
-	fetch(`${target}?name=${name}`)
-	.then(response => {
-		console.log(response);
-		return response.json();
-	})
-	.then(json => {
-		console.log(json);
-		//	중복 여부
-		if (json.exists) {
-			alert('이미 사용중인 아이디입니다.')
-			throw new Error('중복된 아이디입니다.');
-		} else {
-			alert('사용 가능한 아이디입니다.');
-			frm.checkedName.value = "y";
-		}
-	})
-	.catch(error => console.error(error));
+    return true; // 폼 제출을 허용
 }
 
+function checkName(event) {
+    console.log("작동 함!");
+    const obj = event.target; // button#check-email
+    const target = obj.getAttribute("data-target"); // API 호출 위치
+    const frm = obj.form; // 폼 
+
+    const name = frm.name.value.trim();
+
+    if (name.length === 0) {
+        alert("이름을 입력하세요!");
+        return;
+    }
+
+    console.log(`${target}?name=${name}`);
+    fetch(`${target}?name=${name}`)
+        .then(response => {
+            console.log(response);
+            return response.json();
+        })
+        .then(json => {
+            console.log(json);
+            if (json.exists) {
+                alert('이미 사용중인 아이디입니다.');
+                throw new Error('중복된 아이디입니다.');
+            } else {
+                alert('사용 가능한 아이디입니다.');
+                frm.checkedName.value = "y";
+            }
+        })
+        .catch(error => console.error(error));
+}
 
 window.addEventListener("load", event => {
-	document.getElementById("checkName")
-		.addEventListener("click", checkName);
-		
-	// 가입 폼 Validation
-	
-	document.getElementById("joinForm")
-		.addEventListener("submit", event => {
-		const frm = event.target;
-		
-		event.preventDefault();
-		
-		//	이름 검증
-		if (frm.name.value.trim().length === 0) {
-			alert("이름을 입력하세요");
-			frm.name.focus();
-			return;
-		}
-		//	비밀번호 검증
-		if (frm.password.value.trim().length === 0) {
-			alert("비밀번호를 입력하세요");
-			frm.password.focus();
-			return;
-		}
-		//	이메일 검증
-		if (frm.branchId.value.trim().length === 0) {
-			frm.email.focus();
-			return;
-		}
+    document.getElementById("checkName")
+        .addEventListener("click", checkName);
 
-		//	이메일 중복체크 여부 판단
-		if (frm.checkedName.value !== "y") {
-			alert("이름 중복 여부를 확인을 해주세요");
-			return;
-		}
+    document.getElementById("joinForm")
+        .addEventListener("submit", event => {
+            const frm = event.target;
 
-		
-		//	전송
-		frm.submit();
-		
-	});
-	
+            event.preventDefault();
+
+            if (frm.name.value.trim().length === 0) {
+                alert("이름을 입력하세요");
+                frm.name.focus();
+                return;
+            }
+
+            if (frm.password.value.trim().length === 0) {
+                alert("비밀번호를 입력하세요");
+                frm.password.focus();
+                return;
+            }
+
+            if (frm.branchId.value.trim().length === 0) {
+                frm.email.focus();
+                return;
+            }
+
+            if (frm.checkedName.value !== "y") {
+                alert("이름 중복 여부를 확인을 해주세요");
+                return;
+            }
+
+            frm.submit();
+        });
+});
+
+function checkPasswordStrength(password) {
+    var strengthText = document.getElementById("strengthText");
+    var strengthSegments = document.getElementsByClassName("strengthBarSegment");
+    var strength = 0;
+    if (password.length >= 8) strength += 1;
+    if (password.match(/[a-z]+/)) strength += 1;
+    if (password.match(/[A-Z]+/)) strength += 1;
+    if (password.match(/[0-9]+/)) strength += 1;
+    if (password.match(/[\W]+/)) strength += 1;
+
+    for (var i = 0; i < strengthSegments.length; i++) {
+        strengthSegments[i].style.backgroundColor = "white";
+    }
+
+    switch (strength) {
+        case 0:
+        case 1:
+            strengthText.textContent = "매우 약함";
+            strengthText.style.color = "red";
+            for (var i = 0; i < 1; i++) {
+                strengthSegments[i].style.backgroundColor = "red";
+            }
+            break;
+        case 2:
+            strengthText.textContent = "약함";
+            strengthText.style.color = "red";
+            for (var i = 0; i < 2; i++) {
+                strengthSegments[i].style.backgroundColor = "red";
+            }
+            break;
+        case 3:
+            strengthText.textContent = "보통";
+            strengthText.style.color = "blue";
+            for (var i = 0; i < 3; i++) {
+                strengthSegments[i].style.backgroundColor = "blue";
+            }
+            break;
+        case 4:
+            strengthText.textContent = "강함";
+            strengthText.style.color = "#32CD32"; // 밝은 초록색
+            for (var i = 0; i < 4; i++) {
+                strengthSegments[i].style.backgroundColor = "#32CD32"; // 밝은 초록색
+            }
+            break;
+        case 5:
+            strengthText.textContent = "매우 강함";
+            strengthText.style.color = "#32CD32"; // 밝은 초록색
+            for (var i = 0; i < 5; i++) {
+                strengthSegments[i].style.backgroundColor = "#32CD32"; // 밝은 초록색
+            }
+            break;
+        default:
+            strengthText.textContent = "";
+            strengthText.style.color = "black";
+    }
+}
+
+function checkPasswordMatch() {
+    var password = document.getElementById("newPassword").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    var mismatchMessage = document.getElementById("passwordMismatch");
+
+    if (password !== confirmPassword) {
+        mismatchMessage.style.display = "block";
+    } else {
+        mismatchMessage.style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var passwordInput = document.getElementById("newPassword");
+    var confirmPasswordInput = document.getElementById("confirmPassword");
+
+    passwordInput.addEventListener("input", function () {
+        checkPasswordStrength(passwordInput.value);
+        checkPasswordMatch();
+    });
+
+    confirmPasswordInput.addEventListener("input", checkPasswordMatch);
 });

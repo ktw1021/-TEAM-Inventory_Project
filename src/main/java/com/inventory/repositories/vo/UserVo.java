@@ -1,5 +1,8 @@
 package com.inventory.repositories.vo;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class UserVo {
 
 	private Long no;
@@ -13,8 +16,34 @@ public class UserVo {
 	private String branchName;
 	
 	private String authCode;
+	private Timestamp temporaryPasswordCreatedAt;
 	
 	
+
+	
+	
+	public UserVo(Long no, String name, String email, String password, String branchId, String authCode,
+			Timestamp temporaryPasswordCreatedAt) {
+		this.no = no;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.branchId = branchId;
+		this.authCode = authCode;
+		this.temporaryPasswordCreatedAt = temporaryPasswordCreatedAt;
+	}
+
+	public Timestamp getTemporaryPasswordCreatedAt() {
+		return temporaryPasswordCreatedAt;
+	}
+
+	/**
+	 * @param temporaryPasswordCreatedAt the temporaryPasswordCreatedAt to set
+	 */
+	public void setTemporaryPasswordCreatedAt(Timestamp temporaryPasswordCreatedAt) {
+		this.temporaryPasswordCreatedAt = temporaryPasswordCreatedAt;
+	}
+
 	public String getBranchName() {
 		return branchName;
 	}
