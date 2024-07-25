@@ -15,7 +15,7 @@
         <h2>회원가입</h2>
         <form id="joinForm" action="<c:url value='/user/join'/>" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <label for="name">사용자 아이디:</label>
+            <label for="name">사용자 아이디:     (*이름을 입력해주세요.)</label>
             <input type="text" id="name" name="name" required>
             <input type="button" id="checkName" data-target="<c:url value='/user/checkName'/>" value="이름 중복 체크"><br>
             <input type="hidden" name="checkedName" value="n">

@@ -19,6 +19,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="javascript:history.back()" class="back-button">뒤로가기</a>
         <h2>비밀번호 재설정</h2>
         <c:if test="${not empty message}">
             <script>alert('${message}');</script>

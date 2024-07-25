@@ -31,7 +31,7 @@
 
             <input type="submit" value="로그인">
         </form>
-        <a href="<c:url value='/user/forgotPassword'/>">비밀번호 재설정</a> <!-- 비밀번호 찾기 링크 추가 -->
+        <a href="<c:url value='/user/forgotPassword'/>">비밀번호를 잊어버리셨나요?</a> <!-- 비밀번호 찾기 링크 추가 -->
     </div>
 
 </body>

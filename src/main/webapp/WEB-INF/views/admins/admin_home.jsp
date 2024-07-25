@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>관리자 디폴트 페이지</title>
+<title>본사 관리 시스템</title>
 
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/admins.css'/>">
@@ -17,14 +17,15 @@
 	<!-- Main content: 교재 주문목록과 계정 승인요청 브리핑 -->
 	<div class="content">
 		<h1>교재 주문목록</h1>
-		<p>처리되지 않은 발주 요청이 ${orderCount}건 있습니다.</p>
+		<p><strong>처리되지 않은 발주 요청이 <span style="color: red;">${orderCount}</span>건 있습니다.</strong></p>
 		<p class="parent">
 			<a href="<c:url value='/admin/ordercheck'/>">보러가기</a>
 		</p>
 
 
 		<h1>계정 승인 요청</h1>
-		<p>확인해야 할 요청이 ${userCount}건 있습니다.</p>
+
+		<p><strong>처리해야 할 요청이 <span style="color: red;">${userCount}</span>건 있습니다.</strong></p>
 		<p class="parent">
 			<a href="<c:url value='/admin/usermanage'/>">보러 가기</a>
 		</p>
@@ -44,6 +45,6 @@
         </script>
     </c:if>
 	<!-- Include footer -->
-	<%@ include file="/WEB-INF/views/admin_includes/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

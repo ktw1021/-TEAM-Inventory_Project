@@ -38,6 +38,7 @@ public class StockOutController {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 		List <StockVo> list = stockService.getStockOutList(vo.getBranchId());
 		model.addAttribute("list", list);
+		model.addAttribute("authUser", vo);
 		return "branches/branch_stock_out_list";
 	}
     
@@ -99,6 +100,7 @@ public class StockOutController {
     public String stockOutDetail(@PathVariable ("outId") String outId, Model model) {
     	List <StockVo> list = stockService.getStockOutDetail(outId);
     	model.addAttribute("list", list);
+    	model.addAttribute("outId", outId);
     	return "branches/branch_stock_out_detail";
     }
 }
