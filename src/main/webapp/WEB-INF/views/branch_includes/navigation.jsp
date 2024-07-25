@@ -43,7 +43,7 @@
 
                 <c:if test="${sessionScope.authUser.authCode == 2}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value='/admin/' />">관리자 페이지</a>
+                        <a class="nav-link" href="<c:url value='/admin/home' />">관리자 페이지</a>
                     </li>
                 </c:if>
 
@@ -64,17 +64,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
     <!-- Active menu item script -->
-    <script>
-        $(document).ready(function() {
-            var currentPath = window.location.pathname;
-            $('#navbarNav .nav-link').each(function() {
-                var href = $(this).attr('href');
-                if (currentPath.indexOf(href) !== -1) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script>
+	<script>
+		$(document).ready(function() {
+		    var currentPath = window.location.pathname;
+		    $('#navbarNav .nav-link').each(function() {
+		        var href = $(this).attr('href');
+		        if (currentPath.indexOf('/branch/order') !== -1 && href.indexOf('/branch/order') !== -1) {
+		            $(this).addClass('active');
+		        } else if (currentPath.indexOf('/branch/stockin') !== -1 && href.indexOf('/branch/stockin') !== -1) {
+		            $(this).addClass('active');
+		        } else if (currentPath.indexOf('/branch/stockout') !== -1 && href.indexOf('/branch/stockout') !== -1) {
+		            $(this).addClass('active');
+		        } else if (currentPath.indexOf(href) !== -1) {
+		            $(this).addClass('active');
+		        }
+		    });
+		});
+	</script>
 </body>
 </html>

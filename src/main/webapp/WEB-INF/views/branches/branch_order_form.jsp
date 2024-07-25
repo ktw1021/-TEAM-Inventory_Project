@@ -16,31 +16,19 @@
 <!-- CSS 파일 추가 -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
-
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 	<div id="head"></div>
-	<h3 class="parent">
+	<h4 class="parent">
 		<a href="<c:url value="/branch/order/list" />">발주 리스트</a>
-	</h3>
-
+	</h4>
+	<button id="downloadCSV">CSV 다운로드</button>
 	<!-- 장바구니 섹션 -->
 	<div id="cart" class="cart">
-		<h2>Cart</h2>
-		<input type="text" id="searchInput" placeholder="Search books...">
-		<select id="ordering">
-			<option value="">선택</option>
-			<option value="asc">오름차순</option>
-			<option value="desc">내림차순</option>
-		</select> <select id="key">
-			<option value="">선택</option>
-			<option value="kindCode">과목코드</option>
-			<option value="book_name">교재명</option>
-			<option value="inventory">재고</option>
-			<option value="price">가격</option>
-		</select>
+		<h2>장바구니</h2>
+		<input type="text" id="searchInput" placeholder="교재명...">
 		<button id="searchBtn">검색</button>
 		<button id="resetBtn">초기화</button>
 		<!-- 장바구니 아이템이 여기에 동적으로 추가됨 -->
@@ -66,7 +54,7 @@
 			value="${_csrf.token}" />
 	</form:form>
 	</div>
-
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 	<script src="<c:url value='/javascript/bookorder.js'/>"></script>
 </body>
 </html>

@@ -13,13 +13,12 @@
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>출고</h1>
-		<h2>출고 목록</h2>
-		<p class="parent"><a href = "<c:url value="/branch/stockout/form"/>">출고 폼</a></p>
+		<h1>${authUser.branchName } 지점 출고 목록</h1>
+		<h4 class="parent"><a href = "<c:url value="/branch/stockout/form"/>">출고 폼</a></h4>
 		<table border="1">
 				<tr>
-					<th>out_id</th>
-					<th>date</th>
+					<th>출고 번호</th>
+					<th>출고일</th>
 					<th>상세보기</th>
 				</tr>
 					

@@ -97,5 +97,6 @@
 			<a href="<c:url value='/branch/order/list'/>">오더 리스트 보기</a>
 		</p>
 	</div>
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

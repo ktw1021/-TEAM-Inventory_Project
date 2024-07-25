@@ -22,7 +22,7 @@
 	
 	<div class="content">
 		<h1>${authUser.branchName} 지점의 교재 재고 현황</h1>
-		
+		<button id="downloadCSV">CSV 다운로드</button>
 		<form id="search-form">
 			<label for="keyword">검색어: </label><input type="text" name="keyword" value="${param.keyword == null ? '' : param.keyword.trim()}">
 			<input type="checkbox" 	name="check" id="check" value="check" ${param.check == 'check' ? 'checked' : ''} />
@@ -46,5 +46,6 @@
 			<a href="<c:url value='/branch/order/list'/>">오더 리스트 보기</a>
 		</p>
 	</div>
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

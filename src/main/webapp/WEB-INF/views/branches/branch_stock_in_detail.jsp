@@ -55,5 +55,6 @@
 			</c:choose>
 			<p class="parent"><a href ="<c:url value="/branch/stockin/list"/>">목록으로 돌아가기</a></p>
     </div>
+    <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

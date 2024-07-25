@@ -26,6 +26,7 @@ public class StockInController {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 		List <StockVo> list = stockService.getStockInList(vo.getBranchId());
 		model.addAttribute("list", list);
+		model.addAttribute("user", vo);
 		return "branches/branch_stock_in_list";
 	}
 	

@@ -28,11 +28,11 @@
 		</table>
 		<table>
 			<tr>
-				<th>order_id</th>
-				<th>branch_name</th>
-				<th>order_date</th>
+				<th>주문 번호</th>
+				<th>지점명</th>
+				<th>주문일</th>
 				<th>담당자</th>
-				<th>order_check</th>
+				<th>진행 상황</th>
 				<th>상세보기</th>
 			</tr>
 			<c:forEach items="${list}" var="vo">

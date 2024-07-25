@@ -29,10 +29,10 @@ $(document).ready(function() {
 
 <div class="content">
     <div class="order-history">
-        <h2>발주 기록</h2>
-        <h3 class="parent">
+        <h1>${authUser.branchName } 지점 발주 기록</h1>
+        <h4 class="parent">
             <a href="<c:url value="/branch/order/form" />">발주</a>
-        </h3>
+        </h4>
         <table>
             <tr>
                 <th>발주 번호</th>

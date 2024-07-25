@@ -104,7 +104,7 @@ public class StockVo {
 		if (flucDate == null) {
 			return "";
 		}
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd HH:mm");
 		return dateFormat.format(flucDate);
 	}
 

@@ -17,16 +17,16 @@
 
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>입고</h1>
-		<h3 class="parent">
+		<h1>${user.branchName } 지점 입고 페이지</h1>
+		<h4 class="parent">
 			<a href="<c:url value="/branch/initial/setting/form"/>">발주 외 입고</a>
-		</h3>
+		</h4>
 		<table border="1">
 			<tr>
-				<th>in_id</th>
-				<th>order_id</th>
-				<th>date</th>
-				<th>check</th>
+				<th>입고 번호</th>
+				<th>주문 번호</th>
+				<th>입고일</th>
+				<th>진행 상황</th>
 				<th>상세보기</th>
 			</tr>
 
@@ -52,5 +52,6 @@
 		</table>
 
 	</div>
+	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>
