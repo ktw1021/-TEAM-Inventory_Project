@@ -1,5 +1,6 @@
 package com.inventory.repositories.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -29,5 +30,8 @@ public interface UserDao {
 	public UserVo selectUserForProfile(String name);
 	//	비밀번호 변경
 	public void updatePassword(String name, String newPassword);
-	
+	public void updateTemporaryPassword(String name, String temporaryPassword, Timestamp createdAt);
+	public boolean isTemporaryPasswordValid(String username, String rawPassword);
+	public void resetTemporaryPasswordCreatedAt(String name);
+	UserVo getUserByUsername(String username);
 }

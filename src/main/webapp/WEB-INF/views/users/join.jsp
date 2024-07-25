@@ -15,7 +15,7 @@
         <h2>회원가입</h2>
         <form id="joinForm" action="<c:url value='/user/join'/>" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <label for="name">사용자 아이디:</label>
+            <label for="name">사용자 아이디:     (*이름을 입력해주세요.)</label>
             <input type="text" id="name" name="name" required>
             <input type="button" id="checkName" data-target="<c:url value='/user/checkName'/>" value="이름 중복 체크"><br>
             <input type="hidden" name="checkedName" value="n">
@@ -23,7 +23,18 @@
             <input type="email" id="email" name="email" required>
             <label for="password">비밀번호:</label>
             <input type="password" id="password" name="password" required>
-            <label for="branchId">지점 코드:</label>
+            <div id="strengthBarContainer">
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+                <div class="strengthBarSegment"></div>
+            </div>
+            <span id="strengthText"></span>
+            <label for="confirmPassword">비밀번호 확인:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <span id="passwordMismatch">비밀번호가 일치하지 않습니다.</span>
+            <label for="branchId">지점명:</label>
             <select id="branchId" name="branchId" required>
                 <c:forEach var="branch" items="${branches}">
                     <option value="${branch.branchId}">${branch.branchName}</option>

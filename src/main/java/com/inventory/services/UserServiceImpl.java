@@ -1,6 +1,7 @@
 package com.inventory.services;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -114,6 +115,7 @@ public class UserServiceImpl implements UserService {
 
 	    String encodedNewPassword = passwordEncoder.encode(newPassword);
 	    userDao.updatePassword(name, encodedNewPassword);
+	    userDao.resetTemporaryPasswordCreatedAt(name);
 	    return true;
 	}
 
@@ -150,5 +152,19 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-	
+    @Override
+    public void updatePasswordTemporaryPassword(String username, String password, Timestamp createdAt) {
+        userDao.updateTemporaryPassword(username, password, createdAt);
+    }
+    @Override
+    public boolean isTemporaryPasswordValid(String username, String rawPassword) {
+        return userDao.isTemporaryPasswordValid(username, rawPassword);
+    }
+    @Override
+    public void resetTemporaryPasswordCreatedAt(String name) {
+        userDao.resetTemporaryPasswordCreatedAt(name);
+    }
+
+    
+    
 }

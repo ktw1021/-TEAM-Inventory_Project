@@ -27,11 +27,11 @@ public class BranchController {
 	private BookInventoryService bookInvenService;
 	
 	@RequestMapping("/inventory")
-	public String newHome(HttpSession session) {
+	public String newHome(HttpSession session, Model model) {
 		UserVo userVo = (UserVo) session.getAttribute("authUser");
 		userVo.setBranchName(bookInvenService.getBranchName(userVo.getBranchId()));
 		session.setAttribute("authUser", userVo);
-		return"branches/branch_home_ajax";
+    	return"branches/branch_home_ajax";
 	}
 	
 	@RequestMapping(value = "/initialList", method = RequestMethod.GET, produces = "application/json")

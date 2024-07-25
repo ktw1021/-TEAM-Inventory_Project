@@ -25,7 +25,7 @@ public class AdminController {
 	private OrderCheckService orderCheckService;
 
     @RequestMapping({"/home", "/", ""}) 
-    public String adminHome(HttpSession session,  RedirectAttributes redirectAttributes, Model model) {
+    public String adminHome(HttpSession session, RedirectAttributes redirectAttributes, Model model) {
     	
     	//	계정 승인 요청 
     	long taikiUser = userService.userCount();
@@ -33,7 +33,7 @@ public class AdminController {
     	long orderCount = orderCheckService.getCount();
     	
     	List<OrderVo> branchList = orderCheckService.getBranchList();
-    	
+
     	model.addAttribute("userCount", taikiUser);
     	model.addAttribute("orderCount", orderCount);
     	model.addAttribute("branchList", branchList);

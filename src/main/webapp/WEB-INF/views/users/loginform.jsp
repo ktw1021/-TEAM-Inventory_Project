@@ -8,17 +8,18 @@
     <meta charset="UTF-8">
     <title>My Home: Login</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/users.css'/>">
-    <script src="<c:url value="/javascript/users.js"/>"></script>
+    <script src="<c:url value='/javascript/users.js'/>"></script>
 </head>
 <body>
     <div class="container">
         <a href="javascript:history.back()" class="back-button">뒤로가기</a>
         <h2>로그인</h2>
-        <form id="login-form" 
-              name="loginform" 
-              method="POST" 
+        <form id="login-form"
+              name="loginform"
+              method="POST"
               action="<c:url value='/user/login'/>"
               onsubmit="return validateLoginForm(event)">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             
             <label class="block-label" for="username">아이디</label> 
             <input id="username" name="username" type="text" value=""> 
@@ -30,7 +31,8 @@
 
             <input type="submit" value="로그인">
         </form>
-        <a href="<c:url value='/user/forgotPassword'/>">비밀번호 찾기</a> <!-- 비밀번호 찾기 링크 추가 -->
+        <a href="<c:url value='/user/forgotPassword'/>">비밀번호를 잊어버리셨나요?</a> <!-- 비밀번호 찾기 링크 추가 -->
     </div>
+
 </body>
 </html>
