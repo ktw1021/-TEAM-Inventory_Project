@@ -17,10 +17,8 @@
 
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>${user.branchName } 지점 입고 페이지</h1>
-		<h4 class="parent">
-			<a href="<c:url value="/branch/initial/setting/form"/>">발주 외 입고</a>
-		</h4>
+		<h1>${user.branchName } 지점 입고 기록</h1>
+		
 		<table border="1">
 			<tr>
 				<th>입고 번호</th>
@@ -50,7 +48,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-
+		<h6 class="parent">
+			<a href="<c:url value="/branch/initial/setting/form"/>">재고 설정 페이지</a>
+		</h6>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>

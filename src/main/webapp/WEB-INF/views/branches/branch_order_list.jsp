@@ -47,13 +47,16 @@ $(document).ready(function() {
                     <td>${vo.userName}</td>
                     <c:choose>
                         <c:when test="${vo.checked eq 0}">
-                            <td style="color: red;">미확인</td>
+                            <td style="color: #FF4C4C;">미확인</td>
                         </c:when>
                         <c:when test="${vo.checked eq 1}">
-                            <td style="color: blue;">반려</td>
+                            <td style="color: #B0B0B0;">반려</td>
                         </c:when>
                         <c:when test="${vo.checked eq 2}">
-                            <td style="color: green;">승인 완료</td>
+                            <td style="color: orange;">발주 대기</td>
+                        </c:when>
+                        <c:when test="${vo.checked eq 3}">
+                            <td style="color: green;">발주 완료</td>
                         </c:when>
                         <c:otherwise>
                             <td>????</td>

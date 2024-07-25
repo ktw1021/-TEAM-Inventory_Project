@@ -18,7 +18,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
-	<h1>출고 소비 페이지</h1>
+	<h1>출고 처리</h1>
 
 	<form id="search-form">
 		<label for="keyword">검색어: </label>
