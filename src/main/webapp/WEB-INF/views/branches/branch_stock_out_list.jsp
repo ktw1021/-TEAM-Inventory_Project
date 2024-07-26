@@ -38,7 +38,6 @@ td.clickable:hover {
 						<td>${vo.id}</td>
 						<td>${vo.flucDate}</td>
 						<td class="clickable" onclick="redirectToUrl('<c:url value="/branch/stockout/detail/${vo.id }"/>')">보러 가기</td>
-
 					</tr>
 				</c:forEach>
 			</table>

@@ -66,7 +66,7 @@ $(document).ready(function() {
 }
 
 .custom-dropdown:hover {
-    background-color: #3e8e41;
+    background-color: #b0b0b0;
 }
 
 /* 테이블 관련 스타일 */

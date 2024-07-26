@@ -1,5 +1,6 @@
 package com.inventory.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,23 +70,42 @@ public class OrderCheckServiceImpl implements OrderCheckService {
 	}
 
 	@Override
-	public List<OrderVo> getSum() {
-		return OrderCheckDao.getSum();
+	public List<OrderVo> getSum(List<Integer> orderIds) {
+		return OrderCheckDao.getSum(orderIds);
 	}
 
 	@Override
-	public List<OrderVo> getOrderQuantity() {
-		return OrderCheckDao.getOrderQuantity();
+	public List<OrderVo> getOrderQuantity(List<Integer> orderIds) {
+		return OrderCheckDao.getOrderQuantity(orderIds);
 	}
 
 	@Override
 	public int goodGije() {
-		List <String> list = OrderCheckDao.getOrderId();
+		List <Integer> list = OrderCheckDao.getOrderId();
 		int success = 0;
-		for (String orderId :list) {
+		
+		Map<String, Integer> params = new HashMap<>();
+		
+		int groupId = OrderCheckDao.getGroupIdSeq();
+		params.put("groupId", groupId);
+		
+		for (int orderId :list) {
 			success = OrderCheckDao.goodOrder(orderId);
+			params.put("orderId", orderId);
+			success += OrderCheckDao.insertConfirm(params);
 		}
+		
 		return success;
+	}
+
+	@Override
+	public int deleteStockIn(String orderId) {
+		return OrderCheckDao.deleteStockIn(orderId);
+	}
+
+	@Override
+	public List<OrderVo> getHistoryList() {
+		return OrderCheckDao.getHistoryList();
 	}
 	
 }

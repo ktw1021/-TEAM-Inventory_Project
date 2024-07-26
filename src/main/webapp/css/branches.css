@@ -453,7 +453,7 @@ footer {
 }
 
 th.sortable:hover {
-	background-color: #cccccc; /* 배경색 변경 */
+	background-color: #b0b0b0; /* 배경색 변경 */
 	cursor: pointer; /* 마우스 커서를 포인터로 변경 */
 }
 
