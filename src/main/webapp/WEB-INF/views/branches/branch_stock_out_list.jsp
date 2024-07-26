@@ -26,11 +26,12 @@
 					<tr>
 						<td>${vo.id}</td>
 						<td>${vo.flucDate}</td>
-						<td class="parent"><a href = "<c:url value="/branch/stockout/detail/${vo.id }"/>">보러 가기</a></td>
+						<td class="clickable" onclick="redirectToUrl('<c:url value="/branch/stockout/detail/${vo.id }"/>')">보러 가기</td>
 					</tr>
 				</c:forEach>
 			</table>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
+	<script src="<c:url value='/javascript/clickable.js'/>"></script>
 </body>
 </html>

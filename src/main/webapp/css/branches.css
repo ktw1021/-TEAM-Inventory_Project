@@ -1,9 +1,9 @@
-
-
 /* styles.css */
 
 /* Bootstrap CSS */
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
+@import
+	url('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+	;
 
 /* Global Styles */
 body {
@@ -116,7 +116,7 @@ nav .menu {
 	background-color: #000000; /* 더 짙은 검은색으로 변경 */
 }
 
-.content a#take{
+.content a#take {
 	display: inline-block;
 	padding: 10px 20px;
 	background-color: #32CD32; /* 검은색으로 변경 */
@@ -218,48 +218,50 @@ footer {
 }
 
 .cart {
-  position: fixed; /* 화면에 고정 */
-  top: 200px; /* 상단 여백 */
-  right: 20px; /* 오른쪽 여백 */
-  width: 38%; /* 장바구니 너비 */
-  background-color: #ffffff; /* 배경색 */
-  border: 1px solid #cccccc; /* 테두리 */
-  padding: 10px; /* 내부 여백 */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+	position: fixed; /* 화면에 고정 */
+	top: 200px; /* 상단 여백 */
+	right: 20px; /* 오른쪽 여백 */
+	width: 38%; /* 장바구니 너비 */
+	background-color: #ffffff; /* 배경색 */
+	border: 1px solid #cccccc; /* 테두리 */
+	padding: 10px; /* 내부 여백 */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+	z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
 }
 
 /* 장바구니 내용에 스크롤이 필요한 경우 */
 .cart-content {
-  max-height: 550px; /* 최대 높이 설정 */
-  overflow-y: auto; /* 세로 스크롤 표시 */
+	max-height: 550px; /* 최대 높이 설정 */
+	overflow-y: auto; /* 세로 스크롤 표시 */
 }
+
 .cart table {
 	width: 100%;
 }
 
 .cart2 {
-  position: fixed; /* 화면에 고정 */
-  top: 86%; /* 상단 여백 */
-  right: 20px; /* 오른쪽 여백 */
-  width: 35%; /* 장바구니 너비 */
-  background-color: #ffffff; /* 배경색 */
-  border: 1px solid #cccccc; /* 테두리 */
-  padding: 10px; /* 내부 여백 */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+	position: fixed; /* 화면에 고정 */
+	top: 86%; /* 상단 여백 */
+	right: 20px; /* 오른쪽 여백 */
+	width: 35%; /* 장바구니 너비 */
+	background-color: #ffffff; /* 배경색 */
+	border: 1px solid #cccccc; /* 테두리 */
+	padding: 10px; /* 내부 여백 */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+	z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
 }
 
 /* 장바구니 내용에 스크롤이 필요한 경우 */
 .cart-content2 {
-  max-height: 400px; /* 최대 높이 설정 */
-  overflow-y: auto; /* 세로 스크롤 표시 */
+	max-height: 400px; /* 최대 높이 설정 */
+	overflow-y: auto; /* 세로 스크롤 표시 */
 }
+
 .cart table2 {
 	width: 100%;
 }
 
-.parent a  {
+.parent a {
 	display: inline-block;
 	padding: 10px 20px;
 	background-color: #c0c0c0;
@@ -270,12 +272,12 @@ footer {
 	border-radius: 4px;
 }
 
-.parent a  {
+.parent a {
 	background-color: #808080;
 	border-color: #000000;
 }
 
-.parent a  {
+.parent a {
 	color: #fff;
 	text-decoration: none;
 }
@@ -286,13 +288,15 @@ footer {
 
 /* 여기부터 중요함 살려야 함 */
 .comments-section {
-            margin-top: 10px;
+	margin-top: 10px;
 }
+
 .comment-box {
 	width: 100%;
 	height: 60px;
 	margin-bottom: 10px;
 }
+
 .comment-box:disabled {
 	background-color: #f0f0f0; /* 비활성화된 상태의 배경 색상 */
 }
@@ -305,51 +309,54 @@ footer {
 	top: 0;
 	width: 100%;
 	height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
 	background-color: #fefefe;
 	margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px; /* 모달 창의 최대 너비 (변경 가능) */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-    border-radius: 8px; /* 둥근 모서리 */
-    position: relative; /* 자식 요소의 절대 위치에 영향을 주기 위해 */
-    max-height: 50vh;
-    overflow-y: auto; /* 세로 스크롤 */
-}
-.modal-body {
-    max-height: calc(80vh - 100px); /* 최대 높이 (모달 창 높이에서 버튼 높이 차감) */
-    overflow-y: auto; /* 세로 스크롤 */
-    margin-bottom: 20px; /* 버튼과의 거리 */
-}
-.close {
-	color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close:hover,
-.close:focus {
-	color: black;
-    text-decoration: none;
-    cursor: pointer;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 600px; /* 모달 창의 최대 너비 (변경 가능) */
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+	border-radius: 8px; /* 둥근 모서리 */
+	position: relative; /* 자식 요소의 절대 위치에 영향을 주기 위해 */
+	max-height: 50vh;
+	overflow-y: auto; /* 세로 스크롤 */
 }
 
+.modal-body {
+	max-height: calc(80vh - 100px); /* 최대 높이 (모달 창 높이에서 버튼 높이 차감) */
+	overflow-y: auto; /* 세로 스크롤 */
+	margin-bottom: 20px; /* 버튼과의 거리 */
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 
 /* 여기부터 중요함 살려야 함  stock out form*/
 .comments-section {
-            margin-top: 10px;
+	margin-top: 10px;
 }
+
 .comment-box {
 	width: 100%;
 	height: 60px;
 	margin-bottom: 10px;
 }
+
 .comment-box:disabled {
 	background-color: #f0f0f0; /* 비활성화된 상태의 배경 색상 */
 }
@@ -362,60 +369,62 @@ footer {
 	top: 0;
 	width: 100%;
 	height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {	/*모달 창에 대한 스타일*/
+.modal-content { /*모달 창에 대한 스타일*/
 	background-color: #fefefe;
 	margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px; /* 모달 창의 최대 너비 (변경 가능) */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-    border-radius: 8px; /* 둥근 모서리 */
-    position: relative; /* 자식 요소의 절대 위치에 영향을 주기 위해 */
-    max-height: 50vh;
-    overflow-y: auto; /* 세로 스크롤 */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 600px; /* 모달 창의 최대 너비 (변경 가능) */
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+	border-radius: 8px; /* 둥근 모서리 */
+	position: relative; /* 자식 요소의 절대 위치에 영향을 주기 위해 */
+	max-height: 50vh;
+	overflow-y: auto; /* 세로 스크롤 */
 }
-.modal-body {	/*모달 내용에 대한 스타일*/
-    max-height: calc(80vh - 100px); /* 최대 높이 (모달 창 높이에서 버튼 높이 차감) */
-    overflow-y: auto; /* 세로 스크롤 */
-    margin-bottom: 20px; /* 버튼과의 거리 */
+
+.modal-body { /*모달 내용에 대한 스타일*/
+	max-height: calc(80vh - 100px); /* 최대 높이 (모달 창 높이에서 버튼 높이 차감) */
+	overflow-y: auto; /* 세로 스크롤 */
+	margin-bottom: 20px; /* 버튼과의 거리 */
 }
+
 .close {
 	color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
-.close:hover,
-.close:focus {
+
+.close:hover, .close:focus {
 	color: black;
-    text-decoration: none;
-    cursor: pointer;
+	text-decoration: none;
+	cursor: pointer;
 }
- 
+
 /* 드래그 가능한 search-form 스타일 */
 #search-form {
-    position: fixed;
-    top: 10%; /* 페이지 상단에서의 위치 */
-    right: 10px; /* 페이지 오른쪽에서의 위치 */
-    background-color: white; /* 배경색 (투명도 조정 가능) */
-    padding: 10px; /* 패딩 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
-    z-index: 1000; /* 다른 요소들 위에 표시되도록 */
-    max-height: 90%;
-    max-width: 40%;
-} 
-   
-#gije{
+	position: fixed;
+	top: 10%; /* 페이지 상단에서의 위치 */
+	right: 10px; /* 페이지 오른쪽에서의 위치 */
+	background-color: white; /* 배경색 (투명도 조정 가능) */
+	padding: 10px; /* 패딩 */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
+	z-index: 1000; /* 다른 요소들 위에 표시되도록 */
+	max-height: 90%;
+	max-width: 40%;
+}
+
+#gije {
 	max-height: calc(80vh - 50px);
 	overflow-y: auto; /* 세로 스크롤 */
 }
 
-.inventory-table{
+.inventory-table {
 	width: 100%;
 }
 
@@ -427,25 +436,24 @@ footer {
 	padding: 8px;
     text-align: left;
 }*/
-
 .table-container::-webkit-scrollbar {
-    width: 10px;
+	width: 10px;
 }
 
 .table-container::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 10px;
+	background-color: #888;
+	border-radius: 10px;
 }
 
 .table-container::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+	background-color: #555;
 }
 
 .mordan {
-    position: sticky;
-    top: 0;
-    background-color: #f2f2f2;
-    z-index: 9; /* 다른 <th> 요소보다 높이 설정 */
+	position: sticky;
+	top: 0;
+	background-color: #f2f2f2;
+	z-index: 9; /* 다른 <th> 요소보다 높이 설정 */
 }
 
 .sita {
@@ -460,14 +468,26 @@ footer {
     content: ' ▼';
 }*/
 .sortable {
-	
-    cursor: pointer;
+	cursor: pointer;
 }
+
 .sort-indicator {
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
 th.sortable:hover {
-    background-color: #cccccc; /* 배경색 변경 */
-    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+	background-color: #cccccc; /* 배경색 변경 */
+	cursor: pointer; /* 마우스 커서를 포인터로 변경 */
 }
+
+td.clickable {
+	cursor: pointer;
+	padding: 10px 20px; /* 기존 th와 동일한 패딩 */
+	text-align: center;
+}
+
+/* 클릭 시 시각적 피드백 추가 */
+td.clickable:hover {
+	background-color: #e0e0e0; /* 호버 시 색상 변경 */
+}
+

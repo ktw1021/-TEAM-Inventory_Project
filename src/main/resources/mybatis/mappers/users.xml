@@ -107,6 +107,13 @@
     SET temporary_password_created_at = NULL
     WHERE user_name = #{name}
 </update>
+
+<select id="selectBranchUserList" parameterType="String" resultType="UserVo">
+		SELECT user_no AS no,
+		user_name AS name, branch_id AS branchId, auth_code AS authCode
+		FROM users WHERE auth_code = '2' OR branch_id = #{branchId} ORDER BY name
+
+	</select>
 	
 	
 	

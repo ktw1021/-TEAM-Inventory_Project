@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OrderVo {
-
+	
+	private String no;
 	private String orderId;
 	private String branchId;
 	private Date orderDate;
@@ -13,6 +14,26 @@ public class OrderVo {
 	private String bookName;
 	private String branchName;
 	private int inventory;
+	private String name;
+	
+	
+
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
 
 	public int getInventory() {
 		return inventory;
