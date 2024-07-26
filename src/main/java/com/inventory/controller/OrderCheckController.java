@@ -160,9 +160,4 @@ public class OrderCheckController {
 		return "admins/order_check_history_list";
 	}
 	
-	@RequestMapping("/history/{groupId}")
-	public String historyDetail(@PathVariable("groupId") String groupId) {
-		System.err.println(groupId);
-		return "admins/order_check_history_detail";
-	}
 }
