@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>${id }번 order detail</h1>
+		<h1>${id }번 주문 상세</h1>
 		<table>
 			<tr>
 				<th>주문 번호</th>
@@ -47,7 +47,7 @@
 				<p class="update"><a href="<c:url value='/admin/ordercheck/confirm/${id}'/>" class="update">승인</a>	</p>
 			</c:when>
 			<c:when test="${checked eq 2}">
-				<p class="delete"><a href="<c:url value='/admin/ordercheck/refuse/${id}'/>" class="delete">반려</a></p>
+				<p class="delete"><a href="<c:url value='/admin/ordercheck/refuse/${id}/delete'/>" class="delete">반려</a></p>
 			</c:when>
 		</c:choose>
 		<div class="back-link">

@@ -28,9 +28,16 @@ public interface OrderCheckDao {
 	
 	public List <OrderVo> newGetList(Map <String, String> params);
 	
-	public List <OrderVo> getSum();
-	public List <OrderVo> getOrderQuantity();
+	public List <OrderVo> getSum(List<Integer> orderIds);
+	public List <OrderVo> getOrderQuantity(List<Integer> orderIds);
 	
-	public List <String> getOrderId();
-	public int goodOrder (String orderId);
+	public List <Integer> getOrderId();
+	public int goodOrder (int orderId);
+	
+	public int deleteStockIn(String orderId);
+	
+	public int getGroupIdSeq();
+	public int insertConfirm(Map<String, Integer>params);
+	
+	public List <OrderVo> getHistoryList();
 }

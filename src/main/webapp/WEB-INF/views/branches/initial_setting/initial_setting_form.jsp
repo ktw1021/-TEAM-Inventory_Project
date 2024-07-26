@@ -16,7 +16,7 @@
 <script src="<c:url value= "/javascript/initialsetting.js"/>"></script>
 <style type="text/css">
 .selectOrderBy:hover{
-	background-color: #3e8e41;
+	background-color: #b0b0b0;
 	cursor: pointer;
 }
 </style>

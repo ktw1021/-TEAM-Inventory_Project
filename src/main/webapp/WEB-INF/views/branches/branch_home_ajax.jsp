@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 .mordan2:hover{
-	background-color: #3e8e41;
+	background-color: #b0b0b0;
 	cursor: pointer;
 }
 .mordan-dropdown{
@@ -38,7 +38,7 @@
     cursor: pointer;
 }
 .mordan-dropdown:hover{
-	background-color: #3e8e41;
+	background-color: #b0b0b0;
 }
 .mordan-dropdown:hover .dropdown-content{
 	display: block;

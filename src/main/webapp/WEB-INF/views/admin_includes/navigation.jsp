@@ -14,6 +14,16 @@
             font-weight: bold;
             color: white !important;
         }
+        /* 드롭다운 메뉴 스타일 */
+        .dropdown-menu {
+            background-color: #333333;
+        }
+        .dropdown-menu a {
+            color: white;
+        }
+        .dropdown-menu a:hover {
+            background-color: #555555;
+        }
     </style>
 </head>
 <body>
@@ -25,7 +35,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/home' />">본사 홈</a></li>
-                <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/ordercheck' />">발주 승인</a></li>
+                <li class="nav-item dropdown">
+                	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">발주 처리</a>
+                	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<c:url value='/admin/ordercheck/list' />">발주 기록</a>
+                        <a class="dropdown-item" href="<c:url value='/admin/ordercheck/view' />">종합 발주서</a>
+                        <a class="dropdown-item" href="<c:url value='/admin/ordercheck/history' />">종합 발주 내역</a>
+                    </div>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/book/update' />">교재 관리</a></li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/usermanage/list' />">회원 승인</a></li>
             </ul>
@@ -51,6 +68,16 @@
                 var href = $(this).attr('href');
                 if (currentPath.indexOf(href) !== -1) {
                     $(this).addClass('active');
+                }
+            });
+            
+         // 드롭다운 메뉴 항목에 대해 각 링크를 체크
+            $('#navbarNav .dropdown-menu a').each(function() {
+                var href = $(this).attr('href');
+                if (currentPath.indexOf(href) !== -1) {
+                    $(this).addClass('active');
+                    // 드롭다운 부모 항목도 활성화
+                    $(this).closest('.dropdown').find('.nav-link').addClass('active');
                 }
             });
         });
