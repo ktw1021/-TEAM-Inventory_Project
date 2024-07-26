@@ -151,13 +151,14 @@ function checkPasswordMatch() {
     var password = document.getElementById("newPassword").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
     var mismatchMessage = document.getElementById("passwordMismatch");
-    var checkPass = document.getElementsByName("checkPass").value;
+    var checkPassInput = document.querySelector("input[name='checkPass']");
 
     if (password !== confirmPassword) {
         mismatchMessage.style.display = "block";
-        checkPass = "y";
+        checkPassInput.value = "n";
     } else {
         mismatchMessage.style.display = "none";
+        checkPassInput.value = "y";
     }
 }
 
