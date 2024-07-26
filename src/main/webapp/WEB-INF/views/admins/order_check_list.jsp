@@ -68,18 +68,32 @@
 	    right: 50px; /* 페이지 오른쪽에서의 위치 */
 	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
 	}
+	button{
+		width:100%
+	}
 </style>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
+    <c:if test="${param.result == 'success'}">
+        <div class="alert alert-success">
+            작업이 성공적으로 완료되었습니다.
+        </div>
+    </c:if>
+    <c:if test="${param.result == 'failure'}">
+        <div class="alert alert-danger">
+            작업이 실패했습니다. 다시 시도해 주세요.
+        </div>
+    </c:if>
     <div class="content">
         <h1>발주 승인</h1>
         <div id = "order-form">
-        	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">발주서 확인</button>
+        	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">종합 발주서 생성</button><br/>
+        	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/history'/>')">종합 발주 내역 확인</button>
         </div>
         <table>
             <tr>
-                <th>order_id</th>
+                <th>주문 번호</th>
                 <th class="dropdown">
 				<c:choose>
 				    <c:when test="${param.branchId != null && param.branchId != ''}">
@@ -98,7 +112,7 @@
                     </c:forEach>
                 </div>
                 </th>
-                <th>order_date</th>
+                <th>주문 일자</th>
                 <th>담당자</th>
                 <th class="dropdown">
                     <c:choose>
@@ -146,7 +160,7 @@
                             <c:otherwise>알 수 없음</c:otherwise>
                         </c:choose>
 					</td>
-                    <td class="clickable" onclick="redirectToUrl('<c:url value='/admin/ordercheck/detail/${vo.orderId}'/>')">보러가기</td>
+                    <td class="clickable" onclick="redirectToUrl('<c:url value='/admin/ordercheck/detail/${vo.orderId}'/>')">자세히 보기</td>
                 </tr>
             </c:forEach>
         </table>

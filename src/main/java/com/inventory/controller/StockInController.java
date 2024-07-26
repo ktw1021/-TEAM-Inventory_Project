@@ -1,6 +1,8 @@
 package com.inventory.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.StockService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/branch/stockin")
@@ -22,11 +25,21 @@ public class StockInController {
 	StockService stockService;
 
 	@RequestMapping("/list")
-	public String stockInList(Model model, HttpSession session) {
+	public String stockInList(Model model, HttpSession session, HttpServletRequest request) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		List <StockVo> list = stockService.getStockInList(vo.getBranchId());
+		String checkedIn = request.getParameter("checked");
+		if (!(checkedIn == null)) {
+			if (!"0".equals(checkedIn)) {
+				checkedIn = "1";
+			}
+		}
+		
+		Map <String, String> params = new HashMap <>();
+		params.put("branchId", vo.getBranchId());
+		params.put("checkedIn", checkedIn);
+		
+		List <StockVo> list = stockService.getStockInList(params);
 		model.addAttribute("list", list);
-		model.addAttribute("user", vo);
 		return "branches/branch_stock_in_list";
 	}
 	

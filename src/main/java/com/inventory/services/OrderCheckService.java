@@ -28,10 +28,14 @@ public interface OrderCheckService {
 	
 	public List <OrderVo> newGetList(Map <String, String> params);
 	
-	public List <OrderVo> getSum();
-	public List <OrderVo> getOrderQuantity();
+	public List <OrderVo> getSum(List<Integer> orderIds);
+	public List <OrderVo> getOrderQuantity(List<Integer> orderIds);
 	
 	public int goodGije();
+	
+	public int deleteStockIn (String orderId);
+	
+	public List <OrderVo> getHistoryList();
 }
 
 

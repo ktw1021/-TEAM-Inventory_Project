@@ -74,23 +74,47 @@ public class OrderCheckDaoImpl implements OrderCheckDao {
 	}
 
 	@Override
-	public List<OrderVo> getSum() {
-		return sqlSession.selectList("orderCheck.getSumOrderQuantity");
+	public List<OrderVo> getSum(List<Integer> orderIds) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("orderIds", orderIds);
+		return sqlSession.selectList("orderCheck.getSumOrderQuantity", params);
 	}
 
 	@Override
-	public List<OrderVo> getOrderQuantity() {
-		return sqlSession.selectList("orderCheck.getBranchsOrderQuantity");
+	public List<OrderVo> getOrderQuantity(List<Integer> orderIds) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("orderIds", orderIds);
+		return sqlSession.selectList("orderCheck.getBranchsOrderQuantity", params);
 	}
 
 	@Override
-	public List<String> getOrderId() {
+	public List<Integer> getOrderId() {
 		return sqlSession.selectList("orderCheck.getOrderId");
 	}
 
 	@Override
-	public int goodOrder(String orderId) {
+	public int goodOrder(int orderId) {
 		return sqlSession.update("orderCheck.goodOrder", orderId);
+	}
+
+	@Override
+	public int deleteStockIn(String orderId) {
+		return sqlSession.delete("orderCheck.refuseAndDeleteStockIn", orderId);
+	}
+
+	@Override
+	public int getGroupIdSeq() {
+		return sqlSession.selectOne("orderCheck.getGroupIdSeq");
+	}
+
+	@Override
+	public int insertConfirm(Map<String, Integer> params) {
+		return sqlSession.insert("orderCheck.insertConfirm", params);
+	}
+
+	@Override
+	public List<OrderVo> getHistoryList() {
+		return sqlSession.selectList("orderCheck.getListHistory");
 	}
 
 }
