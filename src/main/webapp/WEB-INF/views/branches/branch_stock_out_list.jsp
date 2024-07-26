@@ -26,7 +26,6 @@ td.clickable:hover {
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 		<h1>${authUser.branchName } 지점 출고 기록</h1>
-		<p><a href = "<c:url value="/branch/stockout/form"/>">출고</a><p>
 		<table border="1">
 				<tr>
 					<th>출고 번호</th>

@@ -145,11 +145,12 @@
 		 data.forEach(function(book, index) {
 			 var selectedQuantity = quantityMap[book.bookCode] ? quantityMap[book.bookCode].quantity : 0;
 			 var formattedPrice = formatNumberWithCommas(book.price);
+			 var formattedInventory = formatNumberWithCommas(book.inventory);
 			 resultHtml += '<tr>' +
 				 '<td>' + (index + 1) + '</td>' + // Index 표시
 				 '<td>' + convertKindCode(book.kindCode) + '</td>' +
 				 '<td>' + book.bookName + '</td>' +
-				 '<td>' + book.inventory + '</td>' +
+				 '<td>' + formattedInventory + '</td>' +
 				 '<td>' + formattedPrice + '</td>' +
 				 '<td>' +
 				 '<input type="hidden" class="bookInvenInput" value="' + book.inventory + '">' +
@@ -351,8 +352,8 @@
 
 						 cartHtml += '<tr>' +
 							 '<td>' + item.bookName + '</td>' +
-							 '<td>' + item.quantity + '</td>' +
-							 '<td>' + itemEstimatedInventory + '</td>' +
+							 '<td>' + formatNumberWithCommas(item.quantity) + '</td>' +
+							 '<td>' + formatNumberWithCommas(itemEstimatedInventory) + '</td>' +
 							 '<td>' + currencyFormatter.format(itemTotalPrice) + '</td>' +
 							 '<td><button class="delete" data-book-code="' + item.bookCode + '">삭제</button></td>' +
 							 '</tr>';
@@ -363,10 +364,10 @@
 				 cartHtml += '<tfoot>' +
 					 '<tr>' +
 					 '<td><strong>Total</strong></td>' +
-					 '<td>' + totalQuantity + '</td>' +
-					 '<td>' + totalEstimatedInventory + '</td>' +
+					 '<td>' + formatNumberWithCommas(totalQuantity) + '</td>' +
+					 '<td>' + formatNumberWithCommas(totalEstimatedInventory) + '</td>' +
 					 '<td>' + currencyFormatter.format(totalPrice) + '</td>' +
-					 '<td></td>' +
+					 '<td><button id="clearCartBtn" class="deleteAll">비우기</button></td>' +
 					 '</tr>' +
 					 '</tfoot>';
 

@@ -17,7 +17,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>출고 번호: ${outId }</h1>
+		<h1>${outId }번 출고 상세</h1>
 		<table border="1">
 			<tr>
 				<th>출고일</th>

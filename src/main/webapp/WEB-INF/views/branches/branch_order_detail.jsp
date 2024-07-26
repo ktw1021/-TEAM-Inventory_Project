@@ -18,8 +18,7 @@
 
 	<div class="content">
 		<div class="order-history">
-			<h1>주문번호: ${orderId }</h1>
-				<p><a href="<c:url value="/branch/order/list" />">발주 기록</a></p>
+			<h1>${orderId }번 발주 상세</h1>
 			<table>
 				<tr>
 					<th>책 이름</th>
@@ -44,7 +43,15 @@
 				</tr>
 			</table>
 		</div>
+		<div class="back-link">
+			<a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a>
+		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
+	<script>
+		function goBack() {
+			window.history.back();
+		}
+	</script>
 </body>
 </html>

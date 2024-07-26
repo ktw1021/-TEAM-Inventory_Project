@@ -42,8 +42,8 @@
                         </c:choose>
                         <c:choose>
                             <c:when test="${vo.authCode eq 0 || vo.authCode eq 1}">
-                                <a href="<c:url value='/admin/usermanage/delete/${vo.no}'/> " class="delete">삭제</a>
-                            </c:when>
+							    <a href="<c:url value='/admin/usermanage/delete/${vo.no}'/>" class="delete" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+							</c:when>
                             <c:otherwise>비워뒀음</c:otherwise>
                         </c:choose>
                     </td>

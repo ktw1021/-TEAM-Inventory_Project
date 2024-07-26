@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>${id }번 order detail</h1>
+		<h1>${id }번 주문 상세</h1>
 		<table>
 			<tr>
 				<th>주문 번호</th>

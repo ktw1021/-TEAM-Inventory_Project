@@ -64,7 +64,7 @@
 	}
 	#order-form{
 		position: fixed;
-	    top: 20%; /* 페이지 상단에서의 위치 */
+	    top: 85%; /* 페이지 상단에서의 위치 */
 	    right: 50px; /* 페이지 오른쪽에서의 위치 */
 	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 */
 	}
@@ -73,7 +73,7 @@
 <body>
     <%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
     <div class="content">
-        <h1>발주 승인</h1>
+        <h1>발주 기록</h1>
         <div id = "order-form">
         	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">종합 발주서 확인</button>
         </div>
