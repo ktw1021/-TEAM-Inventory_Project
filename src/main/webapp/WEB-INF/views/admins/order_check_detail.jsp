@@ -46,6 +46,9 @@
 				<p class="delete"><a href="<c:url value='/admin/ordercheck/refuse/${id}'/>" class="delete">반려</a></p>
 				<p class="update"><a href="<c:url value='/admin/ordercheck/confirm/${id}'/>" class="update">승인</a>	</p>
 			</c:when>
+			<c:when test="${checked eq 2}">
+				<p class="delete"><a href="<c:url value='/admin/ordercheck/refuse/${id}'/>" class="delete">반려</a></p>
+			</c:when>
 		</c:choose>
 		<div class="back-link">
 			<a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a>
