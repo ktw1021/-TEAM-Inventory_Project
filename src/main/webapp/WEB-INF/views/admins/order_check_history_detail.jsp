@@ -15,20 +15,18 @@
     <div class="content">
         <h1>발주서</h1>
         <div>
-		    <button type="button" onclick="downloadCSV()">CSV 다운로드</button>
-		    <c:if test="${empty orderIds}">
-		        <c:choose>
-		            <c:when test="${empty bookBranchQuantities}">
-		                <!-- bookBranchQuantities가 비어 있을 때 -->
-		                <button type="button" onclick="orderConfirm('<c:url value='/admin/ordercheck/order'/>', 0)">발주 확정</button>
-		            </c:when>
-		            <c:otherwise>
-		                <!-- bookBranchQuantities에 값이 있을 때 -->
-		                <button type="button" onclick="orderConfirm('<c:url value='/admin/ordercheck/order'/>', 1)">발주 확정</button>
-		            </c:otherwise>
-		        </c:choose>
-		    </c:if>
-		</div>
+            <button type="button" onclick="downloadCSV()">CSV 다운로드</button>
+            <c:choose>
+                <c:when test="${empty bookBranchQuantities}">
+                    <!-- bookBranchQuantities가 비어 있을 때 -->
+                    <button type="button" onclick="orderConfirm('<c:url value='/admin/ordercheck/order'/>', 0)">발주 확정</button>
+                </c:when>
+                <c:otherwise>
+                    <!-- bookBranchQuantities에 값이 있을 때 -->
+                    <button type="button" onclick="orderConfirm('<c:url value='/admin/ordercheck/order'/>', 1)">발주 확정</button>
+                </c:otherwise>
+            </c:choose>
+        </div>
         <table id="orderTable" border="1">
             <tr>
                 <th>교재명</th>

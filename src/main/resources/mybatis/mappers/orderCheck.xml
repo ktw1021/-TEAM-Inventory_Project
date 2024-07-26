@@ -41,6 +41,11 @@
 		UPDATE book_order SET
 		checked = '1' WHERE order_id = #{no}
 	</update>
+	
+	<!-- stockIn 에서 삭제하는 쿼리 -->
+	<delete id="refuseAndDeleteStockIn" parameterType="String">
+		delete stock_in where order_id = #{orderId}
+	</delete>
 
 	<!-- order 승인 -> orderList의 order_check 코드 수정 -->
 	<update id="confirmOrderCode" parameterType="String">
@@ -78,42 +83,83 @@
 		SELECT branch_id as branchId, branch_name as branchName FROM branch
 	</select>
 	
-	<select id = "getSumOrderQuantity" resultType="OrderVo">
-		SELECT od.book_code as bookCode, bl.book_name as bookName, SUM(od.quantity) as inventory 
-		FROM order_detail od 
-		JOIN book_list bl ON od.book_code = bl.book_code
-		JOIN book_order bo ON  bo.order_id = od.order_id
-		WHERE bo.checked = 2
-		GROUP BY od.book_code, bl.book_name 
-		ORDER BY bl.book_name
+	<!-- getSumOrderQuantity 쿼리 수정 -->
+	<select id="getSumOrderQuantity" parameterType="map" resultType="OrderVo">
+	    SELECT 
+	        od.book_code AS bookCode, 
+	        bl.book_name AS bookName, 
+	        SUM(od.quantity) AS inventory
+	    FROM 
+	        order_detail od
+	        JOIN book_list bl ON od.book_code = bl.book_code
+	        JOIN book_order bo ON bo.order_id = od.order_id
+	    WHERE 
+	        <if test="orderIds == null or orderIds.isEmpty()">
+	            bo.checked = 2
+	        </if>
+	        <if test="orderIds != null and !orderIds.isEmpty()">
+	            bo.order_id IN 
+	            <foreach collection="orderIds" item="id" open="(" separator="," close=")">
+	                #{id}
+	            </foreach>
+	        </if>
+	    GROUP BY 
+	        od.book_code, bl.book_name
+	    ORDER BY 
+	        bl.book_name
 	</select>
 	
-	<select id="getBranchsOrderQuantity" resultType="OrderVo">
-		SELECT 
-		    bo.branch_id AS branchId, 
-		    b.branch_name AS branchName, 
-		    od.book_code AS bookCode, 
-		    bl.book_name AS bookName, 
-		    SUM(od.quantity) AS inventory
-		FROM 
-		    book_order bo
-		    JOIN order_detail od ON bo.order_id = od.order_id
-		    JOIN book_list bl ON od.book_code = bl.book_code
-		    JOIN branch b ON bo.branch_id = b.branch_id
-		WHERE 
-		    bo.checked = 2
-		GROUP BY 
-		    bo.branch_id, b.branch_name, od.book_code, bl.book_name
-		ORDER BY 
-		    bl.book_name
+	<!-- getBranchsOrderQuantity 쿼리 수정 -->
+	<select id="getBranchsOrderQuantity" parameterType="map" resultType="OrderVo">
+	    SELECT 
+	        bo.branch_id AS branchId, 
+	        b.branch_name AS branchName, 
+	        od.book_code AS bookCode, 
+	        bl.book_name AS bookName, 
+	        SUM(od.quantity) AS inventory
+	    FROM 
+	        book_order bo
+	        JOIN order_detail od ON bo.order_id = od.order_id
+	        JOIN book_list bl ON od.book_code = bl.book_code
+	        JOIN branch b ON bo.branch_id = b.branch_id
+	    WHERE 
+	        <if test="orderIds == null or orderIds.isEmpty()">
+	            bo.checked = 2
+	        </if>
+	        <if test="orderIds != null and !orderIds.isEmpty()">
+	            bo.order_id IN 
+	            <foreach collection="orderIds" item="id" open="(" separator="," close=")">
+	                #{id}
+	            </foreach>
+	        </if>
+	    GROUP BY 
+	        bo.branch_id, b.branch_name, od.book_code, bl.book_name
+	    ORDER BY 
+	        bl.book_name
 	</select>
 	
-	<select id="getOrderId" resultType = "String">
+	<!-- 발주 확정을 위한 orderId 찾기 -->
+	<select id="getOrderId" resultType = "int">
 		select order_id as orderId from book_order where checked = 2
 	</select>
 	
-	<update id="goodOrder" parameterType="String">
+	<!-- 발주 확정 후 코드 바꾸기 -->
+	<update id="goodOrder" parameterType="int">
 		UPDATE book_order SET
 		checked = '3' WHERE order_id = #{no}
 	</update>
+	
+	<select id="getGroupIdSeq" resultType="int">
+		SELECT group_id_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertConfirm" parameterType = "map">
+		insert into confirm_order (group_id, order_id, confirm_date) values (#{groupId}, #{orderId}, sysdate)
+	</insert>
+	
+	<select id="getListHistory" resultType="OrderVo">
+	SELECT group_id as branchId, LISTAGG(order_id, ', ') WITHIN GROUP (ORDER BY order_id) AS orderId, MIN(confirm_date) AS orderDate 
+	FROM CONFIRM_ORDER GROUP BY group_id ORDER by group_id desc
+	</select>
+	
 </mapper>
