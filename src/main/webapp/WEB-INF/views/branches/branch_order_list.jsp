@@ -145,24 +145,24 @@ $(document).ready(function() {
                     <tr>
                         <td>${vo.orderId}</td>
                         <td>${vo.orderDate}</td>
-                        <td>${vo.name}</td>
-                        <c:choose>
-                            <c:when test="${vo.checked eq 0}">
-                                <td style="color: red;">미확인</td>
-                            </c:when>
-                            <c:when test="${vo.checked eq 1}">
-                                <td style="color: blue;">반려</td>
-                            </c:when>
-                            <c:when test="${vo.checked eq 2}">
-                                <td style="color: green;">확인 완료</td>
-                            </c:when>
-                            <c:when test="${vo.checked eq 3}">
-                                <td style="color: green;">발주 완료</td>
-                            </c:when>
-                            <c:otherwise>
-                                <td>????</td>
-                            </c:otherwise>
-                        </c:choose>
+                        <td class="clickable" onclick="submitWithChecked(${vo.no})">${vo.name}</td>
+                        <td class="clickable" onclick="submitWithCh(${vo.checked})">
+	                        <c:choose>
+	                            <c:when test="${vo.checked eq 0}">
+	                                <span style="color: #FF4C4C; font-weight: bold;">미확인</span>
+	                            </c:when>
+	                            <c:when test="${vo.checked eq 1}">
+	                                <span style="color: #B0B0B0; font-weight: bold;">반려</span>
+	                            </c:when>
+	                            <c:when test="${vo.checked eq 2}">
+	                                <span style="color: orange; font-weight: bold;">확인 완료</span>
+	                            </c:when>
+	                            <c:when test="${vo.checked eq 3}">
+	                                <span style="color: green; font-weight: bold;">발주 완료</span>
+	                            </c:when>
+	                            <c:otherwise>알 수 없음</c:otherwise>
+	                        </c:choose>
+                    	</td>
                         <td class="clickable"
                             onclick="redirectToUrl('<c:url value="/branch/order/detail" />?orderId=${vo.orderId}')">보러
                             가기</td>

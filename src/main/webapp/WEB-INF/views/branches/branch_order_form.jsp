@@ -33,27 +33,21 @@
 		<input type="text" id="searchInput" placeholder="교재명...">
 		<button id="searchBtn">검색</button>
 		<button id="resetBtn">초기화</button>
-		<button id="saveBtn" class="add">장바구니 추가</button>
-		<button type="submit" id="orderBtn" class="update" style="margin-left:155px;">발주</button>
 		<!-- 장바구니 아이템이 여기에 동적으로 추가됨 -->
 		<div id="cartItems" class="cart-content"></div>
 		<!-- 발주 제출 폼 -->
 		<form action="<c:url value="/branch/order/submit"/>" method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
+			<button type="submit" id="orderBtn" class="update" style="margin-top:5px;">발주</button>
 		</form>
+		<button id="saveBtn" class="add">장바구니 추가</button>
 	</div>
 
 	<!-- 검색 입력 및 버튼 -->
 
 	<!-- 검색 결과가 여기에 렌더링됨 -->
 	<div id="result"></div>
-
-	<!-- Spring Security CSRF Token -->
-	<form:form method="post" action="#">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form:form>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 	<script src="<c:url value='/javascript/bookorder.js'/>"></script>
