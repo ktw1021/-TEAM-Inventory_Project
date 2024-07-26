@@ -16,9 +16,6 @@
 	<div class="content">
 		<h1>발주서</h1>
 		<div>
-			<h5 class="parent" style="text-align: left;">
-				<a href="<c:url value='/admin/ordercheck/list'/>">발주 리스트 돌아가기</a>
-			</h5>
 			<button type="button" onclick="downloadCSV()">CSV 다운로드</button>
 			<button type="button" onclick="redirectToUrl('<c:url value='/admin/ordercheck/order'/>')">발주 확정</button>
 		</div>
@@ -44,6 +41,9 @@
         		</tr>
     		</c:forEach>
 		</table>
+		<div class="back-link">
+			<a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a>
+		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/admin_includes/footer.jsp"%>
 </body>

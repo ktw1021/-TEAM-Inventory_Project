@@ -1,6 +1,7 @@
 package com.inventory.services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class StockServiceImpl implements StockService {
 	StockDao stockDao;
 	
 	@Override
-	public List<StockVo> getStockInList(String branchId) {
-		List<StockVo>list = stockDao.getStockInList(branchId); 
+	public List<StockVo> getStockInList(Map<String, String> params) {
+		List<StockVo>list = stockDao.getStockInList(params); 
 		return list;
 	}
 

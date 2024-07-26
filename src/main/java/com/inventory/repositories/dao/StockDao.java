@@ -1,11 +1,12 @@
 package com.inventory.repositories.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.inventory.repositories.vo.StockVo;
 
 public interface StockDao {
-	public List <StockVo> getStockInList (String branchId);
+	public List <StockVo> getStockInList (Map <String, String> params);
 	public List <StockVo> getStockInDetail(String inId);
 	public boolean stockInCheck(String inId);
 	public boolean confirmStockIn(StockVo vo);

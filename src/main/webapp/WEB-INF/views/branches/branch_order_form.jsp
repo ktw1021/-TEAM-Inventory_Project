@@ -16,18 +16,18 @@
 <!-- CSS 파일 추가 -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 	<div id="head"></div>
-	<h4 class="parent">
-		<a href="<c:url value="/branch/order/list" />">발주 리스트</a>
-	</h4>
+	<p><a href="<c:url value="/branch/order/list" />">발주 리스트</a></p>
 	<button id="downloadCSV">CSV 다운로드</button>
 	<!-- 장바구니 섹션 -->
 	<div id="cart" class="cart">
-		<h2>장바구니</h2>
+		<div id="mouse">
+		<h2>장바구니</h2></div>
 		<input type="text" id="searchInput" placeholder="교재명...">
 		<button id="searchBtn">검색</button>
 		<button id="resetBtn">초기화</button>

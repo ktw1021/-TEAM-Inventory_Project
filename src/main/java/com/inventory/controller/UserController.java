@@ -107,16 +107,20 @@ public class UserController {
 	@PostMapping("/changePassword")
 	public String changePassword(@RequestParam("currentPassword") String currentPassword,
 	                             @RequestParam("newPassword") String newPassword,
+	                             @RequestParam("confirmPassword") String confirmPassword,
 	                             HttpSession session) {
 	    UserVo userVo = (UserVo) session.getAttribute("authUser");
-	    boolean success = userService.changePassword(userVo.getName(), currentPassword, newPassword);
 	    
-	    
-	    if (success) {
-	    	session.removeAttribute("tempPasswordMessage");
-	        return "redirect:/user/changePassword?status=success";
+	    if (newPassword.equals(confirmPassword)) {
+	    	boolean success = userService.changePassword(userVo.getName(), currentPassword, newPassword);
+	    	if (success) {
+		    	session.removeAttribute("tempPasswordMessage");
+		        return "redirect:/user/changePassword?status=success";
+		    } else {
+		        return "redirect:/user/changePassword?status=failure";
+		    }
 	    } else {
-	        return "redirect:/user/changePassword?status=failure";
+	    	return "redirect:/user/changePassword?status=failure";
 	    }
 	}
 	

@@ -51,3 +51,7 @@ function downloadCSV() {
     link.click();
     document.body.removeChild(link);
 }
+
+function goBack() {
+	window.history.back();
+}

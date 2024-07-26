@@ -1,6 +1,7 @@
 package com.inventory.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class OrderCheckController {
 	}
 	
 	@RequestMapping ("/view")
-	public String test(HttpSession session) {	
+	public String viewTotalOrder(HttpSession session) {	
 		List<OrderVo> list = OrderCheckService.getSum();  // bookCode와 inventory 정보만 있는 리스트
 	    session.setAttribute("list", list);
 
@@ -101,7 +102,7 @@ public class OrderCheckController {
 
 	    List<OrderVo> testList = OrderCheckService.getOrderQuantity();  // branchId, bookCode, inventory 정보가 있는 리스트
 		// 데이터 가공
-	    Map<String, Map<String, Integer>> bookBranchQuantities = new HashMap<>();
+	    Map<String, Map<String, Integer>> bookBranchQuantities = new LinkedHashMap<>();
 	    Map<String, Integer> bookTotalQuantities = new HashMap<>();
 
 	    for (OrderVo order : testList) {

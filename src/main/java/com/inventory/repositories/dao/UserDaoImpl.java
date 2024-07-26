@@ -170,5 +170,12 @@ public class UserDaoImpl implements UserDao{
 	    sqlSession.update("users.resetTemporaryPasswordCreatedAt", name);
 	}
 
+	@Override
+	public List<UserVo> selectBranchUserList(String branchId) {
+		List<UserVo> list = sqlSession.selectList("users.selectBranchUserList",branchId);
+		return list;
+	}
+
+	
 	
 }

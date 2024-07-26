@@ -85,7 +85,7 @@
 		JOIN book_order bo ON  bo.order_id = od.order_id
 		WHERE bo.checked = 2
 		GROUP BY od.book_code, bl.book_name 
-		ORDER BY od.book_code
+		ORDER BY bl.book_name
 	</select>
 	
 	<select id="getBranchsOrderQuantity" resultType="OrderVo">
@@ -105,7 +105,7 @@
 		GROUP BY 
 		    bo.branch_id, b.branch_name, od.book_code, bl.book_name
 		ORDER BY 
-		    b.branch_name
+		    bl.book_name
 	</select>
 	
 	<select id="getOrderId" resultType = "String">

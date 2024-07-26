@@ -34,4 +34,6 @@ public interface UserDao {
 	public boolean isTemporaryPasswordValid(String username, String rawPassword);
 	public void resetTemporaryPasswordCreatedAt(String name);
 	UserVo getUserByUsername(String username);
+	
+	public List<UserVo> selectBranchUserList(String branchId);
 }
