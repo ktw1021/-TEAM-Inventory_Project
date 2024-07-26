@@ -81,6 +81,10 @@ window.addEventListener("load", event => {
                 alert("이름 중복 여부를 확인을 해주세요");
                 return;
             }
+            if (frm.checkPass.value !== "y"){
+				alert ('비밀번호가 일치하지 않습니다');
+				return;
+			}
 
             frm.submit();
         });
@@ -147,9 +151,11 @@ function checkPasswordMatch() {
     var password = document.getElementById("newPassword").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
     var mismatchMessage = document.getElementById("passwordMismatch");
+    var checkPass = document.getElementsByName("checkPass").value;
 
     if (password !== confirmPassword) {
         mismatchMessage.style.display = "block";
+        checkPass = "y";
     } else {
         mismatchMessage.style.display = "none";
     }

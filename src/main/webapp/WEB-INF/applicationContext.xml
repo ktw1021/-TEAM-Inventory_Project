@@ -33,7 +33,7 @@
 
     <!-- Oracle DataSource -->
     <bean id="oracleDatasource" class="oracle.jdbc.pool.OracleDataSource">
-        <property name="URL" value="jdbc:oracle:thin:@192.168.0.64:1521:xe" />
+        <property name="URL" value="jdbc:oracle:thin:@192.168.0.60:1521:xe" />
         <property name="user" value="team2project" />
         <property name="password">
             <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">

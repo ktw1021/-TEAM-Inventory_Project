@@ -22,7 +22,7 @@
             <label for="email">이메일:</label>
             <input type="email" id="email" name="email" required>
             <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="newPassword" name="password" required>
             <div id="strengthBarContainer">
                 <div class="strengthBarSegment"></div>
                 <div class="strengthBarSegment"></div>
@@ -34,6 +34,7 @@
             <label for="confirmPassword">비밀번호 확인:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
             <span id="passwordMismatch">비밀번호가 일치하지 않습니다.</span>
+            <input type = "hidden" name="checkPass" value="n">
             <label for="branchId">지점명:</label>
             <select id="branchId" name="branchId" required>
                 <c:forEach var="branch" items="${branches}">
