@@ -40,7 +40,7 @@
                 	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<c:url value='/admin/ordercheck/list' />">발주 기록</a>
                         <a class="dropdown-item" href="<c:url value='/admin/ordercheck/view' />">종합 발주서</a>
-                        <a class="dropdown-item" href="<c:url value='/admin/ordercheck/history' />">종합 발주 내역</a>
+                        <a class="dropdown-item" href="<c:url value='/admin/ordercheck/history' />">종합 발주 이력</a>
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/book/update' />">교재 관리</a></li>
