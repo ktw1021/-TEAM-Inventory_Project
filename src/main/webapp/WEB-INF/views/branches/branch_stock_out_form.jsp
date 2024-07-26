@@ -18,7 +18,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
-	<h1>출고 소비 페이지</h1>
+	<h1>출고 처리</h1>
 
 	<form id="search-form">
 		<label for="keyword">검색어: </label>
@@ -56,7 +56,6 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>소비 처리 확인</h2>
             <div id="modal-body">
-            <!-- JavaScript로 동적으로 내용이 추가됩니다. -->
             </div>
             <button type="button" onclick="submitOrderForm()" class="add">확인</button>
             <button type="button" onclick="closeModal()" class="delete">취소</button>

@@ -6,9 +6,21 @@
 <mapper namespace="stock">
 	
 	<!-- 지점 코드에 맞는 Stock in list 불러오기 -->
-	<select id="stockInList" parameterType="String" resultType="StockVo">
-		select in_id as id, order_id as orderId, in_date as flucDate, checked_in as checkedIn, branch_id as branchId FROM stock_in where branch_id = #{branchId} 
-		order by in_id desc
+	<select id="stockInList" parameterType="Map" resultType="StockVo">
+	    SELECT in_id AS id, order_id AS orderId, in_date AS flucDate, checked_in AS checkedIn, branch_id AS branchId 
+	    FROM stock_in
+	    WHERE branch_id = #{branchId} 
+	    <choose>
+	        <when test="checkedIn == 1">
+	            AND (checked_in = 1 OR checked_in = -1)
+	        </when>
+	        <otherwise>
+	            <if test="checkedIn != null and checkedIn != ''">
+	                AND checked_in = #{checkedIn}
+	            </if>
+	        </otherwise>
+	    </choose>
+	    ORDER BY in_id DESC
 	</select>
 	
 	<!-- in_id 에 맞는 detail 페이지 -->

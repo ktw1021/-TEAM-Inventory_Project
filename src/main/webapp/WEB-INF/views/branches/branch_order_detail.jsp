@@ -19,9 +19,7 @@
 	<div class="content">
 		<div class="order-history">
 			<h1>주문번호: ${orderId }</h1>
-			<h4 class="parent">
-				<a href="<c:url value="/branch/order/list" />">발주 기록</a>
-			</h4>
+				<p><a href="<c:url value="/branch/order/list" />">발주 기록</a></p>
 			<table>
 				<tr>
 					<th>책 이름</th>

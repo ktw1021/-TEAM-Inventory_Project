@@ -92,12 +92,13 @@ td.clickable:hover {
 
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 
+
 	<div class="content">
 		<div class="order-history">
 			<h1>${authUser.branchName }지점 발주 기록</h1>
-			<h4 class="parent">
-				<a href="<c:url value="/branch/order/form" />">발주</a>
-			</h4>
+
+				<p><a href="<c:url value="/branch/order/form" />">발주</a></p>
+	
 			<table>
 				<tr>
 					<th>발주 번호</th>

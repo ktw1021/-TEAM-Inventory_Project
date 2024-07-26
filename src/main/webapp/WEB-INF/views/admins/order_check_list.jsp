@@ -75,11 +75,11 @@
     <div class="content">
         <h1>발주 승인</h1>
         <div id = "order-form">
-        	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">발주서 확인</button>
+        	<button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">종합 발주서 확인</button>
         </div>
         <table>
             <tr>
-                <th>order_id</th>
+                <th>주문 번호</th>
                 <th class="dropdown">
 				<c:choose>
 				    <c:when test="${param.branchId != null && param.branchId != ''}">
@@ -98,7 +98,7 @@
                     </c:forEach>
                 </div>
                 </th>
-                <th>order_date</th>
+                <th>주문 일자</th>
                 <th>담당자</th>
                 <th class="dropdown">
                     <c:choose>

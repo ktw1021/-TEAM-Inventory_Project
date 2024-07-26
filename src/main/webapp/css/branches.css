@@ -84,6 +84,7 @@ nav .menu {
 	nav .menu {
 		display: block;
 	}
+
 	nav:focus-within ul, nav ul:focus-within, nav ul:active {
 		display: flex;
 	}
@@ -106,14 +107,14 @@ nav .menu {
 .content a {
 	display: inline-block;
 	padding: 10px 20px;
-	background-color: #333333; /* 검은색으로 변경 */
-	color: white;
+/* 	background-color: #333333; 검은색으로 변경 */
+/* 	color: white; */
 	text-decoration: none;
 	border-radius: 5px;
 }
 
 .content a:hover {
-	background-color: #000000; /* 더 짙은 검은색으로 변경 */
+/* 	background-color: #000000; 더 짙은 검은색으로 변경 */
 }
 
 .content a#take {

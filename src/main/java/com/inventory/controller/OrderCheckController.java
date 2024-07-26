@@ -93,7 +93,7 @@ public class OrderCheckController {
 	}
 	
 	@RequestMapping ("/view")
-	public String test(HttpSession session) {	
+	public String viewTotalOrder(HttpSession session) {	
 		List<OrderVo> list = OrderCheckService.getSum();  // bookCode와 inventory 정보만 있는 리스트
 	    session.setAttribute("list", list);
 

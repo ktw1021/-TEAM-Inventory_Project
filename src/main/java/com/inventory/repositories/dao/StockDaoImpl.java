@@ -16,8 +16,8 @@ public class StockDaoImpl implements StockDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<StockVo> getStockInList(String branchId) {
-		List <StockVo> list = sqlSession.selectList("stock.stockInList", branchId);
+	public List<StockVo> getStockInList(Map <String, String> params) {
+		List <StockVo> list = sqlSession.selectList("stock.stockInList", params);
 		return list;
 	}
 

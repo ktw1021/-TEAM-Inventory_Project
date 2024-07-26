@@ -10,6 +10,7 @@
 <title>지점 관리 시스템</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
+<script src="<c:url value='/javascript/check.js'/>"></script>
 </head>
 
 <body>
@@ -24,6 +25,7 @@
 				<th>수량</th>
 				<th>진행 상황</th>
 			</tr>
+
 				<c:forEach items="${list }" var="vo">
 					<tr>
 						<td>
@@ -49,16 +51,19 @@
 					</tr>
 				</c:forEach>
 			</table>
+
 			
-			<c:choose>
-    			<c:when test="${check eq 0}">
-        			<a href="<c:url value='/branch/stockin/confirm/${inId}' />" id="take">도착했어요~~</a>
-    			</c:when>
-    			<c:otherwise>
-        		<!-- Do nothing or display alternative content -->
-    			</c:otherwise>
-			</c:choose>
-			<p class="parent"><a href ="<c:url value="/branch/stockin/list"/>">목록으로 돌아가기</a></p>
+		<c:choose>
+   			<c:when test="${check eq 0}">
+       			<a href="<c:url value='/branch/stockin/confirm/${inId}' />" id="take">도착했어요~~</a>
+   			</c:when>
+   			<c:otherwise>
+       		<!-- Do nothing or display alternative content -->
+   			</c:otherwise>
+		</c:choose>
+		<div class="back-link">
+			<a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a>
+		</div>
     </div>
     <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>

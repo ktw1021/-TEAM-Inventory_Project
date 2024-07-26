@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="javascript:history.back()" class="back-button">뒤로가기</a>
+        <a href="<c:url value='/main'/>" class="back-button">뒤로가기</a>
         <h2>로그인</h2>
         <form id="login-form"
               name="loginform"
