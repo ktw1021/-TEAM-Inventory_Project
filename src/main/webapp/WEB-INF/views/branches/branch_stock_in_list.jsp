@@ -124,7 +124,7 @@
                         </c:choose>
 					</td>
 
-					<td class="clickable" onclick="redirectToUrl('<c:url value='/branch/stockin/detail/${vo.id}'/>')">보러 가기</td>
+					<td class="clickable" onclick="redirectToUrl('<c:url value='/branch/stockin/detail/${vo.id}'/>')">자세히 보기</td>
 				</tr>
 			</c:forEach>
 		</table>
