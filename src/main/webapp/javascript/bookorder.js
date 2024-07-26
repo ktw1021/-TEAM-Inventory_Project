@@ -367,7 +367,7 @@
 					 '<td>' + formatNumberWithCommas(totalQuantity) + '</td>' +
 					 '<td>' + formatNumberWithCommas(totalEstimatedInventory) + '</td>' +
 					 '<td>' + currencyFormatter.format(totalPrice) + '</td>' +
-					 '<td><button id="clearCartBtn" class="deleteAll">비우기</button></td>' +
+					 '<td></td>' +
 					 '</tr>' +
 					 '</tfoot>';
 
