@@ -24,6 +24,14 @@ public class StockVo {
 
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	// stock_in detail 볼 때 사용
 	public StockVo(int id, String branchId, Date flucDate, int orderId, String bookCode, int quantity, String comments,
 			String checkedIn, String bookName) {
@@ -161,11 +169,4 @@ public class StockVo {
 		this.bookName = bookName;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 }

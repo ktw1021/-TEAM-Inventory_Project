@@ -14,9 +14,13 @@ public interface StockDao {
 	public int getInId (String branchId);
 	public int initialStockIn(String orderId, String branchId, String userName);
 	
+
 	public List <StockVo> getStockOutList (Map <String, String> params);
+
 	public List <StockVo> getStockOutDetail(String outId);
-	public int insertStockOut(Map <String, String> params);
+
+	public int insertStockOut(String branchId, String userName);
+
 	public int getStockOutId(String branchId);
 	public int insertOutDetail(StockVo vo);
 	public int confirmStockOut(StockVo vo);

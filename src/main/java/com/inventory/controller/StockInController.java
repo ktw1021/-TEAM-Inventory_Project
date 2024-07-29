@@ -36,17 +36,20 @@ public class StockInController {
 				checkedIn = "1";
 			}
 		}
-		String userName = request.getParameter("branchId");
-		
 		
 		Map <String, String> params = new HashMap <>();
 		params.put("branchId", vo.getBranchId());
 		params.put("checkedIn", checkedIn);
-		params.put("userName", userName);
 		
 		List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
 		
+		String userName = request.getParameter("userName");
+		if (userName != null && !userName.trim().isEmpty()) {
+			params.put("userName", userName);
+		}
 		List <StockVo> list = stockService.getStockInList(params);
+
+		model.addAttribute("userList", userList);
 		model.addAttribute("list", list);
 		model.addAttribute("user", vo);
 		model.addAttribute("userList", userList);

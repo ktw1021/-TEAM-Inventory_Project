@@ -63,10 +63,7 @@ public class StockServiceImpl implements StockService {
 
 	@Override
 	public int insertStockOut(String branchId, String userName) {
-		Map <String, String> params = new HashMap <>();
-		params.put("userName", userName);
-		params.put("branchId", branchId);
-		return stockDao.insertStockOut(params);
+		return stockDao.insertStockOut(branchId, userName);
 	}
 
 	@Override

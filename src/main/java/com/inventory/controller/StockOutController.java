@@ -21,7 +21,9 @@ import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.BookInventoryService;
 import com.inventory.services.StockService;
+import com.inventory.services.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -32,15 +34,25 @@ public class StockOutController {
 	StockService stockService;
 	@Autowired
 	BookInventoryService bookInvenService;
+	@Autowired
+	UserService userService;
     
     @RequestMapping("/list")
-	public String stockInList(Model model, HttpSession session) {
+	public String stockInList(Model model, HttpSession session, HttpServletRequest request) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
+
+		Map <String, String> params = new HashMap <>();
+        String userName = request.getParameter("userName");
+        if (userName != null && !userName.trim().isEmpty()) {
+            params.put("userName", userName);
+        }
+        params.put("branchId", vo.getBranchId());
 		
-		Map <String, String> params = new HashMap<>();
-		params.put("branchId", vo.getBranchId());
-		
+        List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
+        
 		List <StockVo> list = stockService.getStockOutList(params);
+		model.addAttribute("userList", userList);
+
 		model.addAttribute("list", list);
 		model.addAttribute("authUser", vo);
 		return "branches/branch_stock_out_list";
@@ -88,6 +100,7 @@ public class StockOutController {
         String branchId = userVo.getBranchId();
         
         stockService.insertStockOut(branchId, userVo.getName());
+
         int outId = stockService.getStockOutId(branchId);
         
         vo.forEach(item -> {
