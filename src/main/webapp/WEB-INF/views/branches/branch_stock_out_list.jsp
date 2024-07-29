@@ -30,6 +30,7 @@ td.clickable:hover {
 				<tr>
 					<th>출고 번호</th>
 					<th>출고일</th>
+					<th>담당자</th>
 					<th>상세보기</th>
 				</tr>
 					
@@ -37,6 +38,7 @@ td.clickable:hover {
 					<tr>
 						<td>${vo.id}</td>
 						<td>${vo.flucDate}</td>
+						<td>${vo.userName }</td>
 						<td class="clickable" onclick="redirectToUrl('<c:url value="/branch/stockout/detail/${vo.id }"/>')">자세히 보기</td>
 					</tr>
 				</c:forEach>

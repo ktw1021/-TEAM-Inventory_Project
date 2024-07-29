@@ -18,6 +18,7 @@ public class StockVo {
 	private String comments;
 	private String checkedIn;
 	private String bookName;
+	private String userName;
 
 	public StockVo() {
 
@@ -158,5 +159,13 @@ public class StockVo {
 
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
