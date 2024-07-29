@@ -26,7 +26,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>종합 발주 이력</h1>
+		<h1>종합 발주 기록</h1>
 		<table>
 			<tr>
 				<th>번호</th>

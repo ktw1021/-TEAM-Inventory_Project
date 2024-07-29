@@ -42,5 +42,7 @@ public interface UserService {
 	public void updatePasswordTemporaryPassword(String username, String password, Timestamp createdAt);
 	public boolean isTemporaryPasswordValid(String username, String rawPassword); 
 	public void resetTemporaryPasswordCreatedAt(String name);
+	
+	public List<UserVo> selectBranchUserList(String branchId);
 
 }

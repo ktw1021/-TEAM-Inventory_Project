@@ -41,6 +41,5 @@
             <a href="<c:url value='/user/changePassword'/>" class="btn btn-custom btn-login">비밀번호 변경</a>
         </div>
     </div>
-    <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>
