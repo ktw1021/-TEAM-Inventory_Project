@@ -66,3 +66,4 @@ function downloadCSV() {
 function goBack() {
 	window.history.back();
 }
+

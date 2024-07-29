@@ -16,7 +16,7 @@ public interface StockDao {
 	
 	public List <StockVo> getStockOutList(Map <String, String> params);
 	public List <StockVo> getStockOutDetail(String outId);
-	public int insertStockOut(String branchId);
+	public int insertStockOut(String branchId, String userName);
 	public int getStockOutId(String branchId);
 	public int insertOutDetail(StockVo vo);
 	public int confirmStockOut(StockVo vo);

@@ -63,8 +63,11 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
-	public int insertStockOut(String branchId) {
-		return sqlSession.insert("stock.confirmAndInsertStockOut", branchId);
+	public int insertStockOut(String branchId, String userName) {
+		Map <String, String> map = new HashMap<>();
+		map.put("userName", userName);
+		map.put("branchId", branchId);
+		return sqlSession.insert("stock.confirmAndInsertStockOut", map);
 	}
 
 	@Override

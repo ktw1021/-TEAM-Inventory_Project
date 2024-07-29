@@ -58,8 +58,8 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public int insertStockOut(String branchId) {
-		return stockDao.insertStockOut(branchId);
+	public int insertStockOut(String branchId, String userName) {
+		return stockDao.insertStockOut(branchId, userName);
 	}
 
 	@Override

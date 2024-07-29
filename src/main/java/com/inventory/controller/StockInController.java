@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.StockService;
+import com.inventory.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,6 +24,8 @@ public class StockInController {
 	
 	@Autowired
 	StockService stockService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping("/list")
 	public String stockInList(Model model, HttpSession session, HttpServletRequest request) {
@@ -38,7 +41,13 @@ public class StockInController {
 		params.put("branchId", vo.getBranchId());
 		params.put("checkedIn", checkedIn);
 		
+		String userName = request.getParameter("userName");
+		if (userName != null && !userName.trim().isEmpty()) {
+			params.put("userName", userName);
+		}
 		List <StockVo> list = stockService.getStockInList(params);
+		List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
+		model.addAttribute("userList", userList);
 		model.addAttribute("list", list);
 		model.addAttribute("user", vo);
 		return "branches/branch_stock_in_list";
