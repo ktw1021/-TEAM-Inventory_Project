@@ -52,7 +52,7 @@ public class StockInController {
 		model.addAttribute("userList", userList);
 		model.addAttribute("list", list);
 		model.addAttribute("user", vo);
-		model.addAttribute("userList", userList);
+
 		return "branches/branch_stock_in_list";
 	}
 	
