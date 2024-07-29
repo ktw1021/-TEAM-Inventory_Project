@@ -16,43 +16,41 @@
 <!-- CSS 파일 추가 -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
+<style type="text/css">
+
+</style>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 	<div id="head"></div>
-	<h4 class="parent">
-		<a href="<c:url value="/branch/order/list" />">발주 리스트</a>
-	</h4>
 	<button id="downloadCSV">CSV 다운로드</button>
 	<!-- 장바구니 섹션 -->
 	<div id="cart" class="cart">
-		<h2>장바구니</h2>
+		<div id="mouse">
+		<h2>장바구니</h2></div>
 		<input type="text" id="searchInput" placeholder="교재명...">
 		<button id="searchBtn">검색</button>
 		<button id="resetBtn">초기화</button>
+		<button id="saveBtn" class="add">장바구니 추가</button>
 		<!-- 장바구니 아이템이 여기에 동적으로 추가됨 -->
 		<div id="cartItems" class="cart-content"></div>
-		<button id="clearCartBtn" class="deleteAll">비우기</button>
 		<!-- 발주 제출 폼 -->
+		<br>
+		<button id="clearCartBtn" class="deleteAll">비우기</button>
 		<form action="<c:url value="/branch/order/submit"/>" method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
-			<button type="submit" id="orderBtn" class="update">발주</button>
+			<button type="submit" id="orderBtn" class="update" style="">발주</button>
 		</form>
-		<button id="saveBtn" class="add">장바구니 추가</button>
 	</div>
 
 	<!-- 검색 입력 및 버튼 -->
 
 	<!-- 검색 결과가 여기에 렌더링됨 -->
 	<div id="result"></div>
-
-	<!-- Spring Security CSRF Token -->
-	<form:form method="post" action="#">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form:form>
+	
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 	<script src="<c:url value='/javascript/bookorder.js'/>"></script>

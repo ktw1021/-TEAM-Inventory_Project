@@ -18,6 +18,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
+	<div class="content">
 	<h1>출고 처리</h1>
 
 	<form id="search-form">
@@ -44,13 +45,6 @@
         </tbody>
     </table>
 
-    <form id="orderForm" action="<c:url value='/branch/stockout/confirm'/>" method="post">
-    
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        
-        <button type="button" onclick="showConfirmationModal()" class="update">확정</button>
-    </form>
-
 	<div id="confirmationModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -60,6 +54,7 @@
             <button type="button" onclick="submitOrderForm()" class="add">확인</button>
             <button type="button" onclick="closeModal()" class="delete">취소</button>
         </div>
+    </div>
     </div>
     <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>

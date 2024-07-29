@@ -1,6 +1,7 @@
 package com.inventory.services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<OrderVo> getOrderList(String branchId) {
-		List<OrderVo> list = orderDao.getOrderList(branchId);
+	public List<OrderVo> getOrderList(Map <String, String> params) {
+		List<OrderVo> list = orderDao.getOrderList(params);
 		return list;
 	}
 
