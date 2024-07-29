@@ -48,11 +48,21 @@
 	</select>
 	
 	<!-- out_id 에 맞는 detail 페이지 -->
-	<select id="stockOutDetail" parameterType="String" resultType="StockVo">
+	<select id="stockOutDetail" parameterType="Map" resultType="StockVo">
 		select so.out_id as id, so.out_date as flucDate, so.branch_id as branchId, 
 		out.book_code as bookCode, out.quantity, bl.book_name as bookName, out.comments as comments 
 		from stock_out so join out_detail out on so.out_id = out.out_id join book_list bl on out.book_code = bl.book_code 
-		where so.out_id = #{outId} 
+		where so.out_id = #{outId}
+		<choose>
+	        <when test="userName == 1">
+	            AND (checked_in = 1 OR checked_in = -1)
+	        </when>
+	        <otherwise>
+	            <if test="checkedIn != null and checkedIn != ''">
+	                AND checked_in = #{checkedIn}
+	            </if>
+	        </otherwise>
+	    </choose> 
 	</select>
 	
 	<!-- stock out 테이블에 데이터 입력 -->

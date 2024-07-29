@@ -48,8 +48,8 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public List<StockVo> getStockOutList(String branchId) {
-		return stockDao.getStockOutList(branchId);
+	public List<StockVo> getStockOutList(Map <String, String> params) {
+		return stockDao.getStockOutList(params);
 	}
 	
 	@Override

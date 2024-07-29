@@ -22,6 +22,7 @@ import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.BookInventoryService;
 import com.inventory.services.StockService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -34,9 +35,17 @@ public class StockOutController {
 	BookInventoryService bookInvenService;
     
     @RequestMapping("/list")
-	public String stockInList(Model model, HttpSession session) {
+	public String stockInList(Model model, HttpSession session, HttpServletRequest request) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		List <StockVo> list = stockService.getStockOutList(vo.getBranchId());
+		
+		Map <String, String> params = new HashMap <>();
+        String userName = request.getParameter("userName");
+        if (userName != null && !userName.trim().isEmpty()) {
+            params.put("userName", userName);
+        }
+        params.put("branchId", vo.getBranchId());
+		
+		List <StockVo> list = stockService.getStockOutList(params);
 		model.addAttribute("list", list);
 		model.addAttribute("authUser", vo);
 		return "branches/branch_stock_out_list";

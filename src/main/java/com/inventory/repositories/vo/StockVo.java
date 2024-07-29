@@ -18,9 +18,18 @@ public class StockVo {
 	private String comments;
 	private String checkedIn;
 	private String bookName;
+	private String userName;
 
 	public StockVo() {
 
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	// stock_in detail 볼 때 사용

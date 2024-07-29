@@ -53,8 +53,8 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
-	public List<StockVo> getStockOutList(String branchId) {
-		return sqlSession.selectList("stock.stockOutList", branchId);
+	public List<StockVo> getStockOutList(Map <String, String> params) {
+		return sqlSession.selectList("stock.stockOutList", params);
 	}
 	
 	@Override
