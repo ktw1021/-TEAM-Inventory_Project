@@ -41,15 +41,18 @@ public class StockInController {
 		params.put("branchId", vo.getBranchId());
 		params.put("checkedIn", checkedIn);
 		
+		List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
+		
 		String userName = request.getParameter("userName");
 		if (userName != null && !userName.trim().isEmpty()) {
 			params.put("userName", userName);
 		}
 		List <StockVo> list = stockService.getStockInList(params);
-		List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
+
 		model.addAttribute("userList", userList);
 		model.addAttribute("list", list);
 		model.addAttribute("user", vo);
+
 		return "branches/branch_stock_in_list";
 	}
 	
@@ -68,8 +71,9 @@ public class StockInController {
 	}
 	
 	@RequestMapping("/confirm/{id}")
-	public String confirmStockIn(@PathVariable ("id") String inId) {
-		stockService.stockInCheck(inId);
+	public String confirmStockIn(@PathVariable ("id") String inId, HttpSession session) {
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		stockService.stockInCheck(inId, userVo.getName());
 		List<StockVo>list = stockService.getStockInDetail(inId);
 		
 		for (StockVo vo :list) {

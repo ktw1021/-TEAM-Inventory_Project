@@ -79,7 +79,6 @@
 				AND user_no = #{no}
 			</if>
 		</where>
-
 	</select>
 
 </mapper>

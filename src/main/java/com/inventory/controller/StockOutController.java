@@ -40,7 +40,7 @@ public class StockOutController {
     @RequestMapping("/list")
 	public String stockInList(Model model, HttpSession session, HttpServletRequest request) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		
+
 		Map <String, String> params = new HashMap <>();
         String userName = request.getParameter("userName");
         if (userName != null && !userName.trim().isEmpty()) {
@@ -52,6 +52,7 @@ public class StockOutController {
         
 		List <StockVo> list = stockService.getStockOutList(params);
 		model.addAttribute("userList", userList);
+
 		model.addAttribute("list", list);
 		model.addAttribute("authUser", vo);
 		return "branches/branch_stock_out_list";
@@ -98,7 +99,8 @@ public class StockOutController {
         UserVo userVo = (UserVo)session.getAttribute("authUser");
         String branchId = userVo.getBranchId();
         
-        stockService.insertStockOut(branchId,userVo.getName());
+        stockService.insertStockOut(branchId, userVo.getName());
+
         int outId = stockService.getStockOutId(branchId);
         
         vo.forEach(item -> {

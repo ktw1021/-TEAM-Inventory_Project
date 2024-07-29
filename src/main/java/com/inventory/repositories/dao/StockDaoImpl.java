@@ -28,8 +28,8 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
-	public boolean stockInCheck(String inId) {
-		int successUpdate = sqlSession.update("stock.confirmStockInCheckedIn", inId);
+	public boolean stockInCheck(Map <String, String> params) {
+		int successUpdate = sqlSession.update("stock.confirmStockInCheckedIn", params);
 		return successUpdate == 1;
 	}
 
@@ -45,10 +45,11 @@ public class StockDaoImpl implements StockDao {
 	}
 
 	@Override
-	public int initialStockIn(String orderId, String branchId) {
+	public int initialStockIn(String orderId, String branchId, String userName) {
 		Map <String, String> map = new HashMap<>();
 		map.put("orderId", orderId);
 		map.put("branchId", branchId);
+		map.put("userName", userName);
 		return sqlSession.insert("stock.initialStockIn", map);
 	}
 
@@ -68,6 +69,7 @@ public class StockDaoImpl implements StockDao {
 		map.put("userName", userName);
 		map.put("branchId", branchId);
 		return sqlSession.insert("stock.confirmAndInsertStockOut", map);
+
 	}
 
 	@Override

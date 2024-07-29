@@ -86,23 +86,24 @@
                 <th>입고 번호</th>
                 <th>주문 번호</th>
                 <th>입고일</th>
-                <th class="custom-dropdown"><c:choose>
-                            <c:when test="${param.userName != null && param.userName != ''}">
-                                <c:forEach var="user" items="${userList}">
-                                    <c:if test="${user.name == param.userName}">
-                                        ${user.name} ▼
-                                    </c:if>
-                                </c:forEach>
-                            </c:when>
-                            <c:otherwise>담당자 ▼</c:otherwise>
-                        </c:choose>
-                        <div class="custom-dropdown-content">
-                            <a href="#" onclick="submitWithChecke(null)">모두 보기</a>
-                            <c:forEach items="${userList}" var="vo">
-                                <a href="#" onclick="submitWithChecke('${vo.name}')">${vo.name }</a>
-                            </c:forEach>
-                        </div>
-                    </th>
+                <th class="custom-dropdown">
+                	<c:choose>
+						<c:when test="${param.userName != null && param.userName != ''}">
+							<c:forEach var="user" items="${userList}">
+								<c:if test="${user.name == param.userName}">
+									${user.name} ▼
+								</c:if>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>담당자 ▼</c:otherwise>
+					</c:choose>
+					<div class="custom-dropdown-content">
+    					<a href="#" onclick="submitWithChecke(null)">모두 보기</a>
+						<c:forEach items="${userList}" var="vo">
+							<a href="#" onclick="submitWithChecke('${vo.name}')">${vo.name }</a>
+						</c:forEach>
+   					</div>
+				</th>
                 <th class="custom-dropdown">
                     <c:choose>
                         <c:when test="${param.checked != null && param.checked != ''}">
@@ -154,6 +155,5 @@
         </table>
     </div>
     <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
-
 </body>
 </html>

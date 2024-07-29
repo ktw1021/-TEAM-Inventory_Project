@@ -168,4 +168,5 @@ public class StockVo {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
+
 }
