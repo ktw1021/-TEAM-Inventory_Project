@@ -13,7 +13,7 @@
 <body>
     <%@ include file="/WEB-INF/views/admin_includes/navigation.jsp"%>
     <div class="content">
-        <h1>발주서</h1>
+        <h1>종합 발주서</h1>
         <div>
 		    <button type="button" onclick="downloadCSV()">CSV 다운로드</button>
 		    <c:if test="${empty orderIds}">

@@ -130,7 +130,7 @@
                             <c:otherwise>알 수 없음</c:otherwise>
                         </c:choose>
                     </td>
-                    <td class="custom-clickable" onclick="redirectToUrl('<c:url value='/branch/stockin/detail/${vo.id}'/>')">보러 가기</td>
+                    <td class="custom-clickable" onclick="redirectToUrl('<c:url value='/branch/stockin/detail/${vo.id}'/>')">자세히 보기</td>
                 </tr>
             </c:forEach>
         </table>

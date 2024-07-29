@@ -17,11 +17,10 @@
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>${outId }번 출고 상세</h1>
+		<h1>${outId }번 출고 상세 기록</h1>
 		<table border="1">
 			<tr>
 				<th>출고일</th>
-				<th>교재 코드</th>
 				<th>교재명</th>
 				<th>수량</th>
 				<th>사유</th>
@@ -30,7 +29,6 @@
 			<c:forEach items="${list }" var="vo">
 				<tr>
 					<td>${vo.flucDate}</td>
-					<td>${vo.bookCode}</td>
 					<td>${vo.bookName}</td>
 					<td>${vo.quantity}</td>
 

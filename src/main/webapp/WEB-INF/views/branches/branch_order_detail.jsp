@@ -18,7 +18,7 @@
 
 	<div class="content">
 		<div class="order-history">
-			<h1>${orderId }번 발주 상세</h1>
+			<h1>${orderId }번 발주 상세 기록</h1>
 			<table>
 				<tr>
 					<th>책 이름</th>

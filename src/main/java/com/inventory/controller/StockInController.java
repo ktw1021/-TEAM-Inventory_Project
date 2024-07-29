@@ -40,6 +40,7 @@ public class StockInController {
 		
 		List <StockVo> list = stockService.getStockInList(params);
 		model.addAttribute("list", list);
+		model.addAttribute("user", vo);
 		return "branches/branch_stock_in_list";
 	}
 	

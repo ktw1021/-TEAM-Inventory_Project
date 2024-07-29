@@ -55,5 +55,6 @@
         </div>
     </div>
     </div>
+    <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

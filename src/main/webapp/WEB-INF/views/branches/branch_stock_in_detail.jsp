@@ -17,7 +17,7 @@
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 
-		<h2>${inId }입고 기록</h2>
+		<h2>${inId }번 입고 상세 기록</h2>
 		<table border="1">
 			<tr>
 				<th>입고일</th>

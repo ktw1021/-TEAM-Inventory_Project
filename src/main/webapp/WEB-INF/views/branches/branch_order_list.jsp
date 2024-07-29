@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     <div class="content">
         <div class="order-history">
-            <h1>${authUser.branchName }지점 발주 기록</h1>
+            <h1>${authUser.branchName } 지점 발주 기록</h1>
             <table class="custom-table">
                 <tr>
                     <th>발주 번호</th>
@@ -164,8 +164,7 @@ $(document).ready(function() {
 	                        </c:choose>
                     	</td>
                         <td class="clickable"
-                            onclick="redirectToUrl('<c:url value="/branch/order/detail" />?orderId=${vo.orderId}')">보러
-                            가기</td>
+                            onclick="redirectToUrl('<c:url value="/branch/order/detail" />?orderId=${vo.orderId}')">자세히 보기</td>
                     </tr>
                 </c:forEach>
             </table>

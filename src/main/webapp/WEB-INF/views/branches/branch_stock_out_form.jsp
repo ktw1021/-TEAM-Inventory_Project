@@ -18,6 +18,7 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
+	<div class="content">
 	<h1>출고 처리</h1>
 
 	<form id="search-form">
@@ -53,6 +54,7 @@
             <button type="button" onclick="submitOrderForm()" class="add">확인</button>
             <button type="button" onclick="closeModal()" class="delete">취소</button>
         </div>
+    </div>
     </div>
     <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
