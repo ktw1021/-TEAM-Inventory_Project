@@ -47,14 +47,14 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">입고</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<c:url value='/branch/stockin/list' />">입고 기록</a>
-                        <a class="dropdown-item" href="<c:url value='/branch/initial/setting/form' />">입고 설정</a>
+                        <a class="dropdown-item" href="<c:url value='/branch/initial/setting/form' />">재고 추가</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">출고</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<c:url value='/branch/stockout/list' />">출고 기록</a>
-                        <a class="dropdown-item" href="<c:url value='/branch/stockout/form' />">출고 설정</a>
+                        <a class="dropdown-item" href="<c:url value='/branch/stockout/form' />">출고 처리</a>
                     </div>
                 </li>
             </ul>

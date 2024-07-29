@@ -43,6 +43,5 @@ td.clickable:hover {
 			</table>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
-	<script src="<c:url value='/javascript/clickable.js'/>"></script>
 </body>
 </html>

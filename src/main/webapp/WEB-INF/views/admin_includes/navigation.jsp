@@ -44,7 +44,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/book/update' />">교재 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/usermanage/list' />">회원 처리</a></li>
+                <li class="nav-item"><a class="nav-link" href="<c:url value='/admin/usermanage/list' />">회원 관리</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
