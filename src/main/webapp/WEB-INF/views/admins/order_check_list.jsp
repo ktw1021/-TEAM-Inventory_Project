@@ -71,7 +71,6 @@
 
     #button {
         width: 100%;
-        margin-bottom: 10px;
     }
         /* 드롭다운 스타일 */
     .custom-dropdown {
