@@ -33,6 +33,10 @@ function checkName(event) {
         alert("이름을 입력하세요!");
         return;
     }
+    if (name.length >10) {
+		alert("이름이 그렇게 기신가요?");
+		return;
+	}
 
     console.log(`${target}?name=${name}`);
     fetch(`${target}?name=${name}`)
