@@ -28,18 +28,18 @@
     </select>
     
     <!-- 마이 페이지의 사용자 정보 select -->
- <select id="selectUserForProfile" resultType="UserVo">
-    select u.user_no as no, 
-           u.user_name as name, 
-           u.email,
-           u.password, 
-           u.branch_id as branchId, 
-           u.auth_code as authCode,
-           b.branch_name as branchName
-    from users u
-    left join branch b on u.branch_id = b.branch_id
-    where u.user_name = #{username}
-</select>
+	 <select id="selectUserForProfile" resultType="UserVo">
+	    select u.user_no as no, 
+	           u.user_name as name, 
+	           u.email,
+	           u.password, 
+	           u.branch_id as branchId, 
+	           u.auth_code as authCode,
+	           b.branch_name as branchName
+	    from users u
+	    left join branch b on u.branch_id = b.branch_id
+	    where u.user_name = #{username}
+	</select>
 
 	<!-- name과 비밀번호로 사용자 정보 select (로그인) -->
 	<select id="selectUserByNameAndPassword" parameterType="map"
@@ -88,33 +88,29 @@
 		WHERE user_name = #{name}
 	</update>
 	
- <!-- 임시 비밀번호 업데이트 -->
+ 	<!-- 임시 비밀번호 업데이트 -->
     <update id="updateTemporaryPassword" parameterType="map">
         UPDATE users
         SET password = #{temporaryPassword}, temporary_password_created_at = #{createdAt}
         WHERE user_name = #{name}
     </update>
     
-<!-- 사용자 정보 조회 쿼리 -->
-<select id="getUserByUsername" parameterType="map" resultType="UserVo">
-    SELECT user_no AS no, user_name AS name, password, email, branch_id AS branchId, auth_code AS authCode, temporary_password_created_at AS temporaryPasswordCreatedAt
-    FROM users
-    WHERE user_name = #{name}
-    
-</select>
-	<update id="resetTemporaryPasswordCreatedAt" parameterType="string">
-    UPDATE users
-    SET temporary_password_created_at = NULL
-    WHERE user_name = #{name}
-</update>
-
-<select id="selectBranchUserList" parameterType="String" resultType="UserVo">
-		SELECT user_no AS no,
-		user_name AS name, branch_id AS branchId, auth_code AS authCode
-		FROM users WHERE auth_code = '2' OR branch_id = #{branchId} ORDER BY name
-
+	<!-- 사용자 정보 조회 쿼리 -->
+	<select id="getUserByUsername" parameterType="map" resultType="UserVo">
+	    SELECT user_no AS no, user_name AS name, password, email, branch_id AS branchId, auth_code AS authCode, temporary_password_created_at AS temporaryPasswordCreatedAt
+	    FROM users
+	    WHERE user_name = #{name}
 	</select>
 	
-	
-	
+	<update id="resetTemporaryPasswordCreatedAt" parameterType="string">
+	    UPDATE users
+	    SET temporary_password_created_at = NULL
+	    WHERE user_name = #{name}
+	</update>
+
+	<select id="selectBranchUserList" parameterType="String" resultType="UserVo">
+		SELECT user_no AS no, user_name AS name, branch_id AS branchId, auth_code AS authCode
+		FROM users
+		WHERE auth_code = '2' OR branch_id = #{branchId} ORDER BY name
+	</select>
 </mapper>
