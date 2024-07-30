@@ -176,7 +176,9 @@ public class UserDaoImpl implements UserDao{
 		return list;
 	}
 
+	@Override
+	public List<UserVo> selectUserName() {
+		return sqlSession.selectList("users.selectUserName");
+	}
 
-	
-	
 }

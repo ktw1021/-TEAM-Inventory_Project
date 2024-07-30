@@ -95,6 +95,13 @@
 	<select id="selectBranchUserList" parameterType="String" resultType="UserVo">
 		SELECT user_no AS no, user_name AS name, branch_id AS branchId, auth_code AS authCode
 		FROM users
-		WHERE auth_code = '2' OR branch_id = #{branchId} ORDER BY name
+		WHERE (auth_code = '2' OR branch_id = #{branchId}) and auth_code != 0 ORDER BY name
+	</select>
+	
+	<select id="selectUserName" resultType="UserVo">
+		SELECT user_no AS no, user_name AS name, branch_id AS branchId, auth_code AS authCode
+		FROM users
+		where auth_code != 0
+		ORDER BY authCode, user_no DESC
 	</select>
 </mapper>

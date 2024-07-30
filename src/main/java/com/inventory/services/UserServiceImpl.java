@@ -171,7 +171,8 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-
-    
-    
+	@Override
+	public List<UserVo> selectUserName() {
+		return userDao.selectUserName();
+	}
 }
