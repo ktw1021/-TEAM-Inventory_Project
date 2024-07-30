@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (errorParam) {
         alert('아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.');
     }
+    document.getElementById('name').addEventListener('input', function() {
+   		this.form.checkedName.value = "n";
+   	});
 });
 
 function validateLoginForm(event) {

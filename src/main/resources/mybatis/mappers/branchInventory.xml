@@ -63,6 +63,9 @@
 	<select id="inInventorySum" parameterType = "map" resultType = "BookInventoryVo">
 		select book_code as bookCode, sum(quantity) as inventory from stock_in si join in_detail id on si.in_id = id.in_id 
 		where branch_id = #{branchId}
+		<if test="(startDate == null and endDate == null) or (startDate == '' and endDate == '')">
+			and in_date is not null
+		</if>
 		<if test = "startDate != null and startDate.trim() != ''">
 			<![CDATA[and in_date >= #{startDate}]]>
 		</if>
