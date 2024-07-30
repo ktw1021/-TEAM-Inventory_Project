@@ -18,6 +18,7 @@ import com.inventory.repositories.vo.OrderVo;
 import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.OrderCheckService;
+import com.inventory.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +29,8 @@ public class OrderCheckController {
 
 	@Autowired
 	private OrderCheckService OrderCheckService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping({ "", "/", "/list" })
 	public String orderCheckList(HttpServletRequest request, HttpSession session, Model model) {
@@ -45,6 +48,14 @@ public class OrderCheckController {
         if (branchId != null && !branchId.trim().isEmpty()) {
             params.put("branchId", branchId);
         }
+        
+        String userName = request.getParameter("userName");
+        if (userName != null && !userName.trim().isEmpty()) {
+        	params.put("userName", userName);
+        }
+        
+        List<UserVo> userList = userService.getList();
+        model.addAttribute("userList", userList);
 		
 		List <OrderVo> list = OrderCheckService.newGetList(params);
 		model.addAttribute("list", list);

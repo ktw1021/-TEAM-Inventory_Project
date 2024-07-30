@@ -16,6 +16,9 @@
 	        <if test="checked != null and checked != ''">
 	            AND bo.checked = #{checked}
 	        </if>
+	        <if test="userName != null and userName != ''">
+	            AND bo.user_name = #{userName}
+	        </if>
     	</where>
 		order by order_date desc
 	</select>
