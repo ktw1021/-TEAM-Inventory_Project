@@ -44,6 +44,5 @@ public interface UserService {
 	public void resetTemporaryPasswordCreatedAt(String name);
 	
 	public List<UserVo> selectBranchUserList(String branchId);
-
-
+	public List <UserVo> selectUserName();
 }

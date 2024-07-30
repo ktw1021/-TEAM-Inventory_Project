@@ -54,7 +54,7 @@ public class OrderCheckController {
         	params.put("userName", userName);
         }
         
-        List<UserVo> userList = userService.getList();
+        List<UserVo> userList = userService.selectUserName();
         model.addAttribute("userList", userList);
 		
 		List <OrderVo> list = OrderCheckService.newGetList(params);
