@@ -1,5 +1,6 @@
 package com.inventory.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,11 @@ public class StockServiceImpl implements StockService {
 	}
 	
 	@Override
-	public boolean stockInCheck(String inId) {
-		return stockDao.stockInCheck(inId);
+	public boolean stockInCheck(String inId, String userName) {
+		Map <String, String> params = new HashMap <>();
+		params.put("userName", userName);
+		params.put("inId", inId);
+		return stockDao.stockInCheck(params);
 	}
 
 	@Override
@@ -43,13 +47,13 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public int initialStockIn(String orderId, String branchId) {
-		return stockDao.initialStockIn(orderId, branchId);
+	public int initialStockIn(String orderId, String branchId, String userName) {
+		return stockDao.initialStockIn(orderId, branchId, userName);
 	}
 
 	@Override
-	public List<StockVo> getStockOutList(String branchId) {
-		return stockDao.getStockOutList(branchId);
+	public List<StockVo> getStockOutList(Map <String, String> params) {
+		return stockDao.getStockOutList(params);
 	}
 	
 	@Override
@@ -58,8 +62,8 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public int insertStockOut(String branchId) {
-		return stockDao.insertStockOut(branchId);
+	public int insertStockOut(String branchId, String userName) {
+		return stockDao.insertStockOut(branchId, userName);
 	}
 
 	@Override

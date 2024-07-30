@@ -11,6 +11,15 @@ function submitWithChecked(checked) {
     }
     window.location.href = url.toString();
 }
+function submitWithChecke(checked) {
+    var url = new URL(window.location.href);
+    if (checked === null) {
+        url.searchParams.delete('userName');
+    } else {
+        url.searchParams.set('userName', checked);
+    }
+    window.location.href = url.toString();
+}
 
 function submitWithCh(checked) {
     var url = new URL(window.location.href);
