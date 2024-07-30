@@ -2,8 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const errorParam = urlParams.get('error');
     if (errorParam) {
-        alert(decodeURIComponent(errorParam));
+        alert('아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.');
     }
+    document.getElementById('name').addEventListener('input', function() {
+   		this.form.checkedName.value = "n";
+   	});
 });
 
 function validateLoginForm(event) {
@@ -30,6 +33,10 @@ function checkName(event) {
         alert("이름을 입력하세요!");
         return;
     }
+    if (name.length >10) {
+		alert("이름이 그렇게 기신가요?");
+		return;
+		}
 
     console.log(`${target}?name=${name}`);
     fetch(`${target}?name=${name}`)
@@ -81,6 +88,10 @@ window.addEventListener("load", event => {
                 alert("이름 중복 여부를 확인을 해주세요");
                 return;
             }
+            if (frm.checkPass.value !== "y"){
+				alert ('비밀번호가 일치하지 않습니다');
+				return;
+			}
 
             frm.submit();
         });
@@ -147,11 +158,14 @@ function checkPasswordMatch() {
     var password = document.getElementById("newPassword").value;
     var confirmPassword = document.getElementById("confirmPassword").value;
     var mismatchMessage = document.getElementById("passwordMismatch");
+    var checkPassInput = document.querySelector("input[name='checkPass']");
 
     if (password !== confirmPassword) {
         mismatchMessage.style.display = "block";
+        checkPassInput.value = "n";
     } else {
         mismatchMessage.style.display = "none";
+        checkPassInput.value = "y";
     }
 }
 

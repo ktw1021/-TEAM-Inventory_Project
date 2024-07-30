@@ -165,6 +165,14 @@ public class UserServiceImpl implements UserService {
         userDao.resetTemporaryPasswordCreatedAt(name);
     }
 
-    
-    
+	@Override
+	public List<UserVo> selectBranchUserList(String branchId) {
+		List<UserVo> list = userDao.selectBranchUserList(branchId);
+		return list;
+	}
+
+	@Override
+	public List<UserVo> selectUserName() {
+		return userDao.selectUserName();
+	}
 }

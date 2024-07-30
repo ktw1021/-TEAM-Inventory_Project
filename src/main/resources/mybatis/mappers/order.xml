@@ -10,31 +10,75 @@
 	</insert>
 
 	<select id="getMax" resultType="String">
-		SELECT MAX(order_id) AS max_order_id FROM book_order
+		SELECT MAX(order_id) AS
+		max_order_id FROM book_order
 	</select>
 
 	<insert id="insertDetail" parameterType="OrderVo">
 		insert into order_detail
-		(order_id, book_code, quantity) VALUES(#{orderId}, #{bookCode}, #{quantity})
+		(order_id, book_code, quantity) VALUES(#{orderId}, #{bookCode},
+		#{quantity})
 	</insert>
 
 
-	<select id="selectOrderList" parameterType="String" resultType="OrderVo">
-		SELECT order_id as
-		orderId, branch_id as branchId, order_date as orderDate, checked, user_name as userName FROM 
-		book_order WHERE branch_id = #{branchId} ORDER BY orderId DESC
+	<select id="selectOrderList" parameterType="map"
+		resultType="OrderVo">
+		SELECT
+		b.order_id as orderId,
+		b.branch_id as branchId,
+		b.order_date as orderDate,
+		b.checked as checked,
+		b.user_name as name,
+		u.user_no as no
+		FROM
+		book_order b
+		JOIN
+		users u
+		ON
+		b.user_name = u.user_name
+		<where>
+			b.branch_id = #{branchId}
+			<if test="no != null and no.trim() != ''">
+				AND u.user_no = #{no}
+			</if>
+			<if test="checked != null and checked != ''">
+				AND b.checked = #{checked}
+			</if>
+		</where>
+		ORDER BY b.order_id DESC
 	</select>
-	
-	<select id="selectAllOrderList" parameterType="String" resultType="OrderVo">
+
+
+	<select id="selectAllOrderList" parameterType="String"
+		resultType="OrderVo">
 		SELECT order_id as
-		orderId, branch_id as branchId, order_date as orderDate, checked FROM 
+		orderId, branch_id as branchId,
+		order_date as orderDate, checked FROM
 		book_order WHERE ORDER BY orderId DESC
 	</select>
 
-	<select id="selectDetailList" parameterType="String" resultType="OrderVo">
-		SELECT od.order_id as orderId, od.book_code as bookCode, b.book_name as bookName, od.quantity as quantity, b.price as price
-	    FROM order_detail od join book_list b on od.book_code = b.book_code
-	    WHERE order_id = #{orderId}
+	<select id="selectDetailList" parameterType="String"
+		resultType="OrderVo">
+		SELECT od.order_id as orderId, od.book_code as bookCode,
+		b.book_name as bookName, od.quantity as quantity, b.price as price
+		FROM order_detail od join book_list b on od.book_code = b.book_code
+		WHERE order_id = #{orderId}
+	</select>
+	<select id="selectBranchUserList" parameterType="UserVo"
+		resultType="UserVo">
+		SELECT user_no AS no,
+		user_name AS name, branch_id AS branchId,
+		auth_code AS authCode
+		FROM users
+		where branch_id = #{branchId}
+		<where>
+			<if test="branchId != null and branchId.trim() != ''">
+				bo.branch_id = #{branchId}
+			</if>
+			<if test="no != null">
+				AND user_no = #{no}
+			</if>
+		</where>
 	</select>
 
 </mapper>

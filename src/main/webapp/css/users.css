@@ -190,3 +190,16 @@ a:hover {
     font-weight: bold;
     display: none;
 }
+
+.content a {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #333333; /* 검은색으로 변경 */
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.content a:hover {
+	background-color: #000000; /* 더 짙은 검은색으로 변경 */
+}

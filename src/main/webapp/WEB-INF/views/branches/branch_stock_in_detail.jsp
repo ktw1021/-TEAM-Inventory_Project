@@ -10,26 +10,34 @@
 <title>지점 관리 시스템</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
+<script src="<c:url value='/javascript/check.js'/>"></script>
 </head>
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
 
-		<h2>${inId }입고 기록</h2>
+		<h2>${inId }번 입고 상세 기록</h2>
 		<table border="1">
 			<tr>
-				<th>date</th>
-				<th>book_code</th>
-				<th>book_name</th>
-				<th>quantity</th>
-				<th>check</th>
-				<th>comments</th>
+				<th>입고일</th>
+				<th>교재명</th>
+				<th>수량</th>
+				<th>진행 상황</th>
 			</tr>
+
 				<c:forEach items="${list }" var="vo">
 					<tr>
-						<td>${vo.flucDate}</td>
-						<td>${vo.bookCode}</td>
+						<td>
+							<c:choose>
+						        <c:when test="${vo.flucDate == ''}">
+						            미정
+						        </c:when>
+						        <c:otherwise>
+						            ${vo.flucDate}
+						        </c:otherwise>
+					    	</c:choose>
+					    </td>
 						<td>${vo.bookName}</td>
 						<td>${vo.quantity}</td>
 						<td>
@@ -40,20 +48,22 @@
                 			<c:otherwise>알 수 없음</c:otherwise>
            				</c:choose>
            				</td>
-           				<td>${vo.comments}</td>
 					</tr>
 				</c:forEach>
 			</table>
+
 			
-			<c:choose>
-    			<c:when test="${check eq 0}">
-        			<a href="<c:url value='/branch/stockin/confirm/${inId}' />" id="take">도착했어요~~</a>
-    			</c:when>
-    			<c:otherwise>
-        		<!-- Do nothing or display alternative content -->
-    			</c:otherwise>
-			</c:choose>
-			<p class="parent"><a href ="<c:url value="/branch/stockin/list"/>">목록으로 돌아가기</a></p>
+		<c:choose>
+   			<c:when test="${check eq 0}">
+       			<a href="<c:url value='/branch/stockin/confirm/${inId}' />" id="take">도착했어요~~</a>
+   			</c:when>
+   			<c:otherwise>
+       		<!-- Do nothing or display alternative content -->
+   			</c:otherwise>
+		</c:choose>
+		<div class="back-link">
+			<a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a>
+		</div>
     </div>
     <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>

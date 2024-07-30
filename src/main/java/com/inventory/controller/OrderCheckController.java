@@ -1,19 +1,24 @@
 package com.inventory.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.inventory.repositories.vo.OrderVo;
 import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.OrderCheckService;
+import com.inventory.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +29,8 @@ public class OrderCheckController {
 
 	@Autowired
 	private OrderCheckService OrderCheckService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping({ "", "/", "/list" })
 	public String orderCheckList(HttpServletRequest request, HttpSession session, Model model) {
@@ -41,6 +48,14 @@ public class OrderCheckController {
         if (branchId != null && !branchId.trim().isEmpty()) {
             params.put("branchId", branchId);
         }
+        
+        String userName = request.getParameter("userName");
+        if (userName != null && !userName.trim().isEmpty()) {
+        	params.put("userName", userName);
+        }
+        
+        List<UserVo> userList = userService.selectUserName();
+        model.addAttribute("userList", userList);
 		
 		List <OrderVo> list = OrderCheckService.newGetList(params);
 		model.addAttribute("list", list);
@@ -72,17 +87,24 @@ public class OrderCheckController {
 		OrderCheckService.refuseOrder(id);
 		return "redirect:/admin/ordercheck/list";
 	}
+	
+	@RequestMapping ("/refuse/{id}/delete")
+	public String orderRefuseAndDeleteStockIn(@PathVariable("id") String id) {
+		OrderCheckService.refuseOrder(id);
+		OrderCheckService.deleteStockIn(id);
+		return "redirect:/admin/ordercheck/list";
+	}
 
 	@RequestMapping("/confirm/{id}")
-	public String orderConfirm(@PathVariable("id") String id) {
-		OrderCheckService.confirmOrderCode(id);
+	public String orderConfirm(@PathVariable("id") String orderId) {
+		OrderCheckService.confirmOrderCode(orderId);
 
-		String branchId = OrderCheckService.getBranchId(id);
-		OrderCheckService.confirmAndInsertStockIn(id, branchId);
+		String branchId = OrderCheckService.getBranchId(orderId);
+		OrderCheckService.confirmAndInsertStockIn(orderId, branchId);
 
-		int inId = OrderCheckService.getStockIn(id);
+		int inId = OrderCheckService.getStockIn(orderId);
 
-		List<OrderVo> list = OrderCheckService.getOrderDetail(id);
+		List<OrderVo> list = OrderCheckService.getOrderDetail(orderId);
 		for (OrderVo vo : list) {
 			StockVo stockVo = new StockVo(inId, vo.getBookCode(), vo.getQuantity());
 			OrderCheckService.confirmAndInsertInDetail(stockVo);
@@ -91,17 +113,30 @@ public class OrderCheckController {
 		return "redirect:/admin/ordercheck/list";
 	}
 	
-	@RequestMapping ("/view")
-	public String test(HttpSession session) {	
-		List<OrderVo> list = OrderCheckService.getSum();  // bookCode와 inventory 정보만 있는 리스트
+	@RequestMapping("/view")
+	public String viewTotalOrder(
+	        @RequestParam(value = "order_ids", required = false) String orderIdsParam,
+	        HttpSession session, Model model) {
+		
+	    List<Integer> orderIds = null;
+	    if (orderIdsParam != null && !orderIdsParam.trim().isEmpty()) {
+	        orderIds = Arrays.stream(orderIdsParam.split(","))
+	                .map(String::trim)
+	                .map(Integer::parseInt)
+	                .collect(Collectors.toList());
+	    }
+	    model.addAttribute("orderIds", orderIds);
+
+	    List<OrderVo> list = OrderCheckService.getSum(orderIds);  // bookCode와 inventory 정보만 있는 리스트
 	    session.setAttribute("list", list);
 
 	    List<OrderVo> branchList = OrderCheckService.getBranchList();  // branchId만 있는 리스트
 	    session.setAttribute("branchList", branchList);
 
-	    List<OrderVo> testList = OrderCheckService.getOrderQuantity();  // branchId, bookCode, inventory 정보가 있는 리스트
-		// 데이터 가공
-	    Map<String, Map<String, Integer>> bookBranchQuantities = new HashMap<>();
+	    List<OrderVo> testList = OrderCheckService.getOrderQuantity(orderIds);  // branchId, bookCode, inventory 정보가 있는 리스트
+	    
+	    // 데이터 가공
+	    Map<String, Map<String, Integer>> bookBranchQuantities = new LinkedHashMap<>();
 	    Map<String, Integer> bookTotalQuantities = new HashMap<>();
 
 	    for (OrderVo order : testList) {
@@ -122,7 +157,18 @@ public class OrderCheckController {
 	
 	@RequestMapping ("/order")
 	public String test2 () {
-		OrderCheckService.goodGije();
-		return "redirect:/admin/ordercheck/list";
+		int success = OrderCheckService.goodGije();
+		if (success == 2) {
+	        return "redirect:/admin/ordercheck/list?result=success";
+	    } else {
+	        return "redirect:/admin/ordercheck/list?result=failure";
+	    }
 	}
+	
+	@RequestMapping("/history")
+	public String viewHistoryList(Model model) {
+		model.addAttribute("list", OrderCheckService.getHistoryList());
+		return "admins/order_check_history_list";
+	}
+	
 }

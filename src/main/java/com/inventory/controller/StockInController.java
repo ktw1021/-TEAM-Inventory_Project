@@ -1,6 +1,8 @@
 package com.inventory.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.inventory.repositories.vo.StockVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.StockService;
+import com.inventory.services.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/branch/stockin")
@@ -20,13 +24,35 @@ public class StockInController {
 	
 	@Autowired
 	StockService stockService;
+	@Autowired
+	UserService userService;
 
 	@RequestMapping("/list")
-	public String stockInList(Model model, HttpSession session) {
+	public String stockInList(Model model, HttpSession session, HttpServletRequest request) {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
-		List <StockVo> list = stockService.getStockInList(vo.getBranchId());
+		String checkedIn = request.getParameter("checked");
+		if (!(checkedIn == null)) {
+			if (!"0".equals(checkedIn)) {
+				checkedIn = "1";
+			}
+		}
+		
+		Map <String, String> params = new HashMap <>();
+		params.put("branchId", vo.getBranchId());
+		params.put("checkedIn", checkedIn);
+		
+		List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
+		
+		String userName = request.getParameter("userName");
+		if (userName != null && !userName.trim().isEmpty()) {
+			params.put("userName", userName);
+		}
+		List <StockVo> list = stockService.getStockInList(params);
+
+		model.addAttribute("userList", userList);
 		model.addAttribute("list", list);
 		model.addAttribute("user", vo);
+
 		return "branches/branch_stock_in_list";
 	}
 	
@@ -45,8 +71,9 @@ public class StockInController {
 	}
 	
 	@RequestMapping("/confirm/{id}")
-	public String confirmStockIn(@PathVariable ("id") String inId) {
-		stockService.stockInCheck(inId);
+	public String confirmStockIn(@PathVariable ("id") String inId, HttpSession session) {
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		stockService.stockInCheck(inId, userVo.getName());
 		List<StockVo>list = stockService.getStockInDetail(inId);
 		
 		for (StockVo vo :list) {

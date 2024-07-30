@@ -81,7 +81,7 @@ public class InitialSettingController {
         UserVo userVo = (UserVo)session.getAttribute("authUser");
         String branchId = userVo.getBranchId();
         
-        stockService.initialStockIn("-1", branchId);
+        stockService.initialStockIn("-1", branchId, userVo.getName());
         
         int inId = stockService.getInId(userVo.getBranchId());
         
@@ -95,64 +95,4 @@ public class InitialSettingController {
         return new ResponseEntity<>("성공적으로 처리되었습니다.", HttpStatus.OK);
     }
 	
-//	@RequestMapping("/add")
-//	public String addSettingList(@RequestParam("bookCode") String bookCode, @RequestParam("quantity") int quantity, HttpSession session) {
-//		
-//		UserVo authUser = (UserVo)session.getAttribute("authUser");
-//		
-//		List <StockVo> list = (List<StockVo>) session.getAttribute("initialCart");
-//		if (list == null || list.isEmpty()) {
-//			list = new ArrayList<StockVo>();
-//		}
-//		
-//		//	카트 목록 삽입
-//		StockVo vo = new StockVo (authUser.getBranchId(), bookCode, quantity, (bookService.getData(bookCode)).getBookName());
-//		list.add(vo);
-//		session.setAttribute("initialCart", list);
-//		
-//		return "redirect:/branch/initial/setting";
-//	}
-//	
-//	@RequestMapping("/delete")
-//	public String delSettingList(@RequestParam("bookCode") String bookCode, HttpSession session) {
-//		List <StockVo> list = (List<StockVo>) session.getAttribute("initialCart");
-//		if(list != null && !list.isEmpty()) {
-//			Iterator<StockVo>iterator = list.iterator();
-//			while (iterator.hasNext()) {
-//				StockVo vo = iterator.next();
-//				if(vo.getBookCode().equals(bookCode)) {
-//					iterator.remove();
-//					break;
-//				}
-//			}
-//			session.setAttribute("initialCart", list);
-//		}
-//		return "redirect:/branch/initial/setting";
-//	}
-//	
-//	@RequestMapping("/confirm")
-//	public String confirmSettingList(HttpSession session) {
-//		List<StockVo> list = (List<StockVo>) session.getAttribute("initialCart");
-//		UserVo userVo = (UserVo)session.getAttribute("authUser");
-//		
-//		//	Stock_in 반영 로직
-//		stockService.initialStockIn("-1", userVo.getBranchId());
-//		
-//		//	Stock_in의 in_id 받아오기
-//		int inId = stockService.getInId(userVo.getBranchId());
-//		
-//		//	재고에 반영하는 로직
-//		if(list != null && !list.isEmpty()) {
-//			for (StockVo inInvenStockVo : list) {
-//				stockService.confirmStockIn(inInvenStockVo);
-//				
-////				in_detail 정보 넣기
-//				inInvenStockVo.setId(inId);
-//				orderCheckService.confirmAndInsertInDetail(inInvenStockVo);
-//			}
-//		}
-//		session.setAttribute("authUser", userVo);
-//		
-//		return "redirect:/branch/inventory";
-//	}
 }

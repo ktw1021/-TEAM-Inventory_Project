@@ -17,9 +17,20 @@ function submitWithBranchId(branchId) {
     }
     window.location.href = url.toString();
 }
+
 function redirectToUrl(url) {
     window.location.href = url;
 }
+
+function orderConfirm(url, flag) {
+    if (flag === 0) {
+        alert("데이터가 없습니다. 발주 확정이 불가능합니다.");
+        return;
+    }
+    // flag가 1인 경우 처리 로직
+    window.location.href = url;
+}
+
 function downloadCSV() {
     var csvContent = "data:text/csv;charset=utf-8,";
 
@@ -50,4 +61,18 @@ function downloadCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
+
+function goBack() {
+	window.history.back();
+}
+
+function submitWithChecke(checked) {
+    var url = new URL(window.location.href);
+    if (checked === null) {
+        url.searchParams.delete('userName');
+    } else {
+        url.searchParams.set('userName', checked);
+    }
+    window.location.href = url.toString();
 }

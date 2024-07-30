@@ -7,17 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이 페이지</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/users.css'/>">
-    <c:choose>
-        <c:when test="${user.authCode == '2'}">
-            <link rel="stylesheet" type="text/css" href="<c:url value='/css/admins.css'/>">
-        </c:when>
-        <c:when test="${user.authCode == '1'}">
-            <link rel="stylesheet" type="text/css" href="<c:url value='/css/branches.css'/>">
-        </c:when>
-        <c:otherwise>
-            <p>권한이 없습니다.</p>
-        </c:otherwise>
-    </c:choose>
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/branches.css'/>">
 </head>
 
 <body>
@@ -50,6 +41,5 @@
             <a href="<c:url value='/user/changePassword'/>" class="btn btn-custom btn-login">비밀번호 변경</a>
         </div>
     </div>
-    <%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
 </html>

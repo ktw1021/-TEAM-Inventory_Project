@@ -6,9 +6,24 @@
 <mapper namespace="stock">
 	
 	<!-- 지점 코드에 맞는 Stock in list 불러오기 -->
-	<select id="stockInList" parameterType="String" resultType="StockVo">
-		select in_id as id, order_id as orderId, in_date as flucDate, checked_in as checkedIn, branch_id as branchId FROM stock_in where branch_id = #{branchId} 
-		order by in_id desc
+	<select id="stockInList" parameterType="Map" resultType="StockVo">
+	    SELECT in_id AS id, order_id AS orderId, in_date AS flucDate, checked_in AS checkedIn, branch_id AS branchId, user_name as userName 
+	    FROM stock_in
+	    WHERE branch_id = #{branchId}
+		<choose>
+	        <when test="checkedIn == 1">
+	            AND (checked_in = 1 OR checked_in = -1)
+	        </when>
+	        <otherwise>
+	            <if test="checkedIn != null and checkedIn != ''">
+	                AND checked_in = #{checkedIn}
+	            </if>
+	        </otherwise>
+	    </choose>
+	    <if test="userName != null and userName != ''">
+	    	and user_name = #{userName}
+	   	</if>
+	   	order by in_id desc
 	</select>
 	
 	<!-- in_id 에 맞는 detail 페이지 -->
@@ -20,8 +35,8 @@
 	</select>
 	
 	<!-- 입고 확인 1. checked_in 을 1번으로 수정 -->
-	<update id="confirmStockInCheckedIn" parameterType="String">
-		update stock_in set checked_in = '1', in_date = sysdate where in_id = #{inId}
+	<update id="confirmStockInCheckedIn" parameterType="Map">
+		update stock_in set checked_in = '1', in_date = sysdate, user_name = #{userName} where in_id = #{inId}
 	</update>
 	
 	<!-- 입고 확인 2. branch_id에 맞는 inventory에 book_code랑 quantity 반영 -->
@@ -31,8 +46,15 @@
 	</update>
 	
 	<!-- stock out list 불러오기 -->
-	<select id = "stockOutList" parameterType="String" resultType="StockVo">
-		select out_id as id, out_date as flucDate, branch_id as branchId from stock_out where branch_id = #{branchId} order by out_id desc
+	<select id = "stockOutList" parameterType="Map" resultType="StockVo">
+		select out_id as id, out_date as flucDate, branch_id as branchId, user_name as userName from stock_out
+		<where>
+			branch_id = #{branchId}
+			<if test="userName != null and userName.trim() != ''">
+				AND user_name = #{userName}
+			</if>
+		</where>
+	    order by out_id desc
 	</select>
 	
 	<!-- out_id 에 맞는 detail 페이지 -->
@@ -44,8 +66,8 @@
 	</select>
 	
 	<!-- stock out 테이블에 데이터 입력 -->
-	<insert id="confirmAndInsertStockOut" parameterType="String">
-		insert into stock_out (branch_id) values (#{branchId})
+	<insert id="confirmAndInsertStockOut" parameterType="Map">
+		insert into stock_out (branch_id, user_name) values (#{branchId}, #{userName})
 	</insert>
 	
 	<!-- stock out id 받아오기 -->
@@ -73,7 +95,7 @@
 	
 	<!-- 비밀 코드 2 -> stock_in table에 새로운 데이터 입력 -->
 	<insert id="initialStockIn" parameterType = "map">
-		insert into stock_in (order_id, in_date, checked_in, branch_id) values (#{orderId}, sysdate, '-1', #{branchId})
+		insert into stock_in (order_id, in_date, checked_in, branch_id, user_name) values (#{orderId}, sysdate, '-1', #{branchId}, #{userName})
 	</insert>
 	
 </mapper>

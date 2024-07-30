@@ -1,6 +1,7 @@
 package com.inventory.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.inventory.repositories.vo.BookInventoryVo;
-import com.inventory.repositories.vo.BookVo;
 import com.inventory.repositories.vo.OrderVo;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.BookInventoryService;
 import com.inventory.services.BookService;
 import com.inventory.services.OrderService;
+import com.inventory.services.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/branch/order")
@@ -35,7 +37,8 @@ public class OrderController {
 	OrderService orderService;
 	@Autowired
 	BookInventoryService bookInventoryService;
-
+	@Autowired
+	UserService userService;
 	// 현재 지점의 재고 데이터를 가져오는 메서드
 	@GetMapping("/getData")
 	@ResponseBody
@@ -205,24 +208,42 @@ public class OrderController {
 
 	// 주문 기록 페이지를 로드하는 메서드
 	@RequestMapping("/list")
-	public String orderHistory(Model model, HttpSession session) {
+	public String orderHistory(Model model, HttpSession session, HttpServletRequest request) {
 		// 로그인 시 저장한 session authUser를 받아옴
+		
+		Map <String, String> params = new HashMap <>();
+		String checked = request.getParameter("checked");
+        if (checked != null && !checked.trim().isEmpty()) {
+            params.put("checked", checked);
+        }
+        String no = request.getParameter("no");
+        if (no != null && !no.trim().isEmpty()) {
+            params.put("no", no);
+        }
+		
 		UserVo vo = (UserVo) session.getAttribute("authUser");
+		System.err.println(vo);
+		params.put("branchId",vo.getBranchId());
 
-		// branchId 기반으로 주문 기록을 가져와 리스트에 저장 후 모델에 실어서 jsp에 전달
-		List<OrderVo> list = orderService.getOrderList(vo.getBranchId());
+		List<OrderVo> list = orderService.getOrderList(params);
+		System.out.println(list);
 		model.addAttribute("list", list);
-
+		
+		List<UserVo> userList = userService.selectBranchUserList(vo.getBranchId());
+		System.err.println(userList);
+		
 		Boolean success = (Boolean) session.getAttribute("success");
 		if (success != null && success) {
 			model.addAttribute("success", true);
 			session.removeAttribute("success");
 		}
 		
+		model.addAttribute("userList", userList);
 		model.addAttribute("authUser", vo);
 
 		return "branches/branch_order_list";
 	}
+
 
 	// 주문을 확정하는 메서드
 	@RequestMapping("/submit")
@@ -230,7 +251,18 @@ public class OrderController {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 
 		List<LinkedHashMap> cartData = (List<LinkedHashMap>) session.getAttribute("quantities");
-
+		
+		if (cartData != null) {
+	           Iterator<LinkedHashMap> iterator = cartData.iterator();
+	           while (iterator.hasNext()) {
+	               LinkedHashMap map = iterator.next();
+	               Integer quantity = (Integer) map.get("quantity");
+	               if (quantity != null && quantity == 0) {
+	                   iterator.remove();
+	               }
+	           }
+	       }
+		
 		// 장바구니가 있으면 book_order 테이블에 지점 아이디 기반으로 데이터 생성
 		if (cartData != null && !cartData.isEmpty()) {
 			orderService.insert(vo);

@@ -10,16 +10,17 @@
 <title>지점 관리 시스템</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/branches.css'/>">
+<script src="<c:url value='/javascript/check.js'/>"></script>
+
 </head>
 
 <body>
 	<%@ include file="/WEB-INF/views/branch_includes/navigation.jsp"%>
 	<div class="content">
-		<h1>출고 번호: ${outId }</h1>
+		<h1>${outId }번 출고 상세 기록</h1>
 		<table border="1">
 			<tr>
 				<th>출고일</th>
-				<th>교재 코드</th>
 				<th>교재명</th>
 				<th>수량</th>
 				<th>사유</th>
@@ -28,7 +29,6 @@
 			<c:forEach items="${list }" var="vo">
 				<tr>
 					<td>${vo.flucDate}</td>
-					<td>${vo.bookCode}</td>
 					<td>${vo.bookName}</td>
 					<td>${vo.quantity}</td>
 
@@ -36,7 +36,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<p class="parent"><a href ="<c:url value="/branch/stockout/list"/>">목록으로 돌아가기</a></p>
+		<p><a href="javascript:void(0);" onclick="goBack();">이전 페이지로 돌아가기</a><p>
 	</div>
 	<%@ include file="/WEB-INF/views/branch_includes/footer.jsp"%>
 </body>
