@@ -69,7 +69,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    button {
+    #button {
         width: 100%;
         margin-bottom: 10px;
     }
@@ -150,8 +150,8 @@
     <div class="content">
         <h1>발주 기록</h1>
         <div id="order-form">
-            <button onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">종합 발주서 생성</button><br/>
-            <button onclick="redirectToUrl('<c:url value='/admin/ordercheck/history'/>')">종합 발주 내역 확인</button>
+            <button id="button" onclick="redirectToUrl('<c:url value='/admin/ordercheck/view'/>')">종합 발주서 생성</button><br/>
+            <button id="button" onclick="redirectToUrl('<c:url value='/admin/ordercheck/history'/>')">종합 발주 내역 확인</button>
         </div>
         <table>
             <tr>
