@@ -251,7 +251,18 @@ public class OrderController {
 		UserVo vo = (UserVo) session.getAttribute("authUser");
 
 		List<LinkedHashMap> cartData = (List<LinkedHashMap>) session.getAttribute("quantities");
-
+		
+		if (cartData != null) {
+	           Iterator<LinkedHashMap> iterator = cartData.iterator();
+	           while (iterator.hasNext()) {
+	               LinkedHashMap map = iterator.next();
+	               Integer quantity = (Integer) map.get("quantity");
+	               if (quantity != null && quantity == 0) {
+	                   iterator.remove();
+	               }
+	           }
+	       }
+		
 		// 장바구니가 있으면 book_order 테이블에 지점 아이디 기반으로 데이터 생성
 		if (cartData != null && !cartData.isEmpty()) {
 			orderService.insert(vo);
