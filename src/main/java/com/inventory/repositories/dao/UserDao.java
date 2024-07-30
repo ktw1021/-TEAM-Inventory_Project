@@ -36,4 +36,5 @@ public interface UserDao {
 	UserVo getUserByUsername(String username);
 	
 	public List<UserVo> selectBranchUserList(String branchId);
+
 }

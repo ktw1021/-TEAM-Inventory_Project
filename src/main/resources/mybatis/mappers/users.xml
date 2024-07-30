@@ -112,8 +112,9 @@
 		SELECT user_no AS no,
 		user_name AS name, branch_id AS branchId, auth_code AS authCode
 		FROM users WHERE auth_code = '2' OR branch_id = #{branchId} ORDER BY name
-
 	</select>
+	
+
 	
 	
 	
