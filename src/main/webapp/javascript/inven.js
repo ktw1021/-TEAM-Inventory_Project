@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let rememberedEndDate = '';
     
     //	초기 페이지 로드를 위한 리스트 받기
-    fetch('http://localhost:8080/Inventory/branch/initialList')
+    fetch('/Inventory/branch/initialList')
     .then(response => response.json())
     .then(data => {
 		createTable(data);
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		    rememberedEndDate = '';
 		}
 		
-		fetch('http://localhost:8080/Inventory/branch/search', {
+		fetch('/Inventory/branch/search', {
 		    method: 'POST',
 		    headers: {
 		        'Content-Type': 'application/x-www-form-urlencoded',
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 다운로드 버튼 클릭 이벤트
 	document.getElementById('downloadCSV').addEventListener('click', function() {
-	    fetch('http://localhost:8080/Inventory/branch/initialList')
+	    fetch('/Inventory/branch/initialList')
 	    .then(response => response.json())
 	    .then(data => {
 	        const csv = generateCSV(data);

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
     
     // 페이지 로드 시 초기 데이터로 테이블을 업데이트하고 로컬 스토리지에 저장 공간 마련
-    fetch('http://localhost:8080/Inventory/branch/stockout/getListForform')
+    fetch('/Inventory/branch/stockout/getListForform')
         .then(response => response.json())
         .then(data => {
             updateSearchResults(data);
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const keyword = document.querySelector('input[name="keyword"]').value;
 
 		// AJAX 요청으로 페이지 새로고침 없이 검색
-        fetch('http://localhost:8080/Inventory/branch/stockout/search', {
+        fetch('/Inventory/branch/stockout/search', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded', [csrfHeader]: csrfToken },
             body: new URLSearchParams({ 'keyword': keyword })
@@ -301,7 +301,7 @@ function submitOrderForm() {
         })
         .filter(item => item);
         
-    fetch('http://localhost:8080/Inventory/branch/stockout/confirm', {
+    fetch('/Inventory/branch/stockout/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', [csrfHeader]: csrfToken  },
         body: JSON.stringify(orderData)
@@ -316,7 +316,7 @@ function submitOrderForm() {
     }).then(message => {
         alert(message); // 성공 메시지
         localStorage.clear(); // 성공 후에는 비워주기~~
-        window.location.href = 'http://localhost:8080/Inventory/branch/stockout/list';
+        window.location.href = '/Inventory/branch/stockout/list';
     }).catch(error => console.error('Error:', error));
 }
 function getKindCode(kindCode) {

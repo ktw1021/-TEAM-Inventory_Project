@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
     
+
     // 페이지 로드 시 초기 데이터로 테이블을 업데이트하고 로컬 스토리지에 저장 공간 마련
-    fetch('http://localhost:8080/Inventory/branch/initial/getListForform')
+    fetch('/Inventory/branch/initial/getListForform')
         .then(response => response.json())
         .then(data => {
             updateTable(data);
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let form = document.getElementById('search-form');
         let formData = new FormData(form);
 		
-		fetch('http://localhost:8080/Inventory/branch/initial/search', {
+		fetch('/Inventory/branch/initial/search', {
 			method: 'POST',
 			headers:{
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -300,7 +301,7 @@ function submitOrderForm() {
         })
         .filter(item => item);
         
-    fetch('http://localhost:8080/Inventory/branch/initial/confirm', {
+    fetch('/Inventory/branch/initial/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', [csrfHeader]: csrfToken  },
         body: JSON.stringify(orderData)
@@ -315,6 +316,6 @@ function submitOrderForm() {
     }).then(message => {
         alert(message); // 성공 메시지
         localStorage.clear(); // 성공 후에는 비워주기~~
-        window.location.href = 'http://localhost:8080/Inventory/branch/inventory';
+        window.location.href = '/Inventory/branch/inventory';
     }).catch(error => console.error('Error:', error));
 }
