@@ -14,6 +14,11 @@
     <div class="container">
         <a href="<c:url value='/main'/>" class="back-button">뒤로가기</a>
         <h2>로그인</h2>
+        <!-- 에러 메시지를 표시할 div 추가 -->
+        <c:if test="${not empty sessionScope.errorMessage}">
+            <div style = "color: red;" class="error-message">${sessionScope.errorMessage}</div>
+            <c:remove var="errorMessage" scope="session"/>
+        </c:if>
         <form id="login-form"
               name="loginform"
               method="POST"
@@ -33,6 +38,13 @@
         </form>
         <a href="<c:url value='/user/forgotPassword'/>">비밀번호를 잊어버리셨나요?</a> <!-- 비밀번호 찾기 링크 추가 -->
     </div>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const errorMessageElement = document.querySelector(".error-message");
+            if (errorMessageElement) {
+                alert(errorMessageElement.textContent);
+            }
+        });
+    </script>
 </body>
 </html>

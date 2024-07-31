@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const errorParam = urlParams.get('error');
-    if (errorParam) {
-        alert('아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.');
+    const errorMessage = document.getElementById('error-message').value;
+    if (errorMessage) {
+        alert(errorMessage);
     }
     document.getElementById('name').addEventListener('input', function() {
    		this.form.checkedName.value = "n";
    	});
 });
+
 
 function validateLoginForm(event) {
     var username = document.getElementById('username').value;

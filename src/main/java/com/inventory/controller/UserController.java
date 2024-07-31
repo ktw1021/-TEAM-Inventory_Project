@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.inventory.repositories.vo.UserVo;
 import com.inventory.services.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -86,7 +87,7 @@ public class UserController {
 		return json;
 	}
 	
-	@GetMapping ("/login")
+	@RequestMapping ("/login")
 	public String loginform () {
 		return "users/loginform";
 	}
