@@ -31,23 +31,32 @@
     <!-- EncryptedPropertyLoader Bean 등록 -->
     <bean id="encryptedPropertyLoader" class="com.inventory.security.EncryptedPropertyLoader" />
 
-    <!-- Oracle DataSource -->
-    <bean id="oracleDatasource" class="oracle.jdbc.pool.OracleDataSource">
-        <property name="URL" value="jdbc:oracle:thin:@192.168.0.60:1521:xe" />
-        <property name="user" value="team2project" />
-        <property name="password">
-            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-                <property name="targetObject" ref="encryptedPropertyLoader" />
-                <property name="targetMethod" value="decrypt" />
-                <property name="arguments">
-                    <list>
-                        <value>Yqf9WJSmBhbuwoHPZIh1/A==</value>
-                    </list>
-                </property>
-            </bean>
-        </property>
-        <property name="implicitCachingEnabled" value="true" />
-    </bean>
+<bean id="walletPathResolver" class="com.inventory.security.WalletPathResolver" />
+
+<!-- Oracle DataSource -->
+<bean id="oracleDatasource" class="oracle.jdbc.pool.OracleDataSource">
+    <property name="URL">
+        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+            <property name="targetObject" ref="walletPathResolver" />
+            <property name="targetMethod" value="getWalletJdbcUrl" />
+        </bean>
+    </property>
+    <property name="user" value="team2project" />
+    <property name="password">
+        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+            <property name="targetObject" ref="encryptedPropertyLoader" />
+            <property name="targetMethod" value="decrypt" />
+            <property name="arguments">
+                <list>
+                    <value>VYWP9PIf6nBgIa5fvQLeiA==</value>
+                </list>
+            </property>
+        </bean>
+    </property>
+    <property name="implicitCachingEnabled" value="true" />
+</bean>
+
+
     
     <!-- MyBatis SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
