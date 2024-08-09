@@ -157,7 +157,7 @@
 	</select>
 	
 	<insert id="insertConfirm" parameterType = "map">
-		insert into confirm_order (group_id, order_id, confirm_date) values (#{groupId}, #{orderId}, sysdate)
+		insert into confirm_order (group_id, order_id, confirm_date) values (#{groupId}, #{orderId}, current_timestamp)
 	</insert>
 	
 	<select id="getListHistory" resultType="OrderVo">

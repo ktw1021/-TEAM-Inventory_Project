@@ -36,7 +36,7 @@
 	
 	<!-- 입고 확인 1. checked_in 을 1번으로 수정 -->
 	<update id="confirmStockInCheckedIn" parameterType="Map">
-		update stock_in set checked_in = '1', in_date = sysdate, user_name = #{userName} where in_id = #{inId}
+		update stock_in set checked_in = '1', in_date = current_timestamp, user_name = #{userName} where in_id = #{inId}
 	</update>
 	
 	<!-- 입고 확인 2. branch_id에 맞는 inventory에 book_code랑 quantity 반영 -->
@@ -95,7 +95,7 @@
 	
 	<!-- 비밀 코드 2 -> stock_in table에 새로운 데이터 입력 -->
 	<insert id="initialStockIn" parameterType = "map">
-		insert into stock_in (order_id, in_date, checked_in, branch_id, user_name) values (#{orderId}, sysdate, '-1', #{branchId}, #{userName})
+		insert into stock_in (order_id, in_date, checked_in, branch_id, user_name) values (#{orderId}, current_timestamp, '-1', #{branchId}, #{userName})
 	</insert>
 	
 </mapper>
